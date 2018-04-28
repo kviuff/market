@@ -140,6 +140,7 @@ $(function(){
 		    
 		    $(this).find('td:eq(7)').each(function(){
 		    		totalMoney = totalMoney +  parseFloat($(this).text());
+		    		totalMoney = Math.round(totalMoney*100)/100;
 		    });
 		}
 	});
