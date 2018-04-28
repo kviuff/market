@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../css/admin/common.css" />
+	<script src="../../js/jquery.min.js" ></script>
+	<script src="../../js/upload.js"></script>
+	<script type="text/javascript" src="../../js/ajaxfileupload.js"></script>
+	<title>项目管理系统</title>
+</head>
+<body>
+<script >
+	function statess(obj){
+// 		如果上级是属性，控制radio不可修改
+		var states = $("#pid").find("option:selected").attr("sss");
+		$("input[name='states']").each(function(){
+// 		是属性
+			if(states == 0){
+				$(this).attr("disabled","disabled");
+			}else{
+// 				清空
+				$(this).removeAttr("disabled");
+			}
+// 			是属性给radio赋值
+			if($(this).val()==0 && states==0){
+				$(this).attr("checked","checked");
+			}else if($(this).val()==1 && states==1){
+				$(this).attr("checked","checked");
+			}
+		});
+			
+			
+			
+		
+		
+	}
+	
+</script>
+<div  class="main_2" id="main_2">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box fixed">
+					<div class="box-title fixed">
+						<h3>类别管理 </h3>
+                        <ul class="ul_1">
+                            <li>添加类别</li>
+                        </ul>
+					</div>
+					<div class="box-content_x">
+					<form action="toadd" method="post" id="projectFrom" name="projectFrom" enctype="multipart/form-data" >
+						<div class="form-horizontal">
+							<div class="control-group fixed">
+                                <label for="select" class="control-label">所属栏目：</label>
+                                <div class="controls">
+                                    <select id="pid" name="pid" onchange="statess(this)">
+                                    	<option value="0">一级栏目</option>
+                                    	#foreach($p in $clist) 
+	                                    	#if($!p.pid != 0)
+	                                    	<option value="$!p.id" sss="$!p.states">
+	                                    		#foreach($foo in [0..$!p.level])
+	                                    		&nbsp;&nbsp;
+	                                    		#end
+	                                    	--$!p.cateName</option>
+	                                    	#else
+	                                    	<option value="$!p.id" >$!p.cateName</option>
+	                                    	#end
+                                    	#end
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group fixed">
+                                <label for="select" class="control-label">是否是属性：</label>
+                                <div class="controls">
+                                是：<input type="radio"  name="states" #if($!p.states==0) checked="checked" #end value="0"  />
+                                否：<input type="radio" name="states" #if($!p.states==0) checked="checked" #elseif(!$!p.states) checked="checked" #end value="1"  />
+                                </div>
+                            </div>
+                            <div class="control-group fixed">
+                                <label for="select" class="control-label">名称：</label>
+                                <div class="controls">
+                                    <input type="text" name="cateName" id="cateName"/>
+                                </div>
+                            </div>
+                             <div class="control-group fixed">
+                                <label for="select" class="control-label">排序：</label>
+                                <div class="controls">
+                                    <input type="text" name="sort" id="sort"/>
+                                </div>
+                            </div>
+                            <div class="control-group fixed">
+                                <label for="select" class="control-label">类别图标(尺寸1)：</label>
+                                <div class="controls">
+                                    <input type="text" name="icon" id="icon"/>
+                                    <input type="file" class="html_date" id="iconup"  name="iconup"/>
+                                    <input type="button" value="上传" onclick="ajaxFileUpload('${BASE_PATH}','/file/fileUpload','iconup','icon')"/>
+                                       	
+                                </div>
+                            </div>
+                              <div class="control-group fixed">
+                                <label for="select" class="control-label">类别图标(尺寸2)：</label>
+                                <div class="controls">
+                                    <input type="text" name="icon1" id="icon1"/>
+                                    <input type="file" class="html_date" id="iconup1"  name="iconup1"/>
+                                    <input type="button" value="上传" onclick="ajaxFileUpload('${BASE_PATH}','/file/fileUpload','iconup1','icon1')"/>
+                                       	
+                                </div>
+                            </div>
+                              <div class="control-group fixed">
+                                <label for="select" class="control-label">类别图标(尺寸3)：</label>
+                                <div class="controls">
+                                    <input type="text" name="icon2" id="icon2"/>
+                                    <input type="file" class="html_date" id="iconup2"  name="iconup2"/>
+                                    <input type="button" value="上传" onclick="ajaxFileUpload('${BASE_PATH}','/file/fileUpload','iconup2','icon2')"/>
+                                       	
+                                </div>
+                            </div>
+                            <div class="form-actions fixed">
+								<button type="submit" class="btn btn-primary">提交</button>
+							</div>
+						</div>
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

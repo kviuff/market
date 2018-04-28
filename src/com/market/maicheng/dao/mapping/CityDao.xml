@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.CityDao">
+	<resultMap type="com.market.maicheng.model.City" id="resultList">
+		<id column="Id" property="Id" />
+		<result column="Name" property="Name" />
+		<result column="Pid" property="Pid" />
+	</resultMap>
+	
+	<select id="getCityByPid" resultMap="resultList">
+		<![CDATA[select * from china where Pid = #{Pid}]]>	 
+	</select>
+	
+	
+	<insert id="addCity" parameterType="com.market.maicheng.model.City">
+		<![CDATA[insert into china (Id,Name,Pid)
+		values (#{Id},#{Name},#{Pid})]]>	
+	</insert>
+	
+	
+</mapper>

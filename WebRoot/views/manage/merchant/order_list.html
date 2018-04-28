@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>订单打印</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../../css/admin/common.css" />
+<link rel="stylesheet" href="../../css/admin/tasktable.css" />
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/jquery.poshytip.min.js"></script>
+<script src="../../js/jquery.printarea.js"></script>
+
+</head>
+<body>
+	<div class="main_2" id="main_2">
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="box fixed">
+						<div class="box-title fixed">
+							<h3>订单管理</h3>
+						</div>
+						<div class="print-layout">
+							<div class="print-page">
+								<div id="printarea">
+									<div class="orderprint">
+								        <div id="ui_alltasks" class="ui_wtable UI_task_table">
+					                        <table class="itable" width="100%" border="0" cellspacing="1" cellpadding="0">
+					                            <thead>
+					                              <tr>
+					                                <td>序号</td>
+					                                <td>用户</td>
+					                                <td>金额</td>
+					                                <td>操作</td>
+					                              </tr>
+					                            </thead>
+					                            <tbody>
+					                            	#foreach($order in $orderInfoList) 
+					                            	<tr>
+				                                    <td>$!order.id</td>
+				                                    <td>$!order.username</td>
+				                                    <td>$!order.pmoney</td>
+				                                    <td>
+				                                    		<a href="/webadmin/order/orderListBySubId?subid=$!order.id">打印</a>
+				                                    </td>
+				                                </tr>
+				                                #end
+					                            </tbody>
+					                        </table>
+					                    </div>
+							        		<div class="explain"> </div>
+							        		<div class="tc page">第1页/共1页</div>
+						    			</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+$(function(){
+	$("#printbtn").click(function(){
+	$("#printarea").printArea();
+	});
+});
+
+//打印提示
+$('#printbtn').poshytip({
+	className: 'tip-yellowsimple',
+	showTimeout: 1,
+	alignTo: 'target',
+	alignX: 'center',
+	alignY: 'bottom',
+	offsetY: 5,
+	allowTipHover: false
+});
+</script>
+
+</html>

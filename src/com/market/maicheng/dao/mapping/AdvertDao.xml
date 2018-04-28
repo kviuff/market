@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.AdvertDao">
+	<resultMap type="com.market.maicheng.model.Advert" id="resultListAdvert">
+		<id column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="link" property="link" />
+		<result column="url" property="url" />
+		<result column="type" property="type" />
+	</resultMap>
+	
+	<insert id="addAdvert" parameterType="com.market.maicheng.model.Advert" flushCache="true">
+		<![CDATA[insert into advert (id,title,link,url,type) values (#{id},#{title},#{link},#{url},#{type})]]>
+	</insert>
+	
+	<update id="upAdvert" parameterType="com.market.maicheng.model.Advert">
+		<![CDATA[update advert set title=#{title},link=#{link},url=#{url},type=#{type} where id = #{id}]]>
+	</update>
+	
+	<select id="getAdvert" resultMap="resultListAdvert">
+		<![CDATA[select * from advert]]>
+	</select>
+	
+	<select id="getAdvertForType" resultMap="resultListAdvert">
+		<![CDATA[select * from advert where type=#{type} order by id desc]]>
+	</select>
+	
+	<select id="getAdvertForID" resultType="com.market.maicheng.model.Advert">
+		<![CDATA[select * from advert where id=#{id}]]>
+	</select>
+	
+	<delete id="delAdvertForID">
+		<![CDATA[delete from advert where id=#{id}]]>
+	</delete>
+</mapper>

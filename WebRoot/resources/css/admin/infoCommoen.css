@@ -1,0 +1,93 @@
+.crowdtit { height: 50px; line-height: 50px; font-size: 18px; clear: both; }
+.crowdtit a { font-size: 14px; color: #256bbb; padding-left: 20px; }
+.csgadress { width: 298px; height: 150px; margin-top: 20px; border: 1px solid #dfdfdf; padding: 0 10px; position: relative; float: left; margin-right: 30px; }
+.csgadress span { font-size: 14px; height: 32px; line-height: 32px; color: #333; }
+.csgadress p { font-size: 12px; color: #888; line-height: 22px; border-top: 1px dotted #e4e4e4; padding: 5px 0; }
+/*.csgadress a { display: block; width: 51px; height: 18px; border: 1px solid #dfdfdf; background: #f8f8f8; line-height: 18px; text-align: center; border-radius: 1px; }*/
+.csgadress .cur_right { display: none; width: 28px; height: 27px; background: url(../images/csfocus.gif) no-repeat 0 0; position: absolute; right: 0; bottom: 0; }
+.csgadress .default { height: 24px; line-height: 24px; position: absolute; right: 0; text-align: center; top: 0; width: 70px; }
+.csgadress .list_foot { position: absolute; right: 0; bottom: 0; }
+.csgcur .cur_right { display: block; }
+.csghover, .csgcur { border: 1px solid #d80c18; }
+.add_address { clear: both; width: 110px; height: 30px; }
+.add_address a { width: 110px; height: 30px; background: #d80c18; text-align: center; line-height: 30px; font-size: 14px; color: #fff!important; border-radius: 2px; }
+.add_address a:link{ color: #fff;}
+.delivery { color: #333; font-size: 14px; }
+.delivery input { margin-right: 3px; }
+.invoice { font-size: 14px; line-height: 24px; }
+.invoice span { color: #333; }
+.return table { width: 100%; border: 1px solid #dfdfdf; color: #333; border-collapse: collapse; empty-cells: show; margin-bottom: 10px; }
+.return th { height: 41px; background: #f3f3f3; font-size: 14px; text-align: center; border: 1px solid #dfdfdf; font-weight: normal; }
+.return td { padding: 5px; text-align: center; font-size: 14px; border: 1px solid #dfdfdf; }
+.return td.t_l { text-align: left; padding: 20px; }
+.return td.t_l h3 { font-weight: normal; color: #333; margin-bottom: 15px; }
+.return td.t_l p { line-height: 24px; color: #888; }
+.write_jumpWrap { width: 1200px; height: 70px; line-height: 70px; background: #f8f8f8; overflow: hidden; }
+.protocol { font-size: 14px; color: #333; }
+.ordertit { height: 30px; line-height: 30px; font-size: 18px; clear: both; }
+.order_status { background: #fff7d1; border: 1px solid #f8dda2; padding: 10px 20px 0 20px; }
+.stepflex { border-top: 5px solid #dfdfdf; display: block; text-align: center; }
+.stepflex dl { border-top: 5px solid #dfdfdf; float: left; position: relative; top: -5px; width: 240px; }
+.stepflex dl.doing { border-top-color: #c80000; }
+.stepflex dl.doing .s-num { background-position: -23px 0; }
+.stepflex dl.doing .s-text { color: #333; }
+.stepflex dl.done { border-top-color: #f05353; }
+.stepflex dl.done .s-num { background-position: -46px 0; }
+.stepflex dl.done .s-text { color: #888; }
+.stepflex .s-num { background-image: url(../images/step.png); color: #fff; font-size: 16px; font-weight: 700; height: 23px; line-height: 23px; margin: -15px auto 0; position: relative; width: 23px; }
+.stepflex .s-text { font-size: 14px; padding-top: 5px; }
+.orderbox { clear: both; }
+.orderTab li { height: 30px; float: left; padding: 0 20px; border: 1px solid #dfdfdf; border-bottom: none; font-size: 14px; color: #333; line-height: 30px; cursor: pointer; }
+.orderTab li.hover { border-top-color: red; }
+.orderInfo { clear: both; padding: 0 20px 20px 20px; border: 1px solid #dfdfdf; }
+.orderInfo table th { border-bottom: 1px solid #dfdfdf; font-weight: normal; height: 46px; font-size: 14px; color: #333; }
+.orderInfo table td { font-size: 14px; padding: 5px 0; }
+.orderCon { display: none; }
+.recbox { padding: 20px; }
+.rectit a { color: #256bbb; }
+.recbox table { margin-bottom: 20px; }
+.recbox td { font-size: 14px; padding: 3px; }
+.orderlist { width: 100%; }
+.orderlist td { padding: 20px; font-size: 14px; }
+.order_view { width: 61px; height: 26px; background: #f2f2f2; border: 1px solid #e1e1e1; line-height: 26px; text-align: center; color: #256bbb; position: relative; }
+.order_view em { display: block; width: 18px; height: 18px; background: #d80c18; border-radius: 18px; color: #fff; position: absolute; right: -8px; top: -8px; z-index: 10; line-height: 18px; font-size: 12px; }
+.csgtotal { border: 1px solid #dfdfdf; border-top: none; padding: 20px; background: #f8f8f8; }
+.csgtotal table { float: right; font-size: 14px; color: #333; text-align: center; }
+.csgtotal table td { padding: 5px 10px; }
+.ordersum { width: 100%; overflow: hidden; height: 30px; line-height: 30px; }
+.note { background: #fff7d1 url(../images/icon.png) no-repeat scroll 20px -21px; border: 1px solid #f8dea5; height: 32px; line-height: 32px; }
+.allorder table { border: 1px solid #dfdfdf; border-collapse: collapse; empty-cells: show; }
+.allorder table th { height: 42px; border: none; padding: 0 20px; background: #f8f8f8; font-weight: normal; font-size: 14px; }
+.allorder table th span { color: #333; }
+.allorder table th em { padding: 0 20px; }
+.allorder table td { padding: 20px; border: 1px solid #dfdfdf; text-align: center; }
+.trackbox { position: relative; }
+.track { display: block; font-size: 14px; width: 50px; margin: 0 auto; position: relative; }
+.track i { display: block; color: #6a6a6a; font: 400 15px/15px consolas; height: 7px; overflow: hidden; transition: transform 0.1s ease-in 0s; margin-top: 8px; }
+.track i s { position: relative; text-decoration: none; top: -7px; }
+.track:hover i { transform: rotate(180deg); color: #d80c18; }
+.processbox { display: none; width: 455px; padding: 20px; background: #fff; position: absolute; left: 50%; top: 20px; margin-left: -227px; z-index: 10; }
+.processbox .stepflex dl { width: 90px; margin-bottom: 15px; }
+.processbox table { border: 1px solid #fff; }
+.processbox table th { height: 26px; background: #efefef; border: 1px solid #fff; }
+.processbox table td { border: 1px solid #fff; text-align: left; padding: 5px 20px; }
+.ordercell { margin-bottom: 10px; }
+.allorder {min-height:300px;_height:300px;}
+.addressee_info input.text2, .addressee_info input.text2, .pay_body input.text2 { height: 20px; line-height: 20px; width: 198px; border: 1px solid #dfdfdf; }
+.addressee_info select.select2 { border: 1px solid #abadb3; height: 26px; line-height: 26px; padding-top: 2px; width: 138px; }
+.addressee_info input.text3 { height: 20px; line-height: 20px; width: 600px; border: 1px solid #dfdfdf; }
+.addressee_info { width: 890px; }
+.addressee_info dl { font-size: 14px; margin-bottom: 15px; overflow: hidden; width: 890px; }
+.addressee_info dt { float: left; line-height: 24px; text-align: right; width: 160px; }
+.addressee_info dd { float: left; text-align: left; width: 730px; }
+.addressee_info dd .message { font-size: 12px; height: 20px; line-height: 20px; width: 730px; }
+.addressee_info dd input { height: 20px; line-height: 20px; border: 1px solid #dfdfdf; vertical-align: middle; }
+.invoice p { margin-bottom: 10px; }
+.invoice dl { clear: both; padding-top: 10px;font-size:12px; }
+.invoice dl dt { float: left; line-height: 22px; }
+.invoice dl dd { float: left; line-height: 22px; padding-left: 10px; width: 700px; }
+.invoice dl dd span.red{ color:#d80c18; font-size:12px;}
+.invoice dl dd p { margin: 0; padding: 0; }
+#shadeLayer { position: fixed!important; width: 100%; height: 100%; left: 0; top: 0; }
+#wjPop-body { left: 50%; top: 50%; width: 806px; height: 376px; margin-left: -403px; margin-top: -188px; }
+.wjPop { display: none; }

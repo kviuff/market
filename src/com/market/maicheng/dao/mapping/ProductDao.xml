@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.ProductDao">
+	<resultMap type="com.market.maicheng.model.Product" id="resultList">
+		<id column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="barcodeid" property="barcodeid" />
+		<result column="categoryID" property="categoryID" />
+		<result column="brandid" property="brandid" />
+		<result column="brandname" property="brandname" />
+		<result column="series" property="series" />
+		<result column="specs" property="specs" />
+		<result column="img" property="img" />
+		<result column="contentImg" property="contentImg" />
+		<result column="createTime" property="createTime" />
+		<result column="merchantID" property="merchantID" />
+		<result column="isdel" property="isdel" />
+		<result column="state" property="state" />
+		<result column="reviewedID" property="reviewedID" />
+		<result column="reviewedTime" property="reviewedTime" />
+		<result column="hasBarCode" property="hasBarCode" />
+		<result column="istop" property="istop" />
+		<collection property="barcodePriceList"
+			ofType="com.market.maicheng.model.BarcodePrice" column="id" javaType="arraylist"
+			select="com.market.maicheng.dao.BarcodePriceDao.getBarcodePriceByBarcodeID">
+		</collection>
+	</resultMap>
+	<resultMap type="com.market.maicheng.model.SameGood" id="resultList2">
+		<id column="id" property="id" />
+		<result column="sid" property="sid" />
+		<result column="mid" property="mid" />
+		<result column="barcodeid" property="barcodeId" />
+	</resultMap>
+	<insert id="addProduct" parameterType="com.market.maicheng.model.Product"
+		flushCache="true">
+		<![CDATA[insert into product ]]>
+		<![CDATA[(id,title,barcodeid,categoryID,brandid,brandname,series,specs,img,contentImg,createTime,merchantID,isdel,state,reviewedID,reviewedTime,hasBarCode,istop) values ]]>
+		<![CDATA[(#{id},#{title},#{barcodeid},#{categoryID},#{brandid},#{brandname},#{series},#{specs},#{img},#{contentImg},#{createTime},#{merchantID},#{isdel},#{state},#{reviewedID},#{reviewedTime},#{hasBarCode},#{istop})]]>
+	</insert>
+
+	<update id="updateProduct" parameterType="com.market.maicheng.model.Product"
+		flushCache="true">
+		<![CDATA[update product set title=#{title},barcodeid=#{barcodeid},categoryID=#{categoryID},brandid=#{brandid},brandname=#{brandname},series=#{series},specs=#{specs},img=#{img},contentImg=#{contentImg},createTime=#{createTime},isdel=#{isdel},state=#{state},reviewedID=#{reviewedID},reviewedTime=#{reviewedTime},hasBarCode=#{hasBarCode},istop=#{istop} where id = #{id}]]>
+	</update>
+
+	<update id="updateProductTop">
+		<![CDATA[update product set istop=#{istop} where id = #{pid}]]>
+	</update>
+	<select id="statisticsProduct" parameterType="com.market.maicheng.model.Product"
+		statementType="CALLABLE">  
+     <![CDATA[ {call statistics_product(
+                #{merchantID,mode=IN,javaType=java.lang.Long,jdbcType=BIGINT},
+              #{categoryID,mode=IN,javaType=java.lang.Long,jdbcType=BIGINT}
+          )
+       }]]>
+	</select>
+	<update id="delProduct">
+    	<![CDATA[update product set isdel = 1 where id = #{id}]]>
+	</update>
+
+	<select id="getProductByID" resultType="com.market.maicheng.model.Product">
+    	<![CDATA[select * from product where id=#{id}]]>
+	</select>
+
+	<select id="getSameGoodsByBarcodeID" resultMap="resultList2">
+    	<![CDATA[select * from sameGoods where barcodeid=#{barcodeId}]]>
+	</select>
+	<insert id="addSameGood" parameterType="com.market.maicheng.model.SameGood"
+		flushCache="true">
+		<![CDATA[insert into sameGoods ]]>
+		<![CDATA[(sid,mid,barcodeid) values ]]>
+		<![CDATA[(#{sid},#{mid},#{barcodeId})]]>
+	</insert>
+	<select id="getProductByBarcodeID" resultType="com.market.maicheng.model.Product">
+		<!-- <![CDATA[select * from product where isdel = 0 and barcodeid in (select 
+			barcodeid from sameGoods where sid = (select sid from sameGoods where barcodeid=#{barcodeId}))]]> -->
+    	<![CDATA[select * from product where isdel = 0 and barcodeid=#{barcodeId} limit 1]]>
+	</select>
+	<delete id="deleteSameGoods">
+		<![CDATA[delete from sameGoods where sid = #{sid} and barcodeid!=#{barcodeId}]]>
+	</delete>
+	<select id="getSameGood" resultType="com.market.maicheng.model.SameGood">
+		<![CDATA[select * from sameGoods where barcodeid = #{barcodeId} and mid = #{mid} limit 1]]>
+	</select>
+	<select id="getProductByMerchantID" resultMap="resultList">
+    	<![CDATA[select * from product where isdel = 0 and merchantID=#{merchantID}]]>
+	</select>
+
+	<!-- 带同品的不分页获取 -->
+	<select id="getProductsHasSg" resultMap="resultList">
+		<![CDATA[select a.*, c.cateName as categoryName from product a ]]>
+		<![CDATA[left join category c on a.categoryID = c.id ]]>
+		<![CDATA[where a.isdel = 0 and a.merchantID = #{merchantID} ]]>
+		<![CDATA[ and a.barcodeid in (select s.barcodeid from samegoods s where  s.sid in 
+(select distinct  s.sid from samegoods s,product p where s.mid=p.merchantID and  s.barcodeid = p.barcodeid and p.merchantID = #{merchantID}]]>
+		<if test="categoryID != -1"> and p.categoryID = #{categoryID}</if>
+		<if test="title != null"> and p.title like '%${title}%'</if>
+		<if test="barcodeId != null"> and p.barcodeid like '%${barcodeId}%'</if>
+		<![CDATA[ ) ]]>
+		<if test="barcodeId != null"> and s.barcodeid like '%${barcodeId}%'</if>
+		<![CDATA[ ) ]]>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+		<!-- <if test="barcodeId != null"> and barcodeid = #{barcodeId}</if> -->
+	</select>
+
+	<!-- 不带同品的不分页获取 -->
+	<select id="getProducts" resultMap="resultList">
+    	<![CDATA[select a.*, c.cateName as categoryName from product a ]]>
+    	<![CDATA[left join barcodeprice b on a.id = b.barcodeId ]]>
+    	<![CDATA[left join category c on a.categoryID = c.id ]]>
+    	<![CDATA[where a.isdel = 0 ]]>
+		<if test="merchantID != 0"> and a.merchantID = #{merchantID}</if>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+		<if test="title != ''"> and a.title like '%${title}%'</if>
+		<if test="barcodeId != null"> and a.barcodeid like '%${barcodeId}%'</if>
+    	<![CDATA[ group by a.id ]]>
+    	<![CDATA[ ${orderby} ]]>
+	</select>
+
+	<!-- 不带同品的分页获取 -->
+	<select id="getProductsForPage" resultMap="resultList">
+    	<![CDATA[select a.*, c.cateName as categoryName from product a ]]>
+    	<![CDATA[left join barcodeprice b on a.id = b.barcodeId ]]>
+    	<![CDATA[left join category c on a.categoryID = c.id ]]>
+    	<![CDATA[where a.isdel = 0 ]]>
+		<if test="merchantID != 0"> and a.merchantID = #{merchantID}</if>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+		<if test="title != ''"> and a.title like '%${title}%'</if>
+		<if test="barcodeId != null"> and (a.barcodeid like '%${barcodeId}%' or b.scode like
+			'%${barcodeId}%')</if>
+  	<![CDATA[ group by a.id ]]>
+    	<![CDATA[ ${orderby} limit #{offset},#{rows} ]]>
+	</select>
+	<select id="getProductsByCount" resultType="int">
+    	<![CDATA[select count(distinct a.id) from product a left join barcodeprice b on a.id = b.barcodeId where a.isdel = 0 ]]>
+		<if test="merchantID != 0"> and a.merchantID = #{merchantID}</if>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+		<if test="title != ''"> and a.title like '%${title}%'</if>
+		<if test="barcodeId != null"> and (a.barcodeid like '%${barcodeId}%' or b.scode like
+			'%${barcodeId}%')</if>
+	</select>
+
+	<!-- 包含同品查询 高红飞添加 开始 -->
+	<select id="getSameGoods" resultMap="resultList">
+		<![CDATA[select a.*, c.cateName as categoryName from product a ]]>
+		<![CDATA[left join category c on a.categoryID = c.id ]]>
+		<![CDATA[where a.isdel = 0 and a.merchantID = #{merchantID}]]>
+		<![CDATA[ and a.barcodeid in (select s.barcodeid from samegoods s where  s.sid in 
+(select distinct  s.sid from samegoods s,product p where s.mid=p.merchantID and  s.barcodeid = p.barcodeid and p.merchantID = #{merchantID}]]>
+		<if test="categoryID != -1"> and p.categoryID = #{categoryID}</if>
+		<if test="title != null"> and p.title like '%${title}%'</if>
+		<if test="barcodeId != null"> and p.barcodeid like '%${barcodeId}%'</if>
+		<![CDATA[ ) ]]>
+		<if test="barcodeId != null"> and s.barcodeid like '%${barcodeId}%'</if>
+		<![CDATA[ ) ]]>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+	</select>
+
+	<select id="getProductsSgByCount" resultType="int">
+    		<![CDATA[select count(*) from (]]>
+    		<![CDATA[select a.*, c.cateName as categoryName from product a]]>
+    		<![CDATA[left join category c on a.categoryID = c.id ]]>
+    		<![CDATA[left join barcodeprice b on a.id = b.barcodeId ]]>
+    		<![CDATA[where a.isdel = 0 and a.merchantID = #{merchantID} ]]>
+		<![CDATA[ and a.barcodeid in (select s.barcodeid from samegoods s where  s.sid in 
+(select distinct  s.sid from samegoods s,product p where s.mid=p.merchantID and  s.barcodeid = p.barcodeid and p.merchantID = #{merchantID}]]>
+		<if test="categoryID != -1"> and p.categoryID = #{categoryID}</if>
+		<if test="title != null"> and p.title like '%${title}%'</if>
+		<if test="barcodeId != null"> and p.barcodeid like '%${barcodeId}%'</if>
+		<![CDATA[ )) ]]>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+		
+		<![CDATA[ UNION ]]>
+		<![CDATA[select a.*, c.cateName as categoryName from product a]]>
+    		<![CDATA[left join category c on a.categoryID = c.id ]]>
+    		<![CDATA[left join barcodeprice b on a.id = b.barcodeId ]]>
+    		<![CDATA[where a.isdel = 0 and a.merchantID = #{merchantID} ]]>
+		<![CDATA[ and a.barcodeid like '%${barcodeId}%']]>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+		
+		<![CDATA[ UNION ]]>
+		<![CDATA[select a.*, c.cateName as categoryName from product a]]>
+    		<![CDATA[left join category c on a.categoryID = c.id ]]>
+    		<![CDATA[left join barcodeprice b on a.id = b.barcodeId ]]>
+    		<![CDATA[where a.isdel = 0 and a.merchantID = #{merchantID} ]]>
+		<![CDATA[ and b.scode like '%${barcodeId}%']]>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+		<![CDATA[ ) aa ]]>
+	</select>
+	
+	<select id="getProductsHasSgForPage" resultMap="resultList">
+    		<![CDATA[(select a.*, c.cateName as categoryName from product a]]>
+    		<![CDATA[left join category c on a.categoryID = c.id ]]>
+    		<![CDATA[left join barcodeprice b on a.id = b.barcodeId ]]>
+    		<![CDATA[where a.isdel = 0 and a.merchantID = #{merchantID} ]]>
+		<![CDATA[ and a.barcodeid in (select s.barcodeid from samegoods s where  s.sid in 
+(select distinct  s.sid from samegoods s,product p where s.mid=p.merchantID and  s.barcodeid = p.barcodeid and p.merchantID = #{merchantID}]]>
+		<if test="categoryID != -1"> and p.categoryID = #{categoryID}</if>
+		<if test="title != null"> and p.title like '%${title}%'</if>
+		<if test="barcodeId != null"> and p.barcodeid like '%${barcodeId}%'</if>
+		<![CDATA[ )) ]]>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+		<![CDATA[ ${orderby} )]]>
+		
+		<![CDATA[ UNION ]]>
+		<![CDATA[(select a.*, c.cateName as categoryName from product a]]>
+    		<![CDATA[left join category c on a.categoryID = c.id ]]>
+    		<![CDATA[left join barcodeprice b on a.id = b.barcodeId ]]>
+    		<![CDATA[where a.isdel = 0 and a.merchantID = #{merchantID} ]]>
+		<![CDATA[ and a.barcodeid like '%${barcodeId}%']]>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+		<![CDATA[ ${orderby} )]]>
+		
+		<![CDATA[ UNION ]]>
+		<![CDATA[(select a.*, c.cateName as categoryName from product a]]>
+    		<![CDATA[left join category c on a.categoryID = c.id ]]>
+    		<![CDATA[left join barcodeprice b on a.id = b.barcodeId ]]>
+    		<![CDATA[where a.isdel = 0 and a.merchantID = #{merchantID} ]]>
+		<![CDATA[ and b.scode like '%${barcodeId}%']]>
+		<if test="categoryID != -1"> and a.categoryID = #{categoryID}</if>
+		<![CDATA[ ${orderby} )]]>
+		
+    		<![CDATA[ limit #{offset},#{rows} ]]>
+	</select>
+
+
+	<!-- 包含同品分页查询 高红飞添加 结束 -->
+</mapper>

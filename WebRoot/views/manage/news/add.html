@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../css/admin/common.css" />
+	<script src="../../js/jquery.min.js" ></script>
+	<script src="../../js/upload.js"></script>
+	<script type="text/javascript" src="../../js/ajaxfileupload.js"></script>
+	<script type="text/javascript" src="../..//js/My97DatePicker/WdatePicker.js"></script>
+	<script >
+	function save(){
+		var title = $("#title").val();
+		var zhaiyao = $("#zhaiyao").val();
+		var times = $("#times").val();
+		var oid = $("#oid").val();
+		//添加
+		aj.ajax({
+			type : "POST",
+    		url:"../news/toadd",  
+    		data:{title:title,zhaiyao:zhaiyao,times:times,oid:oid},
+    		success:function(){
+				alert("保存成功！");
+				location.href="../news/list";
+    		}
+		});
+	}
+</script>
+	<title>项目管理系统</title>
+</head>
+<body>
+<div  class="main_2" id="main_2">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box fixed">
+					<div class="box-title fixed">
+						<h3>新闻详情</h3>
+                        <ul class="ul_1">
+                            <li>管理新闻</li>
+                        </ul>
+					</div>
+					<div class="box-content_x">
+					<form action="javascript:;" method="post" id="projectFrom" name="projectFrom" enctype="multipart/form-data" >
+						<div class="form-horizontal">
+						 
+                            	 
+							<div class="control-group fixed">
+                                <label for="select" class="control-label">
+                               		 标题：
+                                </label>
+                                <div class="controls">
+                                	<input id="oid" value="$!attribute.id" style="display: none"/>
+                                	<input type="text" name="title" id="title" value="$!attribute.title"/>
+                                </div>
+                            </div>
+                            <div class="control-group fixed">
+                                <label for="select" class="control-label">
+                                	内容：
+                                </label>
+                                <div class="controls">
+                                    <textarea id="zhaiyao" rows="10">$!attribute.content</textarea>
+                                </div>
+                            </div>
+                            <!-- div class="control-group fixed">
+                            	<label for="select" class="control-label">
+                            		发布时间：
+                                </label>
+                                <div class="controls">
+                                <input type="text" value="$!attribute.addtime" name="times" placeholder="点击选取时间" id="times" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+                            	 </div>
+                            </div--> 
+                            <div class="control-group fixed">
+	                            <div class="form-actions fixed">
+									<button type="submit" class="btn btn-primary"  onclick="save()">提交</button>
+								</div>
+							</div>
+					</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

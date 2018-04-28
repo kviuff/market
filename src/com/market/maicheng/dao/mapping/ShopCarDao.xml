@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.ShopCarDao">
+	<resultMap type="com.market.maicheng.model.ShopCar" id="resultList">
+		<id column="id" property="id" />
+		<result column="memberid" property="memberid" />
+		<result column="mid" property="mid" />
+		<result column="pid" property="pid" />
+		<result column="count" property="count" />
+		<result column="barcodepriceid" property="barcodepriceid" />
+		<result column="addtime" property="addtime" />
+		<result column="ping" property="ping" />
+	</resultMap>
+
+	<insert id="addShopCar" parameterType="com.market.maicheng.model.ShopCar" flushCache="true">
+		<![CDATA[insert into shopcar (id,mid,memberid,pid,count,barcodepriceid,addtime,ping) values ]]>
+		<![CDATA[ (#{id},#{mid},#{memberid},#{pid},#{count},#{barcodepriceid},#{addtime},#{ping})]]>
+	</insert>
+	
+	<update id="upShopCar" parameterType="com.market.maicheng.model.ShopCar"  flushCache="true">
+		<![CDATA[update shopcar set memberid=#{memberid},pid=#{pid},count=#{count},barcodepriceid=#{barcodepriceid},addtime=#{addtime},ping=#{ping} where id = #{id}]]>
+	</update>
+	
+	<select id="getShopCarList" resultMap="resultList">
+		<![CDATA[select *, (select shopname from merchant m where car.mid = m.id) as mname from ShopCar car where memberid=#{memberid} order by addtime desc]]>
+	</select>
+	
+	<delete id="delShopCar">
+		<![CDATA[delete from ShopCar where id = #{id}]]>
+	</delete>
+	
+	<delete id="delShopCarForidsAndUserid">
+		<![CDATA[delete from ShopCar where  barcodepriceid = #{barcodepriceid} and pid = #{pid} and memberid = ${memberid}]]>
+	</delete>
+	
+	<select id="getShopCar" resultType="com.market.maicheng.model.ShopCar">
+		<![CDATA[select * from ShopCar where memberid=#{memberid}]]>
+	</select>
+	
+	<select id="getShopCarByid" resultType="com.market.maicheng.model.ShopCar">
+		<![CDATA[select *, (select shopname from merchant m where car.mid = m.id) as mname from ShopCar car where id=#{id}]]>
+	</select>
+	
+	<select id="getShopCarForUseridAndPidids" resultType="com.market.maicheng.model.ShopCar">
+		<![CDATA[select * from ShopCar where mid=#{mid} and memberid=#{memberid} and pid=#{pid} and barcodepriceid = #{barcodepriceid}]]>
+	</select>
+	<select id="getShopCarForUseridAndMid" resultType="com.market.maicheng.model.ShopCar">
+		<![CDATA[select * from ShopCar where  memberid=#{memberid} limit 1]]>
+	</select>
+	
+	<update id="updateCarCount">
+		<![CDATA[update shopcar set count=#{count} where id = #{carId}]]>
+	</update>
+	
+	<update id="updateCarFight">
+		<![CDATA[update shopcar set ping=#{fight} where id = #{carId}]]>
+	</update>
+	
+</mapper>

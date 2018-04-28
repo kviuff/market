@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.BrandDao">
+	<resultMap type="com.market.maicheng.model.Brand" id="resultList">
+		<id column="brand_id" property="id" />
+		<result column="pid" property="pid" />
+		<result column="brand_name" property="brandName" />
+		<result column="brand_initial" property="brandInitial" />
+		<result column="is_del" property="isDel" />
+	</resultMap>
+	
+	<insert id="addBrand" useGeneratedKeys="true" keyProperty="id"  parameterType="com.market.maicheng.model.Brand">
+		<![CDATA[insert into mk_brand (brand_id,pid,brand_name,brand_initial,is_del) values (#{id},#{pid},#{brandName},#{brandInitial},#{isDel})]]>
+	</insert>
+	
+	<update id="updateBrand" parameterType="com.market.maicheng.model.Brand">
+		<![CDATA[update mk_brand set pid=#{pid},brand_name=#{brandName},is_del=#{isDel} where brand_id = #{id} ]]>
+	</update>
+	
+	<update id="delBrand" >
+		<![CDATA[update mk_brand set is_del=1 where brand_id = #{id} ]]>
+	</update>
+	
+	<select id="getBrandListByPage" resultMap="resultList">
+		<![CDATA[select * from mk_brand where is_del = 0]]>
+		<if test="brandName != null"> and brand_name like '%${brandName}%'</if>
+		<![CDATA[order by brand_initial asc limit #{offset},#{rows} ]]> 
+	</select>
+	
+	<select id="getBrandListByCount" resultType="int">  
+		<![CDATA[select count(*) from mk_brand where is_del = 0 ]]>
+		<if test="brandName != null"> and brand_name like '%${brandName}%'</if>
+	</select>
+	
+	<select id="getBrandList" resultMap="resultList">
+		<![CDATA[select * from mk_brand where is_del = 0]]>
+	</select>
+	<select id="getBrand" resultType="com.market.maicheng.model.Brand">
+    	<![CDATA[select * from mk_brand where brand_id=#{id}]]>
+    </select>
+</mapper>

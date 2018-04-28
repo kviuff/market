@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.CategoryDao">
+	<resultMap type="com.market.maicheng.model.Category" id="resultList">
+		<id column="id" property="id" />
+		<result column="cateName" property="cateName" />
+		<result column="isdel" property="isdel" />
+		<result column="pid" property="pid" />
+		<result column="pname" property="pname" />
+		<result column="istop" property="istop" />
+		<result column="icon" property="icon" />
+		<result column="icon1" property="icon1" />
+		<result column="icon2" property="icon2" />
+		<result column="level" property="level" />
+		<result column="states" property="states" />
+		<result column="sort" property="sort" />
+	</resultMap>
+	<resultMap type="com.market.maicheng.model.MerchantCategory" id="merchantCategoryList">
+		<!-- <id column="id" property="id" /> -->
+		<result column="id" property="id" />
+		<!--<result column="mid" property="mid" /> -->
+		<result column="cateName" property="cateName" />
+	</resultMap>
+	<insert id="addCate" parameterType="com.market.maicheng.model.Category" flushCache="true">
+		<![CDATA[insert into category (id,cateName,isdel,pid,pname,istop,icon,icon1,icon2,level,states,sort) values (#{id},#{cateName},#{isdel},#{pid},#{pname},#{istop},#{icon},#{icon1},#{icon2},#{level},#{states},#{sort})]]>
+	</insert>
+	
+	<insert id="addMerchantCategory" parameterType="com.market.maicheng.model.MerchantCategory" flushCache="true">
+		<![CDATA[insert into merchant_category (mid,cid) values (#{mid},#{cid})]]>
+	</insert>
+	<update id="updateCate" parameterType="com.market.maicheng.model.Category" flushCache="true">
+		<![CDATA[update category set cateName = #{cateName},isdel=#{isdel},pid=#{pid},istop=#{istop},icon=#{icon},icon1=#{icon1},icon2=#{icon2},level=#{level},states=#{states},sort=#{sort},updateTime=#{updateTime} where id = #{id}]]>
+    </update>
+    <select id="getMerchantCategoryById" resultMap="merchantCategoryList">
+    	<![CDATA[select c.id,c.cateName from merchant_category r,category c where r.cid=c.id and  isdel = 0 and r.mid=#{mid}]]>
+    </select> 
+    <select id="getMerchantCategoryList" resultMap="resultList">
+    	<![CDATA[select * from category where isdel = 0 and pid=#{pid}]]>
+    	<if test="istop != -1"> and istop = #{istop}</if>
+    	<![CDATA[order by istop desc,updateTime desc ]]> 
+    	<if test="num != 0"> limit #{num}</if>
+    </select> 
+    <select id="getProductCategoryList" resultMap="resultList">
+    	<![CDATA[select * from category where isdel = 0 and pid=#{pid}]]>
+    	<if test="istop != -1"> and istop = #{istop}</if>
+    	<![CDATA[ order by sort asc]]>
+    	<if test="num != 0"> limit #{num}</if>
+    </select> 
+    <select id="getProductCategoryListLimit" resultMap="resultList">
+    	<!-- <![CDATA[select c.* from category c, statistics_category_product r where c.id = r.cid and r.mid=#{mid} and c.isdel = 0 and c.pid=#{pid} and r.products<>0]]> -->
+    	<![CDATA[select  distinct c.* from  category c ,product p  where c.id = p.categoryID and c.isdel = 0 and c.pid=#{pid} and p.merchantID = #{mid}]]>
+    	<if test="istop != -1"> and c.istop = #{istop}</if>
+    	<![CDATA[ order by c.sort asc]]>
+    	<if test="num != 0"> limit #{num}</if>
+    </select>
+    
+    <select id="getProductSecCategoryListLimit" resultMap="resultList">
+<!-- <![CDATA[select * from category where pid in(select  distinct c.id from  category c ,product p  where c.id = p.categoryID and c.isdel = 0 and c.pid=0 and p.merchantID = #{mid}]]>-->
+    	<![CDATA[select * from category where id in(select  distinct c.pid from  category c ,product p  where c.id = p.categoryID and c.isdel = 0 and p.merchantID = #{mid}]]>
+    	<if test="istop != -1"> and c.istop = #{istop}</if>
+    	<![CDATA[ )]]>
+    	<![CDATA[ order by sort asc]]>
+    	<if test="num != 0"> limit #{num}</if>
+    </select>
+    
+    <select id="getCategory" resultType="com.market.maicheng.model.Category">
+    	<![CDATA[select * from category where id=#{id}]]>
+    </select>
+    
+    <update id="delCate" parameterType="long">
+		<![CDATA[update category set isdel = 1 where id = #{id}]]>
+    </update>
+    
+    <update id="updateIsTop">
+		<![CDATA[update category set istop = #{istop},updateTime=#{updateTime} where id = #{id}]]>
+    </update>
+<!--     模糊搜索分类 -->
+     <select id="getCategoryBySearchAll" resultMap="resultList">
+    	<![CDATA[select * from category where isdel=0 and cateName like '%${cateName}%' order by sort asc]]>
+    </select>
+    
+    <select id="getCateforLimit" resultMap="resultList">
+    	<![CDATA[select * from category where isdel=0 and pid = #{pid}]]>
+    	<if test="pageSize != -1"> limit #{pageSize} </if>
+    </select>
+    <delete id="delMerchantCategoryById" parameterType="long">
+    <![CDATA[delete from merchant_category  where mid = #{mid}]]>
+    </delete>
+    
+    
+</mapper>

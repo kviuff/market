@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.market.maicheng.dao.OrderInfoMapper">
+	<resultMap id="BaseResultMap" type="com.market.maicheng.model.OrderInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="addressid" property="addressid" jdbcType="BIGINT" />
+		<result column="paymethod" property="paymethod" jdbcType="INTEGER" />
+		<result column="shippingmethod" property="shippingmethod"
+			jdbcType="VARCHAR" />
+		<result column="invoicetypename" property="invoicetypename"
+			jdbcType="INTEGER" />
+		<result column="invoicecontent" property="invoicecontent"
+			jdbcType="VARCHAR" />
+		<result column="pmoney" property="pmoney" jdbcType="DOUBLE" />
+		<result column="distribution" property="distribution" jdbcType="DOUBLE" />
+		<result column="pname" property="pname" jdbcType="VARCHAR" />
+		<result column="pcount" property="pcount" jdbcType="INTEGER" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="ispay" property="ispay" jdbcType="INTEGER" />
+		<result column="paytime" property="paytime" jdbcType="BIGINT" />
+		<result column="addtime" property="addtime" jdbcType="BIGINT" />
+		<result column="userid" property="userid" jdbcType="BIGINT" />
+		<result column="expressnum" property="expressnum" jdbcType="VARCHAR" />
+		<result column="ordersource" property="ordersource" jdbcType="INTEGER" />
+		<result column="isdel" property="isdel" jdbcType="INTEGER" />
+		<result column="purl" property="purl" jdbcType="VARCHAR" />
+		<result column="receiver" property="receiver" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="provinceid" property="provinceid" jdbcType="BIGINT" />
+		<result column="provincename" property="provincename" jdbcType="VARCHAR" />
+		<result column="cityid" property="cityid" jdbcType="BIGINT" />
+		<result column="cityname" property="cityname" jdbcType="VARCHAR" />
+		<result column="regionid" property="regionid" jdbcType="BIGINT" />
+		<result column="region" property="region" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+		<result column="pid" property="pid" jdbcType="BIGINT" />
+		<result column="rreason" property="rreason" jdbcType="VARCHAR" />
+		<result column="subid" property="subid" jdbcType="BIGINT" />
+		<result column="subprice" property="subprice" jdbcType="VARCHAR" />
+		<result column="ispin" property="ispin" jdbcType="INTEGER" />
+		<result column="saleid" property="saleid" jdbcType="BIGINT" />
+		<result column="salename" property="salename" jdbcType="VARCHAR" />
+		<result column="scode" property="scode" jdbcType="VARCHAR" />
+		<result column="unit" property="unit" jdbcType="VARCHAR" />
+		<result column="spec" property="spec" jdbcType="VARCHAR" />
+		<result column="merchantid" property="merchantid" jdbcType="BIGINT" />
+		<result column="merchantname" property="merchantname" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="isexamine" property="isexamine" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, addressid, paymethod, shippingmethod, invoicetypename,
+		invoicecontent, pmoney,
+		distribution, pname, pcount, content, ispay, paytime, addtime, userid, expressnum,
+		ordersource, isdel, purl, receiver, mobile, provinceid, provincename,
+		cityid, cityname,
+		regionid, region, address, zipcode, pid, rreason, subid, subprice, ispin,
+		saleid,
+		salename, scode, unit, spec, merchantid, merchantname, remark, isexamine
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from orderinfo
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from orderinfo
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.market.maicheng.model.OrderInfo">
+		insert into orderinfo (id, addressid, paymethod,
+		shippingmethod, invoicetypename, invoicecontent,
+		pmoney, distribution, pname,
+		pcount, content, ispay,
+		paytime, addtime, userid,
+		expressnum, ordersource, isdel,
+		purl, receiver, mobile,
+		provinceid, provincename, cityid,
+		cityname, regionid, region,
+		address, zipcode, pid,
+		rreason, subid, subprice,
+		ispin, saleid, salename,
+		scode, unit, spec,
+		merchantid, merchantname, remark,
+		isexamine)
+		values (#{id,jdbcType=BIGINT}, #{addressid,jdbcType=BIGINT},
+		#{paymethod,jdbcType=INTEGER},
+		#{shippingmethod,jdbcType=VARCHAR}, #{invoicetypename,jdbcType=INTEGER},
+		#{invoicecontent,jdbcType=VARCHAR},
+		#{pmoney,jdbcType=DOUBLE}, #{distribution,jdbcType=DOUBLE}, #{pname,jdbcType=VARCHAR},
+		#{pcount,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR},
+		#{ispay,jdbcType=INTEGER},
+		#{paytime,jdbcType=BIGINT}, #{addtime,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT},
+		#{expressnum,jdbcType=VARCHAR}, #{ordersource,jdbcType=INTEGER},
+		#{isdel,jdbcType=INTEGER},
+		#{purl,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+		#{provinceid,jdbcType=BIGINT}, #{provincename,jdbcType=VARCHAR},
+		#{cityid,jdbcType=BIGINT},
+		#{cityname,jdbcType=VARCHAR}, #{regionid,jdbcType=BIGINT}, #{region,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR},
+		#{pid,jdbcType=BIGINT},
+		#{rreason,jdbcType=VARCHAR}, #{subid,jdbcType=BIGINT}, #{subprice,jdbcType=VARCHAR},
+		#{ispin,jdbcType=INTEGER}, #{saleid,jdbcType=BIGINT},
+		#{salename,jdbcType=VARCHAR},
+		#{scode,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR},
+		#{merchantid,jdbcType=BIGINT}, #{merchantname,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{isexamine,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.market.maicheng.model.OrderInfo">
+		insert into orderinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="addressid != null">
+				addressid,
+			</if>
+			<if test="paymethod != null">
+				paymethod,
+			</if>
+			<if test="shippingmethod != null">
+				shippingmethod,
+			</if>
+			<if test="invoicetypename != null">
+				invoicetypename,
+			</if>
+			<if test="invoicecontent != null">
+				invoicecontent,
+			</if>
+			<if test="pmoney != null">
+				pmoney,
+			</if>
+			<if test="distribution != null">
+				distribution,
+			</if>
+			<if test="pname != null">
+				pname,
+			</if>
+			<if test="pcount != null">
+				pcount,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="ispay != null">
+				ispay,
+			</if>
+			<if test="paytime != null">
+				paytime,
+			</if>
+			<if test="addtime != null">
+				addtime,
+			</if>
+			<if test="userid != null">
+				userid,
+			</if>
+			<if test="expressnum != null">
+				expressnum,
+			</if>
+			<if test="ordersource != null">
+				ordersource,
+			</if>
+			<if test="isdel != null">
+				isdel,
+			</if>
+			<if test="purl != null">
+				purl,
+			</if>
+			<if test="receiver != null">
+				receiver,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="provinceid != null">
+				provinceid,
+			</if>
+			<if test="provincename != null">
+				provincename,
+			</if>
+			<if test="cityid != null">
+				cityid,
+			</if>
+			<if test="cityname != null">
+				cityname,
+			</if>
+			<if test="regionid != null">
+				regionid,
+			</if>
+			<if test="region != null">
+				region,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="zipcode != null">
+				zipcode,
+			</if>
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="rreason != null">
+				rreason,
+			</if>
+			<if test="subid != null">
+				subid,
+			</if>
+			<if test="subprice != null">
+				subprice,
+			</if>
+			<if test="ispin != null">
+				ispin,
+			</if>
+			<if test="saleid != null">
+				saleid,
+			</if>
+			<if test="salename != null">
+				salename,
+			</if>
+			<if test="scode != null">
+				scode,
+			</if>
+			<if test="unit != null">
+				unit,
+			</if>
+			<if test="spec != null">
+				spec,
+			</if>
+			<if test="merchantid != null">
+				merchantid,
+			</if>
+			<if test="merchantname != null">
+				merchantname,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="isexamine != null">
+				isexamine,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="addressid != null">
+				#{addressid,jdbcType=BIGINT},
+			</if>
+			<if test="paymethod != null">
+				#{paymethod,jdbcType=INTEGER},
+			</if>
+			<if test="shippingmethod != null">
+				#{shippingmethod,jdbcType=VARCHAR},
+			</if>
+			<if test="invoicetypename != null">
+				#{invoicetypename,jdbcType=INTEGER},
+			</if>
+			<if test="invoicecontent != null">
+				#{invoicecontent,jdbcType=VARCHAR},
+			</if>
+			<if test="pmoney != null">
+				#{pmoney,jdbcType=DOUBLE},
+			</if>
+			<if test="distribution != null">
+				#{distribution,jdbcType=DOUBLE},
+			</if>
+			<if test="pname != null">
+				#{pname,jdbcType=VARCHAR},
+			</if>
+			<if test="pcount != null">
+				#{pcount,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="ispay != null">
+				#{ispay,jdbcType=INTEGER},
+			</if>
+			<if test="paytime != null">
+				#{paytime,jdbcType=BIGINT},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=BIGINT},
+			</if>
+			<if test="expressnum != null">
+				#{expressnum,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersource != null">
+				#{ordersource,jdbcType=INTEGER},
+			</if>
+			<if test="isdel != null">
+				#{isdel,jdbcType=INTEGER},
+			</if>
+			<if test="purl != null">
+				#{purl,jdbcType=VARCHAR},
+			</if>
+			<if test="receiver != null">
+				#{receiver,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceid != null">
+				#{provinceid,jdbcType=BIGINT},
+			</if>
+			<if test="provincename != null">
+				#{provincename,jdbcType=VARCHAR},
+			</if>
+			<if test="cityid != null">
+				#{cityid,jdbcType=BIGINT},
+			</if>
+			<if test="cityname != null">
+				#{cityname,jdbcType=VARCHAR},
+			</if>
+			<if test="regionid != null">
+				#{regionid,jdbcType=BIGINT},
+			</if>
+			<if test="region != null">
+				#{region,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="zipcode != null">
+				#{zipcode,jdbcType=VARCHAR},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=BIGINT},
+			</if>
+			<if test="rreason != null">
+				#{rreason,jdbcType=VARCHAR},
+			</if>
+			<if test="subid != null">
+				#{subid,jdbcType=BIGINT},
+			</if>
+			<if test="subprice != null">
+				#{subprice,jdbcType=VARCHAR},
+			</if>
+			<if test="ispin != null">
+				#{ispin,jdbcType=INTEGER},
+			</if>
+			<if test="saleid != null">
+				#{saleid,jdbcType=BIGINT},
+			</if>
+			<if test="salename != null">
+				#{salename,jdbcType=VARCHAR},
+			</if>
+			<if test="scode != null">
+				#{scode,jdbcType=VARCHAR},
+			</if>
+			<if test="unit != null">
+				#{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="spec != null">
+				#{spec,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantid != null">
+				#{merchantid,jdbcType=BIGINT},
+			</if>
+			<if test="merchantname != null">
+				#{merchantname,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isexamine != null">
+				#{isexamine,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.market.maicheng.model.OrderInfo">
+		update orderinfo
+		<set>
+			<if test="addressid != null">
+				addressid = #{addressid,jdbcType=BIGINT},
+			</if>
+			<if test="paymethod != null">
+				paymethod = #{paymethod,jdbcType=INTEGER},
+			</if>
+			<if test="shippingmethod != null">
+				shippingmethod = #{shippingmethod,jdbcType=VARCHAR},
+			</if>
+			<if test="invoicetypename != null">
+				invoicetypename = #{invoicetypename,jdbcType=INTEGER},
+			</if>
+			<if test="invoicecontent != null">
+				invoicecontent = #{invoicecontent,jdbcType=VARCHAR},
+			</if>
+			<if test="pmoney != null">
+				pmoney = #{pmoney,jdbcType=DOUBLE},
+			</if>
+			<if test="distribution != null">
+				distribution = #{distribution,jdbcType=DOUBLE},
+			</if>
+			<if test="pname != null">
+				pname = #{pname,jdbcType=VARCHAR},
+			</if>
+			<if test="pcount != null">
+				pcount = #{pcount,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="ispay != null">
+				ispay = #{ispay,jdbcType=INTEGER},
+			</if>
+			<if test="paytime != null">
+				paytime = #{paytime,jdbcType=BIGINT},
+			</if>
+			<if test="addtime != null">
+				addtime = #{addtime,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				userid = #{userid,jdbcType=BIGINT},
+			</if>
+			<if test="expressnum != null">
+				expressnum = #{expressnum,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersource != null">
+				ordersource = #{ordersource,jdbcType=INTEGER},
+			</if>
+			<if test="isdel != null">
+				isdel = #{isdel,jdbcType=INTEGER},
+			</if>
+			<if test="purl != null">
+				purl = #{purl,jdbcType=VARCHAR},
+			</if>
+			<if test="receiver != null">
+				receiver = #{receiver,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceid != null">
+				provinceid = #{provinceid,jdbcType=BIGINT},
+			</if>
+			<if test="provincename != null">
+				provincename = #{provincename,jdbcType=VARCHAR},
+			</if>
+			<if test="cityid != null">
+				cityid = #{cityid,jdbcType=BIGINT},
+			</if>
+			<if test="cityname != null">
+				cityname = #{cityname,jdbcType=VARCHAR},
+			</if>
+			<if test="regionid != null">
+				regionid = #{regionid,jdbcType=BIGINT},
+			</if>
+			<if test="region != null">
+				region = #{region,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="zipcode != null">
+				zipcode = #{zipcode,jdbcType=VARCHAR},
+			</if>
+			<if test="pid != null">
+				pid = #{pid,jdbcType=BIGINT},
+			</if>
+			<if test="rreason != null">
+				rreason = #{rreason,jdbcType=VARCHAR},
+			</if>
+			<if test="subid != null">
+				subid = #{subid,jdbcType=BIGINT},
+			</if>
+			<if test="subprice != null">
+				subprice = #{subprice,jdbcType=VARCHAR},
+			</if>
+			<if test="ispin != null">
+				ispin = #{ispin,jdbcType=INTEGER},
+			</if>
+			<if test="saleid != null">
+				saleid = #{saleid,jdbcType=BIGINT},
+			</if>
+			<if test="salename != null">
+				salename = #{salename,jdbcType=VARCHAR},
+			</if>
+			<if test="scode != null">
+				scode = #{scode,jdbcType=VARCHAR},
+			</if>
+			<if test="unit != null">
+				unit = #{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="spec != null">
+				spec = #{spec,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantid != null">
+				merchantid = #{merchantid,jdbcType=BIGINT},
+			</if>
+			<if test="merchantname != null">
+				merchantname = #{merchantname,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isexamine != null">
+				isexamine = #{isexamine,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.market.maicheng.model.OrderInfo">
+		update orderinfo
+		set addressid = #{addressid,jdbcType=BIGINT},
+		paymethod = #{paymethod,jdbcType=INTEGER},
+		shippingmethod = #{shippingmethod,jdbcType=VARCHAR},
+		invoicetypename = #{invoicetypename,jdbcType=INTEGER},
+		invoicecontent = #{invoicecontent,jdbcType=VARCHAR},
+		pmoney = #{pmoney,jdbcType=DOUBLE},
+		distribution = #{distribution,jdbcType=DOUBLE},
+		pname = #{pname,jdbcType=VARCHAR},
+		pcount = #{pcount,jdbcType=INTEGER},
+		content = #{content,jdbcType=VARCHAR},
+		ispay = #{ispay,jdbcType=INTEGER},
+		paytime = #{paytime,jdbcType=BIGINT},
+		addtime = #{addtime,jdbcType=BIGINT},
+		userid = #{userid,jdbcType=BIGINT},
+		expressnum = #{expressnum,jdbcType=VARCHAR},
+		ordersource = #{ordersource,jdbcType=INTEGER},
+		isdel = #{isdel,jdbcType=INTEGER},
+		purl = #{purl,jdbcType=VARCHAR},
+		receiver = #{receiver,jdbcType=VARCHAR},
+		mobile = #{mobile,jdbcType=VARCHAR},
+		provinceid = #{provinceid,jdbcType=BIGINT},
+		provincename = #{provincename,jdbcType=VARCHAR},
+		cityid = #{cityid,jdbcType=BIGINT},
+		cityname = #{cityname,jdbcType=VARCHAR},
+		regionid = #{regionid,jdbcType=BIGINT},
+		region = #{region,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		zipcode = #{zipcode,jdbcType=VARCHAR},
+		pid = #{pid,jdbcType=BIGINT},
+		rreason = #{rreason,jdbcType=VARCHAR},
+		subid = #{subid,jdbcType=BIGINT},
+		subprice = #{subprice,jdbcType=VARCHAR},
+		ispin = #{ispin,jdbcType=INTEGER},
+		saleid = #{saleid,jdbcType=BIGINT},
+		salename = #{salename,jdbcType=VARCHAR},
+		scode = #{scode,jdbcType=VARCHAR},
+		unit = #{unit,jdbcType=VARCHAR},
+		spec = #{spec,jdbcType=VARCHAR},
+		merchantid = #{merchantid,jdbcType=BIGINT},
+		merchantname = #{merchantname,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		isexamine = #{isexamine,jdbcType=INTEGER}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="getOrderListByUserid" resultMap="BaseResultMap">
+		<![CDATA[select * from OrderInfo where isdel=0 and subid=0]]>
+		<if test="userid != -1"> and userid = #{userid}</if>
+		<if test="saleid != -1"> and saleid = #{saleid}</if>
+		<if test="merchantid != -1"> and merchantid = #{merchantid}</if>
+		<![CDATA[order by addTime desc limit #{offset},#{rows} ]]>
+	</select>
+
+	<select id="getOrderListByUseridForCount" resultType="int">
+		<![CDATA[select count(id) from OrderInfo where isdel=0 and subid=0]]>
+		<if test="userid != -1"> and userid = #{userid}</if>
+		<if test="saleid != -1"> and saleid = #{saleid}</if>
+		<if test="merchantid != -1"> and merchantid = #{merchantid}</if>
+	</select>
+
+	<select id="getOrderListBysubid" resultMap="BaseResultMap">
+		<![CDATA[select * from OrderInfo where isdel=0 and subid=#{subid} order by addTime desc]]>
+	</select>
+
+
+	<resultMap id="BaseResultMap1" type="com.market.maicheng.model.StatisticsOrder">
+		<id column="id" property="merchantId" />
+		<id column="shopName" property="merchantName" />
+		<id column="ordercount" property="orderCount" />
+	</resultMap>
+
+	<select id="getOrderListByMerchant" resultMap = "BaseResultMap1">
+		<![CDATA[select mer.shopName,mer.id, (select count(1) from orderinfo oo where oo.merchantid = mer.id and oo.subid = 0) as ordercount 
+		from merchant mer]]>
+		<![CDATA[limit #{offset},#{rows} ]]>
+	</select>
+	
+	<select id="getOrderListByMerchantCount" resultType = "int">
+		<![CDATA[select count(1) from merchant mer]]>
+	</select>
+	
+	<select id="getOrderListByMerchantId" resultMap="BaseResultMap">
+		<![CDATA[select * from OrderInfo where isdel=0 and subid=0]]>
+		<if test="merchantid != -1"> and merchantid = #{merchantid}</if>
+		<![CDATA[order by addTime desc limit #{offset},#{rows} ]]>
+	</select>
+
+	<select id="getOrderListByMerchantIdForCount" resultType="int">
+		<![CDATA[select count(1) from OrderInfo where isdel=0 and subid=0]]>
+		<if test="merchantid != -1"> and merchantid = #{merchantid}</if>
+	</select>
+	
+	<select id="getOrderListBymerchantid" resultMap="BaseResultMap">
+		<![CDATA[select info.*, (select username from member mm where mm.id = info.userid) as username from OrderInfo info 
+		where info.merchantid = #{merchantid} and info.subid=0 order by info.addTime desc]]>
+	</select>
+	
+	
+	<resultMap id="OrderResultMap" type="com.market.maicheng.model.ReportOrder">
+		<id column="ordate" property="ordate" />
+		<id column="ornum" property="ornum" />
+	</resultMap>
+	<select id="reportForDay" resultMap="OrderResultMap" >
+		<![CDATA[select FROM_UNIXTIME(addtime/1000,'%Y-%m-%d') ordate, count(1) ornum, sum(pmoney) totalmoney from orderinfo where pid is null and merchantid=#{merchantid} group by ordate]]>
+	</select>
+	<select id="reportForMonth" resultMap="OrderResultMap">
+		<![CDATA[select FROM_UNIXTIME(addtime/1000,'%Y-%m') ordate, count(1) ornum, sum(pmoney) totalmoney from orderinfo where pid is null and merchantid=#{merchantid} group by ordate]]>
+	</select>
+	<select id="reportForYear" resultMap="OrderResultMap">
+		<![CDATA[select FROM_UNIXTIME(addtime/1000,'%Y') ordate, count(1) ornum, sum(pmoney) totalmoney from orderinfo where pid is null and merchantid=#{merchantid} group by ordate]]>
+	</select>
+	
+</mapper>

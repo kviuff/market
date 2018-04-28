@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.market.maicheng.dao.RelationMapper" >
+  <resultMap id="BaseResultMap" type="com.market.maicheng.model.Relation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="createid" property="createid" jdbcType="BIGINT" />
+    <result column="relaid" property="relaid" jdbcType="BIGINT" />
+    <result column="classid" property="classid" jdbcType="BIGINT" />
+    <result column="createtime" property="createtime" jdbcType="BIGINT" />
+    <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="fromType" property="fromType" jdbcType="INTEGER" /> 
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+    <result column="mid" property="mid" jdbcType="BIGINT" />
+    <result column="pricLevel" property="pricLevel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, createid, relaid, classid, createtime, contacts, mobile, isdel,pricLevel,fromType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from relation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from relation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.market.maicheng.model.Relation" >
+    insert into relation (id, createid, relaid, 
+      classid, createtime, contacts, 
+      mobile,  isdel,mid,pricLevel,fromType
+      )
+    values (#{id,jdbcType=BIGINT}, #{createid,jdbcType=BIGINT}, #{relaid,jdbcType=BIGINT}, 
+      #{classid,jdbcType=BIGINT}, #{createtime,jdbcType=BIGINT}, #{contacts,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR},  #{isdel,jdbcType=INTEGER}, #{mid,jdbcType=BIGINT}, #{pricLevel,jdbcType=INTEGER}, #{fromType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.market.maicheng.model.Relation" >
+    insert into relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createid != null" >
+        createid,
+      </if>
+      <if test="relaid != null" >
+        relaid,
+      </if>
+      <if test="classid != null" >
+        classid,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="contacts != null" >
+        contacts,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="pricLevel != null" >
+        pricLevel,
+      </if>
+      <if test="fromType != null" >
+        fromType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createid != null" >
+        #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="relaid != null" >
+        #{relaid,jdbcType=BIGINT},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=BIGINT},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="mid != null" >
+        #{mid,jdbcType=BIGINT},
+      </if>
+      <if test="pricLevel != null" >
+        #{pricLevel,jdbcType=INTEGER},
+      </if>
+      <if test="fromType != null" >
+        #{fromType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updatePricLevel">
+  update relation
+    set pricLevel = #{pricLevel}
+    where mid = #{mid} and relaid = #{relaid}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.market.maicheng.model.Relation" >
+    update relation
+    <set >
+      <if test="createid != null" >
+        createid = #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="relaid != null" >
+        relaid = #{relaid,jdbcType=BIGINT},
+      </if>
+      <if test="classid != null" >
+        classid = #{classid,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=BIGINT},
+      </if>
+      <if test="contacts != null" >
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="pricLevel != null" >
+        pricLevel = #{pricLevel,jdbcType=INTEGER},
+      </if>
+      <if test="fromType != null" >
+        fromType = #{fromType,jdbcType=INTEGER},
+      </if>
+      <if test="mid != null" >
+        mid = #{mid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.market.maicheng.model.Relation" >
+    update relation
+    set createid = #{createid,jdbcType=BIGINT},
+      relaid = #{relaid,jdbcType=BIGINT},
+      classid = #{classid,jdbcType=BIGINT},
+      createtime = #{createtime,jdbcType=BIGINT},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=INTEGER},
+      pricLevel = #{pricLevel,jdbcType=INTEGER},
+      fromType = #{fromType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  	<select id="getRelationListByCreateidForCount" resultType="int">  
+		<![CDATA[select count(*) from relation where isdel = 0 and mid=#{mid}  and pricLevel>0 ]]> 
+		<if test="classid != 0" > and classid = #{classid,jdbcType=BIGINT}</if>
+		<if test="createid != 0" > and createid = #{createid,jdbcType=BIGINT}</if>
+	</select>
+  	<select id="getRelationListByCreateid" resultMap="BaseResultMap">
+		<![CDATA[select * from relation where isdel = 0 and mid=#{mid}  and pricLevel>0]]>
+		<if test="classid != 0" > and classid = #{classid,jdbcType=BIGINT}</if>
+		<if test="createid != 0" > and createid = #{createid,jdbcType=BIGINT}</if>
+	   	<![CDATA[order by createtime asc limit #{offset},#{rows} ]]> 
+	</select>
+	
+	<select id="getRelationListByLevelForCount" resultType="int">
+		<![CDATA[select count(*) from relation where isdel = 0 and mid = #{mid} and pricLevel = #{pricLevel} ]]>
+	</select>
+	
+	<select id="getRelationListByLevel" resultMap="BaseResultMap">
+		<![CDATA[select * from relation where isdel = 0 and mid = #{mid} and pricLevel = #{pricLevel} ]]>
+		<![CDATA[order by createtime asc limit #{offset},#{rows} ]]> 
+	</select>
+	
+	<select id="getCustomerListForCount" resultType="int">
+		<![CDATA[select count(*) from relation where isdel = 0 and mid = #{mid} and pricLevel =0 ]]>
+	</select>
+	
+	<select id="getCustomerList" resultMap="BaseResultMap">
+		<![CDATA[select * from relation where isdel = 0 and mid = #{mid} and pricLevel =0 ]]>
+		<![CDATA[order by createtime asc limit #{offset},#{rows} ]]> 
+	</select>
+	
+	<select id="getRelationListByRelaidForCount" resultType="int">  
+		<![CDATA[select count(*) from relation where isdel = 0 and mid=#{mid} and createid = #{createid} and relaid=#{relaid}  and pricLevel>0]]> 
+	</select>
+	
+	<select id="getRelationListByRelaid" resultMap="BaseResultMap">  
+		<![CDATA[select * from relation where isdel = 0 and mid=#{mid}  and relaid=#{relaid} ]]> 
+	</select>
+	<select id="getMerchantByKey" resultType="com.market.maicheng.model.Relation">
+    <![CDATA[select *
+    from relation
+    where relaid=#{relaid} and mid=#{mid} limit 1]]> 
+  </select>
+</mapper>

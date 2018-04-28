@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../css/admin/common.css" />
+	
+	<script src="../../js/jquery.min.js" ></script>
+	<script>
+		$(function(){
+			$("#saveBut").click(function(){
+				var brandName = $("#brandName").val();
+				var id = "$!goodsId";
+				aj.ajax({
+				    type : "POST",
+				    url : "/webadmin/product/updateGoodsBrand",
+				    data : {goodsId: id,brandName: brandName},
+	   				success : function(msg) {
+						if(msg.state == "1"){
+							alert("更新成功");
+							location.href="/webadmin/product/list";
+						}else{
+							alert("更新失败");
+						}
+				    },
+				    error:function(msg){ 
+						alert("程序出错，请联系管理员");
+				    }
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+<div class="main_2" id="main_2">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box fixed">
+					<div class="box-title fixed">
+						<h3>商品管理</h3>
+					</div>
+					<div class="box-content_x">
+						<div class="form-horizontal user_right">
+
+							<div class="control-group fixed">
+								<label for="select" class="control-label">品牌：</label>
+								<div class="controls">
+									<input type="text" name="brandName" id="brandName" class="input-xlarge" /> <span class="help-block" />
+								</div>
+							</div>
+							<div class="form-actions fixed">
+								<button id="saveBut" type="submit" class="btn btn-primary">修改</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

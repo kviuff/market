@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../css/admin/common.css" />
+	<link rel="stylesheet" href="../css/admin/font-awesome.css" />
+	<link rel="stylesheet" href="../css/admin/themes.css" />
+	<link rel="stylesheet" href="../css/admin/jquery-ui.css" />
+	<link rel="stylesheet" href="../css/admin/jquery.ui.theme.css" />
+
+	<script src="../js/jquery.min.js" ></script>
+	<script src="../js/jquery.ui.core.min.js"></script>
+	<script src="../js/jquery.ui.widget.min.js"></script>
+	<script src="../js/jquery.ui.mouse.min.js"></script>
+	<script src="../js/jquery.ui.resizable.min.js" ></script>
+	<script src="../js/common.js" ></script>
+	<script src="../js/placeholder.js" ></script>
+	
+	
+	<style>
+		html,body{ overflow:hidden;}
+	</style>
+	<title>电子商务管理后台</title>
+</head>
+<body class="theme-red">
+	<div id="navigation" class="navbar-fixed-top">
+		<div class="user">
+			<div class="dropdown">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0)">欢迎登陆：$username<img width="60px;" height="27px;" alt="" src="../images/admin/bluemanmxxl.png" /></a>
+				<ul class="dropdown-menu pull-right user_ul">
+                   	<li id="headimg">
+                           <dl class="fixed">
+                           	<dt><a href="user_modify.aspx.htm" tppabs="http://net.hongru.com.cn:8000/2013/oa/user_modify.aspx" target="main" onClick="leftnav(0,'#sis_15')"><img width="160px;" height="160px;" alt="" src="../images/admin/bluemanmxxl.png" /></a></dt>
+                           	<dd>
+                               	<span><a href="manageuser/usermodify" target="main">编辑个人资料</a></span>
+                                <!-- span><a href="user_password.aspx.htm" target="main">密码设置</a></span-->
+                                <span><a href="loginout">注销</a></span>
+                            </dd>
+                           </dl>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="content" class="container-fluid nav-fixed">
+		<div id="left" class="sidebar-fixed" >
+            <div class="left_center left_center-fixed" >
+	            <ul id="sis_0" style="display:block">
+	                <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="manageuser/userlist"><i class="icon-angle-right"></i><span>管理员管理</span></a>
+	                    </div>
+	                </li>
+	                <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="member/memberlist"><i class="icon-angle-right"></i><span>会员管理</span></a>
+	                    </div>
+	                </li>
+	                <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="category/list"><i class="icon-angle-right"></i><span>类别管理</span></a>
+	                    </div>
+	                </li>
+	                <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="merchant/list"><i class="icon-angle-right"></i><span>商铺管理</span></a>
+	                    </div>
+	                </li>
+	                <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="barcode/list"><i class="icon-angle-right"></i><span>条码库存管理</span></a>
+	                    </div>
+	                </li>
+	                <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="product/list"><i class="icon-angle-right"></i><span>商品管理</span></a>
+	                    </div>
+	                </li>
+	                <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="advert"><i class="icon-angle-right"></i><span>广告列表</span></a>
+	                    </div>
+	                </li>
+	                <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="brand/list"><i class="icon-angle-right"></i><span>品牌管理</span></a>
+	                    </div>
+	                </li>
+	                <!-- <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="tool/syndata"><i class="icon-angle-right"></i><span>工具</span></a>
+	                    </div>
+	                </li> -->
+	                <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="news/list"><i class="icon-angle-right"></i><span>公告管理</span></a>
+	                    </div>
+	                </li>
+	                <!-- li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="order/list"><i class="icon-angle-right"></i><span>订单管理</span></a>
+	                    </div>
+	                </li>
+	                  <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="about/add"><i class="icon-angle-right"></i><span>关于我们</span></a>
+	                    </div>
+	                </li>
+                	<li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="comm/list"><i class="icon-angle-right"></i><span>评论审核</span></a>
+	                    </div>
+	                </li>
+                	<li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="forum/list"><i class="icon-angle-right"></i><span>论坛分类</span></a>
+	                    </div>
+	                </li> -->
+	                <li class="subnav subnav-hidden">
+	                    <div class="subnav-title">
+	                        <a target="main" class="toggle-subnav" href="staticticalManagerment/list"><i class="icon-angle-right"></i><span>统计管理</span></a>
+	                    </div>
+	                </li>
+				</ul>
+            </div>
+           
+        </div>
+        <div id="main">
+        	<div  id="main_frm" class="container-fluid">
+        		<span id="mask" style="position: absolute; width: 100%; height: 100%; z-index: 10;"></span>
+				<iframe width="100%" scrolling="yes" frameborder="0" src="product/list" id="main_cont" name="main" ></iframe>
+            </div>
+        </div>
+	</div>
+</body>
+
+</html>

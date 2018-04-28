@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>订单打印</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../../css/admin/PrintArea.css" />
+<link rel="stylesheet" href="../../css/admin/common.css" />
+<link rel="stylesheet" href="../../css/admin/tasktable_print.css" />
+<script src="../../js/jquery-1.10.2.js"></script>
+<script src="../../js/jquery.PrintArea.js"></script>
+
+</head>
+<body>
+	<div class="main_2" id="main_2">
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="box fixed">
+						<div class="box-title fixed">
+							<h3>订单管理</h3>
+						</div>
+						<div class="print-layout">
+							<div class="print-btn" id="printbtn" title="">
+								<button>打印</button>
+							</div>
+							<div class="print-page">
+								<div id="printarea">
+									<div class="orderprint">
+										<div style="text-align: center; font-size: 26px;">
+											<span>$!orderInfo.merchantname销售单</span>
+										</div>
+										<div id="ui_alltasks" class="ui_wtable UI_task_table">
+											<table class="buyer-info">
+												<tr>
+													<td>单位名称：$!orderInfo.merchantname</td>
+													<td>收货地址：$!orderInfo.provincename $!orderInfo.cityname
+														$!orderInfo.region $!orderInfo.address</td>
+													<td>日期：$!date.format('yyyy-MM-dd HH:mm:ss
+														',$!orderInfo.addtime)</td>
+												</tr>
+												<tr>
+													<td>电话：$!orderInfo.mobile</td>
+													<td>单号：$!orderInfo.id</td>
+													<td></td>
+												</tr>
+											</table>
+											<table id="mytable" class="itable" border="1"
+												cellspacing="0" cellpadding="0">
+												<thead>
+													<tr>
+														<tr>
+															<td style="width: 20px;" align=center>序号</td>
+															<td style="width: 100px;" align=center>条 码</td>
+															<td style="width: 280px;" align=center>商品名称</td>
+															<td style="width: 40px;" align=center>规格</td>
+															<td style="width: 20px;" align=center>单位</td>
+															<td style="width: 20px;" align=center>数量</td>
+															<td style="width: 50px;" align=center>单价</td>
+															<td style="width: 65px;" align=center>金额</td>
+															<td style="width: 45px;" align=center>提货参考</td>
+															<td style="width: 35px;" align=center>备注</td>
+														</tr>
+													</tr>
+												</thead>
+												<tbody>
+													#foreach($order in $orderInfoList)
+													<tr>
+														<td>$!{velocityCount}</td>
+														<td>$!order.scode</td>
+														<td>$!order.pname</td>
+														<td>$!order.spec</td>
+														<!-- <td>$!date.format('yyyy-MM-dd HH:mm:ss ',$!member.auditTime)</td> -->
+														<td>$!order.unit</td>
+														<td>$!order.pcount</td>
+														<td>$!order.subprice</td>
+														<td>$!order.pmoney</td>
+														<td><input style="width: 60px" type="text"></td>
+														<td>$!order.remark</td>
+													</tr>
+													#end
+													<tr id="xiaoRow">
+
+													</tr>
+													<tr id="totalRow">
+													</tr>
+												</tbody>
+											</table>
+
+											<table style="clear: both;">
+												<tr>
+													<td colspan=6>备注：</td>
+												</tr>
+												<tr>
+													<td>制单人：</td>
+													<td>业务员：</td>
+													<td>出库：</td>
+													<td>保管员：</td>
+													<td>送货领单：</td>
+													<td>收货人：</td>
+												</tr>
+												<tr>
+													<td colspan=4>地址电话：$!merchant.provinceName
+														$!merchant.cityName $!merchant.region $!merchant.address</td>
+													<td>手机：$!merchant.phone</td>
+													<td>传真：</td>
+												</tr>
+												<tr>
+													<td colspan=6>注：$!merchant.printRemarks</td>
+												</tr>
+											</table>
+
+										</div>
+										<div class="explain"></div>
+										<div class="tc page">第1页/共1页</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+$(function(){
+	$("#printbtn").click(function(){
+		var options = { mode : 'popup', popClose : 'false', extraCss : '', retainAttr : 'class,id,style,on', extraHead : '<meta charset="utf-8" />,<meta http-equiv="X-UA-Compatible" content="IE=edge"/>' };
+		$("#printarea").printArea(options);
+	});
+	var totalRow = 0;
+	var totalMoney = 0;
+	var trLength = $('#mytable tr').length;
+	$('#mytable tr').each(function(index) { 
+		if (index != 1 && index <= trLength-2) {
+		    $(this).find('td:eq(5)').each(function(){
+	            totalRow = totalRow +  parseInt($(this).text());
+		    });
+		    
+		    $(this).find('td:eq(7)').each(function(){
+		    		totalMoney = totalMoney +  parseFloat($(this).text());
+		    });
+		}
+	});
+	$('#xiaoRow').append('<td colspan=2>小计</td><td colspan=3></td><td>' + totalRow + '</td><td></td><td>' + totalMoney + '</td><td></td><td></td>');
+	$('#totalRow').append('<td colspan=2>总计</td><td colspan=3></td><td>' + totalRow + '</td><td></td><td>' + totalMoney + '</td><td></td><td></td>');
+});
+
+
+</script>
+
+</html>

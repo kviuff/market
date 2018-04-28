@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="../../css/admin/common.css" />
+		<link rel="stylesheet" href="../../css/admin/tasktable.css" />
+		<script src="../../js/jquery.min.js" ></script>
+	</head>
+<body>
+
+<div  class="main_2" id="main_2">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="box fixed">
+                    <div class="box-title fixed">
+                        <h3> 商品管理 </h3>
+                    </div>
+                     <div class="box-content_x_z fixed">
+	                    <!-- <span #if($!state == 1) class="this" #end><a href="list?state=1">审核通过</a></span>
+	                    <span #if($!state == 0) class="this" #end><a href="list?state=0">申请审核</a></span>
+	                    <span #if($!state == 2) class="this" #end><a href="list?state=2">拒绝申请</a></span>    -->   
+                    </div>
+                    <div class="box-content_x fixed">
+                    	<form action="../product/list" method="get">
+                        <div class="form-horizontal">
+                            <div class="serach_address"> 
+                                <span>
+                                商品名称&nbsp;&nbsp;
+                                    <input class="html_date" id="title" name="title" type="text" value="$!{title}"/>
+                                </span> 
+
+
+                                <span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<button id="uic_wtable_search_submit"  type="submit" class="btn btn-primary">查询</button>
+                                </span> 
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <div id="ui_alltasks" class="ui_wtable UI_task_table">
+                        <table class="itable" width="100%" border="0" cellspacing="1" cellpadding="0">
+                            <thead>
+                              <tr>
+                                <td>编号</td>
+                                <td>商品名称</td>
+                                <td>商品二维码</td>
+                                <td>品牌</td>
+                                <td>商品图片</td>
+                                <td>商品编号</td>
+                                <td>操作</td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            	#foreach($product in $pageVo.list) 
+                            	<tr>
+                                    <td>$!product.id</td>
+                                    <td>$!product.title</td>
+                                    <td>$!product.barcodeid</td>
+                                    <td>$!product.brandname</td>
+                                    <td><img widh="35px" height="35px" src="../../$!product.img"/></td>
+                                    <td>$!product.merchantID</td>
+                                    <td><a href="/webadmin/product/changeBrandName?goodsId=$!product.id">修改品牌</a></td>
+                                </tr>
+                                #end
+                            </tbody>
+                        </table>
+                    </div>
+					
+					<div class="bontom_bon fixed">
+                        <div class="page">
+                        	$!pageVo.pageNumHtml
+    						<span class="page_z">第<em>$pageVo.pageNum</em>页，共<em>$pageVo.pageCount</em>页</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>

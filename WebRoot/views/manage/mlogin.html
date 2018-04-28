@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="/css/admin/common.css" />
+	<link rel="stylesheet" href="/css/admin/font-awesome.css" />
+	<script src="/js/jquery.min.js" ></script>
+	
+	<style>
+		html,body{ overflow:hidden;}
+	</style>
+	<title>超市管理系统</title>
+	<script>
+		//校验图片
+		function changeImg(){ 
+			 $("#numimg").attr("src","verificationcode?"+Math.random()); 
+		}
+		
+		$(function(){
+			$("#tUserName").keydown(function(event){
+	        	if(event.which == 13){
+	          		$("#subBut").click();
+	        	}
+	        });
+	        $("#tUserwd").keydown(function(event){
+	        	if(event.which == 13){
+	          		$("#subBut").click();
+	        	}
+	        });
+			$("#subBut").click(function(){
+				var tUserName = $("#tUserName").val();
+				var tUserwd = $("#tUserwd").val();
+				
+				if(tUserName.length == 0){
+					$("#tUserName").focus();
+					$("#form_error").html("请输入用户名");
+					$("#form_error").show();
+					return false;
+				}
+				if(tUserwd.length == 0){
+					$("#tUserwd").focus();
+					$("#form_error").html("请输入密码");
+					$("#form_error").show();
+					return false;
+				}
+				aj.ajax({
+				    type : "POST",
+				    url : "/webadmin/mtologin",
+				    data : {tUserName: tUserName, tUserwd: tUserwd},
+	   				success : function(msg) {
+						if(msg != "1"){
+							$("#form_error").html(msg);
+							$("#form_error").show();
+						}else{
+							location.href="/webadmin/merchant";
+						}
+				    },
+				    error:function(msg){ 
+						alert("程序出错，请联系管理员");
+				    }
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+<div class="container-fluid login_index">
+        <div class="row-fluid">
+            <div class="row-fluid">
+                <div class="span12 center login-header">
+                    <h2>
+                    </h2>
+                </div>
+                <!--/span-->
+            </div>
+            <!--/row-->
+            <div class="row-fluid">
+                <div class="well span5 center login-box">
+                    <div class="alert alert-info">
+                        <img src="/images/admin/logo.png" />
+                    </div>
+                        <div style="text-align:center">
+                            <div data-rel="tooltip" class="input-prepend" data-original-title="用户名">
+                                <span class="add-on"><i class="icon-user"></i></span>
+                                <input type="text" class="input-large span8" maxlength="20" id="tUserName" name="tUserName" />
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <div data-rel="tooltip" class="input-prepend" data-original-title="密码">
+                                <span class="add-on"><i class="icon-lock"></i></span>
+                                <input type="password" class="input-large span8" id="tUserwd" maxlength="20" name="tUserwd" />
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <!-- <div data-rel="tooltip" class="input-prepend" data-original-title="验证码">
+                                <span class="add-on"><i class="icon-ok"></i></span>
+                                <input type="text" onkeyup="this.value=this.value.toUpperCase();" class="input-large span3" id="tCode" maxlength="4" name="tCode" />
+                                <img align="middle" id="numimg" src="verificationcode"/>&nbsp;
+                                <span onclick="changeImg()" style="cursor: pointer;">刷新</span>
+                            </div> -->
+                            <div class="clearfix">
+                            </div>
+                            <p class="center span5">
+                                <button id="subBut" name="subBut" class="btn btn-large btn-danger" type="submit" >登录</button>
+                            </p>
+                        </div>
+                    </fieldset>
+                    <div style="display: none;" class="alert alert-error" id="form_error">123
+                    </div>
+                    
+                    
+                </div>
+                <!--/span-->
+            </div>
+            <!--/row-->
+        </div>
+        <!--/fluid-row-->
+    </div>
+
+</body>
+</html>

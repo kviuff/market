@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../css/admin/common.css" />
+	<link rel="stylesheet" href="../../css/admin/tasktable.css" />
+	<script src="../../js/jquery.min.js" ></script>
+	<script type="text/javascript" src="../../js/ajaxfileupload.js"></script>
+	<script src="../../js/upload.js"></script>
+	<script>
+		$(function(){
+			$("#add_ad_type_name").click(function(){
+				var ad_type_name = $("#ad_type_name").val();
+				if(ad_type_name.length > 0){
+					aj.ajax({
+					    type : "POST",
+					    url : "addtype",
+					    async : false,
+					    data : {ad_type_name : ad_type_name},
+		   				success : function(msg) {
+		   					if(msg == 1){
+		   						alert("添加成功！");
+		   						location.reload();
+		   					}else{
+		   						alert("添加失败！");
+		   					}
+					    },
+					    error:function(msg){ 
+							alert("程序出错，请联系管理员");
+					    }
+					});
+				}
+			});
+		});
+		
+		function changetype(obj){
+			var typeid = $(obj).parent().parent().find("#typeid").val();
+			var typename = $(obj).parent().parent().find("#typename").val();
+			aj.ajax({
+			    type : "POST",
+			    url : "updatetype",
+			    async : false,
+			    data : {typeid : typeid,typename : typename},
+   				success : function(msg) {
+   					if(msg == 1){
+   						alert("修改成功！");
+   						location.reload();
+   					}else{
+   						alert("修改失败！");
+   					}
+			    },
+			    error:function(msg){ 
+					alert("程序出错，请联系管理员");
+			    }
+			});
+		}
+		
+		function deltype(typeid){
+			
+			if (confirm("是否要删除该类别？")) {
+				aj.ajax({
+				    type : "POST",
+				    url : "deltype",
+				    async : false,
+				    data : {typeid : typeid},
+	   				success : function(msg) {
+	   					if(msg == 1){
+	   						alert("删除成功！");
+	   						location.reload();
+	   					}else{
+	   						alert("删除失败！");
+	   					}
+				    },
+				    error:function(msg){ 
+						alert("程序出错，请联系管理员");
+				    }
+				});
+			}
+			
+		}
+	</script>
+</head>
+<body>
+<div class="main_2" id="main_2">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box fixed">
+					<div class="box-title fixed">
+						<h3>广告管理</h3>
+					</div>
+					<div class="box-content_x fixed">
+                        <div class="form-horizontal">
+                        	<div class="serach_address">
+                            	添加类别：
+                                <span>
+                                    <input class="html_date" id="ad_type_name" name="ad_type_name" type="text" value="$!{username}"/>
+                                </span>
+                                <span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<button id="add_ad_type_name"  type="submit" class="btn btn-primary">确定</button>
+                                </span> 
+                            </div>
+                        </div>
+                    </div>
+					<div class="box-content_x">
+						
+						<div id="ui_alltasks" class="ui_wtable UI_task_table">
+	                        <table class="itable" width="100%" border="0" cellspacing="1" cellpadding="0">
+	                            <thead>
+	                              <tr>
+	                                <td>编号</td>
+	                                <td>广告图片类别名称</td>
+	                                <td>操作</td>
+	                              </tr>
+	                            </thead>
+	                            <tbody>
+	                            	#foreach($type in $aTypeList) 
+	                            	<tr>
+	                                    <td>$!type.id<input type="hidden" id="typeid" name="typeid" value="$!type.id"/></td>
+	                                    <td><input type="text" id="typename" name="typename" value="$!type.adTypeName"/></td>
+	                                    <td>
+	                                    <a href="javascript:void(0)" onclick="changetype(this)">修改</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+	                                    <a href="javascript:void(0)" id="delete" onclick="deltype('$!type.id')">删除</a>
+	                                    </td>
+	                                </tr>
+	                                #end
+	                            </tbody>
+	                        </table>
+	                    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

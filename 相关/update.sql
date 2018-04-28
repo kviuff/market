@@ -1,0 +1,1 @@
+ALTER TABLE `orderinfo` ADD COLUMN `createtime`  bigint(13) NULL COMMENT '创建时间';

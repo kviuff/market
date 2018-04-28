@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.BarcodeDao">
+	<resultMap type="com.market.maicheng.model.Barcode" id="resultList">
+		<id column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="barcodeid" property="barcodeid" />
+		<result column="categoryID" property="categoryID" />
+		<result column="gcId1" property="gcId1" />
+		<result column="gcId2" property="gcId2" />
+		<result column="gcId3" property="gcId3" />
+		<result column="brandid" property="brandid" />
+		<result column="brandname" property="brandname" />
+		<result column="series" property="series" />
+		<result column="specs" property="specs" />
+		<result column="img" property="img" />
+		<result column="createTime" property="createTime" />
+		<result column="createUserID" property="createUserID" />
+		<result column="isDel" property="isDel" />
+	</resultMap>
+	<insert id="addBarcode" parameterType="com.market.maicheng.model.Barcode" flushCache="true">
+		<![CDATA[insert into barcode (id,title,barcodeid,categoryID,brandid,brandname,series,specs,img,createTime,createUserID,gcId1,gcId2,gcId3,isDel) values (#{id},#{title},#{barcodeid},#{categoryID},#{brandid},#{brandname},#{series},#{specs},#{img},#{createTime},#{createUserID},#{gcId1},#{gcId2},#{gcId3},#{isDel})]]>
+	</insert>
+	
+	<update id="updateBarcode" parameterType="com.market.maicheng.model.Barcode" flushCache="true">
+		<![CDATA[update barcode set title=#{title},barcodeid=#{barcodeid},categoryID=#{categoryID},brandid=#{brandid},brandname=#{brandname},series=#{series},specs=#{specs},img=#{img},createTime=#{createTime},createUserID=#{createUserID},isDel=#{isDel} where id = #{id}]]>
+	</update>
+    
+    <update id="delBarcode">
+    	<![CDATA[update barcode set isDel = 1 where id = #{id}]]>
+    </update>
+    
+    <select id="getBarcodeForID" resultType="com.market.maicheng.model.Barcode">
+    	<![CDATA[select * from barcode where id=#{id}]]>
+    </select>
+    
+    <select id="getBarcodeForBarcodeid" resultType="com.market.maicheng.model.Barcode">
+    	<![CDATA[select * from barcode where barcodeid=#{barcodeid} limit 1]]>
+    </select>
+    
+    <select id="getBarcodeList" resultMap="resultList">
+		<![CDATA[select * from barcode where isdel = 0]]>
+		<if test="brandName != null"> and brandname like '%${brandName}%'</if>
+    	<![CDATA[order by id asc limit #{offset},#{rows} ]]> 
+	</select>
+	
+	<select id="getBarcodeListByCount" resultType="int">  
+		<![CDATA[select count(*) from barcode where isdel = 0 ]]> 
+		<if test="brandName != null"> and brandname like '%${brandName}%'</if>
+	</select>
+</mapper>

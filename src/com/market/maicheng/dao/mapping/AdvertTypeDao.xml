@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.AdvertTypeDao">
+	<resultMap type="com.market.maicheng.model.AdvertType" id="resultList">
+		<id column="id" property="id" />
+		<result column="adTypeName" property="adTypeName" />
+		<result column="isdel" property="isdel" />
+	</resultMap>
+	
+	<insert id="addAdvertType" parameterType="com.market.maicheng.model.AdvertType" flushCache="true">
+		<![CDATA[insert into advertType (id,adTypeName,isdel) values (#{id},#{adTypeName},#{isdel})]]>
+	</insert>
+	
+	<update id="upAdvertType" parameterType="long">
+		<![CDATA[update advertType set adTypeName=#{adTypeName} where id = #{id}]]>
+	</update>
+	
+	<select id="getAdvertType" resultMap="resultList">
+		<![CDATA[select * from advertType order by id desc]]>
+	</select>
+	
+	<delete id="delAdvertType">
+		<![CDATA[delete from advertType where id = #{id}]]>
+	</delete>
+	
+	<select id="getAdvertTypeByID" resultType="com.market.maicheng.model.AdvertType">
+		<![CDATA[select * from advertType where id=#{id}]]>
+	</select>
+</mapper>

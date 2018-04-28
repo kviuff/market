@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.MemberDao">
+	<resultMap type="com.market.maicheng.model.Member" id="resultList">
+		<id column="id" property="id" />
+		<result column="userName" property="userName" />
+		<result column="password" property="password" />
+		<result column="realName" property="realName" />
+		<result column="mobile" property="mobile" />
+		<result column="userType" property="userType" />
+		<result column="createTime" property="createTime" />
+		<result column="loginTime" property="loginTime" />
+		<result column="wechatID" property="wechatID" />
+		<result column="headpic" property="headpic" />
+		<result column="merchantid" property="merchantid" />
+		<result column="isdel" property="isdel" />
+		<result column="state" property="state" />
+		<result column="storeName" property="storeName" />
+	</resultMap>
+	
+	<insert id="addMember" parameterType="com.market.maicheng.model.Member">
+		<![CDATA[insert into member (id,userName,password,realName,headpic,mobile,userType,createTime,loginTime,wechatID,isdel,merchantid,state,storeName) values]]>
+		<![CDATA[(#{id},#{userName},#{password},#{realName},#{headpic},#{mobile},#{userType},#{createTime},#{loginTime},#{wechatID},#{isdel},#{merchantid},#{state},#{storeName})]]>
+	</insert>
+	
+	<update id="updateMember" parameterType="com.market.maicheng.model.Member">
+		<![CDATA[update member set password=#{password},realName=#{realName},mobile=#{mobile},userType=#{userType},merchantid=#{merchantid},wechatID=#{wechatID},headpic=#{headpic},storeName=#{storeName} where id = #{id} ]]>
+	</update>
+
+	<select id="getMemberForid" resultType="com.market.maicheng.model.Member">
+		<![CDATA[select * from member where id = #{id} ]]>
+	</select>
+	
+	<select id="getMemberForUserName" resultType="com.market.maicheng.model.Member">
+		<![CDATA[select * from member where username = #{username} ]]>
+	</select>
+	
+	<select id="getMemberForUserNameAndPassword" resultType="com.market.maicheng.model.Member">
+		<![CDATA[select * from member where userName = #{username} and password = #{password} ]]>
+	</select>
+	
+	<select id="getMemberListByMerchantid" resultMap="resultList">
+		<![CDATA[select * from member where merchantid = #{merchantid} and isdel = 0]]> 
+    	<![CDATA[order by id asc ]]> 
+	</select>
+	
+	<select id="getMemberList" resultMap="resultList">
+		<![CDATA[select * from member where isdel = 0]]> 
+    	<if test="username != null"> and username like '%${username}%'</if>
+		<if test="id != 0"> and ID = #{id}</if>
+    	<![CDATA[order by id asc limit #{offset},#{rows} ]]> 
+	</select>
+	
+	<select id="getMemberListByCount" resultType="int">  
+		<![CDATA[select count(*) from member where isdel = 0 ]]> 
+		<if test="username != null"> and username like '%${username}%'</if>
+		<if test="id != 0"> and id = #{id}</if>
+	</select>
+	
+	<update id="delMember"  parameterType="Long">
+		<![CDATA[update member set isdel=1 where ID = #{id}]]>	
+	</update>
+	
+	<update id="updateMemberUserType">
+		<![CDATA[update member set userType=#{userType} where ID = #{id}]]>	
+	</update>
+	
+	<update id="updateMemberState">
+		<![CDATA[update member set state=#{state} where ID = #{id}]]>	
+	</update>
+</mapper>

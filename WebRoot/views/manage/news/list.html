@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="../../css/admin/common.css" />
+		<link rel="stylesheet" href="../../css/admin/tasktable.css" />
+		<script src="../../js/jquery.min.js" ></script>
+	</head>
+<body>
+<div  class="main_2" id="main_2">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="box fixed">
+                    <div class="box-title fixed">
+                        <h3> 公告管理 </h3>
+                        <ul class="ul_1">
+                            <li>
+                            	<a href="add">添加公告</a><i class="icon-angle-right"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="box-content_x fixed">
+                    	<form action="../news/list" method="post">
+                        <div class="form-horizontal">
+                            <div class="serach_address"> 
+                                <span>
+                                    <input class="html_date" id="uic_vtask_date_day1" name="username" type="text" value="$!{username}"/>
+<!--                                     类别 -->
+									 <select id="types" name="types">
+                                    	<option value="-1" #if($!{types} == -1) selected="selected" #end>请选择</option>
+								    	<option value="0" #if($!{types} == 0) selected="selected" #end>管理员发布</option>
+								    	<option value="1" #if($!{types} == 1) selected="selected" #end>会员发布</option>
+								    </select>
+                                </span> 
+
+
+                                <span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<button id="uic_wtable_search_submit"  type="submit" class="btn btn-primary">确定</button>
+                                </span> 
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <div id="ui_alltasks" class="ui_wtable UI_task_table">
+                        <table class="itable" width="100%" border="0" cellspacing="1" cellpadding="0">
+                            <thead>
+                              <tr>
+                                <td>编号</td>
+                                <td>公告标题</td>
+                                <td>添加时间</td>
+                                <td>操作</td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            #foreach($p in $pageVo.list)
+                            	<tr>
+                                    <td>$!p.id</td>
+                                    <td id="td_$!p.id">$!p.title</td>
+                                    <td>$!DateUtils.getLongToDate($!p.addtime)</td>
+                                    <td><a href="update?_id=$p.id">修改</a>|<a href="delete?_id=$p.id">删除</a ></td>
+                                </tr>
+                              #end
+                              
+                            </tbody>
+                        </table>
+                    </div>
+<!-- 					分页 -->
+					<div class="bontom_bon fixed">
+                        <div class="page">
+<!--        $pageVo.pageNum      $pageVo.pageCount      -->
+							$!pageVo.pageNumHtml
+    						<span class="page_z">第<em>$!pageVo.pageNum</em>页，共<em>$!pageVo.pageCount</em>页</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>

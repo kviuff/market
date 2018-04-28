@@ -1,0 +1,678 @@
+URL地址：http://60.205.156.58/market
+
+1、注册（添加员工）
+url: /member/regist
+参数:
+   用户名：username
+   密码：password
+   真实姓名：realname
+   联系方式：mobile
+   微信号：wechatID
+
+   （添加员工需要参数）
+   用户类型： usertype（固定2）
+   商户ID： merchant
+调用方式： get post 
+返回结果：{"result":"注册成功","data":201708030871053316,"state":"1"}
+   state： 0 程序出错
+           1 注册成功
+	   2 注册失败
+	   3 用户名密码为空
+	   4 用户名已注册
+   data： 用户userid
+
+2、登陆
+url: /member/login
+参数:
+   用户名 username
+   密码 password
+调用方式： get post 
+返回结果：{"result":"ok","data":201708030871053316,"state":"1"}
+   state： 0 程序出错
+           1 登陆成功
+	   2 用户不存在
+   data：  登陆用户userid
+
+3、获取用户信息
+url: /member/getMember
+参数
+   用户id：userid
+调用方式：get post 
+返回结果：{"state":"1","result":"ok","data":"一串！~"}
+   state： 0 程序出错
+           1 查询成功
+	   2 用户不存在
+   data(json格式)：  用户名：username
+		     真实姓名：realname
+	 	     联系方式：mobile
+         	     微信号：wechatID
+		     用户类型：userType 0 普通用户  5 未审核商户 6 审核拒绝商户 7 经销商 8 代理商 9员工账号
+		     用户头像：headpic
+		     商户ID：merchantID
+		  
+4、更新用户信息
+url: /member/updateMember
+参数:   用户id：userid
+	密码：password (如不修改pass传null)
+	真实姓名：realname
+	联系方式：mobile
+	微信号：wechatID
+调用方式：get post 
+返回结果：{"state":"1","result":"用户更新成功"}
+	 state： 0 程序出错
+		 1 更新成功
+		 2 用户不存在
+		 3 用户更新失败
+
+5、修改头像
+url: /member/uploadhead
+参数:   头像地址：headpic
+        用户ID：userid
+调用方式：get post 
+返回结果：{"state":"1","result":"头像更新成功"}
+	 state： 0 程序出错
+		 1 头像成功
+		 2 用户登陆错误
+		 3 头像更新失败
+
+6、上传图片
+url：/file/fileUpload
+参数：文件流
+调用：post
+返回：{"state":"1","result":"头像更新成功"}
+     state： 1`文件超出限制，最大10M！
+	      1`文件上传失败，请重试！
+	      1`文件上传失败，只支持jpg/gif/png格式！
+	      1`请选择文件后上传
+	      0`图片路径
+
+
+7、获取城市列表
+url：/searchCity
+参数：城市ID：pid （不传或传0 代表获取所有省）
+调用：post
+返回：{"result":[{"id":1,"name":"北京","pid":0,"sid":"1"},....],"state":1}
+
+
+8、商家入驻
+ url：/merchant/apply
+参数：
+商铺名称：shopName;
+省ID：provinceId;
+省名称：provinceName;
+市id：cityId;
+市名称：cityName;
+地区ID：regionid;
+地区：region;
+详细地址：address;
+联系人：contacts;
+联系电话：phone;
+电子邮箱：email;
+营业执照：businessLicense;
+姓名：userName;
+身份证号：carid;
+手持身份证照片：caridPhoto;
+商户类型：0经销商 1代理商：merchantType
+
+调用：post
+返回：{"result":"申请成功","data":201708030871053316,"state":"1"}
+	state： 0 程序出错
+		 1 申请成功
+		 2 申请失败
+		 3 用户不存在
+
+9、获取商品分类
+修改前
+	url：/getCategoryList
+	参数：分类ID：pid （不传或传0 代表获取一级分类）
+	      获取个数：number （不传或传0 代表获取所有）
+	调用：post
+	返回：{"result":"ok","data":[{"id":201708040461691824,"pid":0,"cateName":"包装食品"}....],"state":1}
+修改后
+	9.1、获取全局商品分类
+		url：/category/getCategoryList
+		参数：	分类ID：pid （不传或传0 代表获取一级分类）
+		      	获取个数：number （不传或传0 代表获取所有）
+		调用：post
+		返回：{"result":"ok","data":[{"id":201708040461691824,"pid":0,"cateName":"包装食品"}....],"state":1}
+	9.2、获取商铺商品分类
+		url：/category/getMerchantCategoryList
+		参数：	商铺ID：mid 
+				分类ID：pid （不传或传0 代表获取二级分类）
+		      	获取个数：number （不传或传0 代表获取所有）
+		调用：post
+		返回：{"result":"ok","data":[{"id":201708040461691824,"pid":0,"cateName":"包装食品"}....],"state":1}
+
+
+
+
+
+10、获取商品品牌
+url：/getBrandList
+参数：分类ID：pid （不传或传0 代表获取一级分类）
+调用：post
+返回：{"result":"ok","data":[{"id":1,"BrandName":"好丽友"},{"id":2,"BrandName":"康师傅"}],"state":1}
+
+11、商品上架--扫码获取库存信息
+	url：/product/getProductByBarcode
+	参数：条形码：barcodeid
+	商铺ID:mid(不传或传0 代表普通用查找商品)
+	调用：post
+	返回：{"result":"条码库存不存在","state":2,dataType:0,data:[{..}]}
+		state： 0 程序出错
+		       	1 ok 数据在data
+		       	2 条形码不存在
+		       	3 未接收到条形码
+		dataType： 	0 后台没有关于此条形码的信息，前端需要根据这个值直接进入商品上架页面
+					1 条形码在库里存在，但没有对应上架的商品
+					2 根据条形码有对应上架的商品
+
+12、添加库存--扫码没有库存则先添加库存
+url：/product/addProductByBarcode
+参数：
+title //商品名称
+barcodeid //条形码ID
+categoryID //分类ID
+brandid //品牌ID
+brandname //品名
+series //系列
+specs //规格
+img //商品图片
+userid //登陆用户ID
+barcodeprice  //价格 字符串 单位-规格-进价-会员价-供货商价,单位-规格-进价-会员价-供货商价,.... 单个后面不加逗号
+调用：post
+返回：{"result":"参数不全","state":3}
+	state  0 程序出错
+	       1 ok 数据在data
+	       2 添加失败
+
+13、商品上架
+	13.1 有码商品上架
+		url：/product/addProduct
+		参数
+		barcodeid //条形库存ID
+		categoryID //分类ID
+		brandname  //品名
+		barcodeprice  //价格 字符串 单位-规格-进价-会员价-供货商价,单位-规格-进价-会员价-供货商价,.... 单个后面不加逗号
+		merchantID   //商户ID
+		contentImg  //内容图片
+		istop		//是否置顶 1：为置顶，0：不置顶
+		
+		调用：post
+		返回：{"result":"参数不全","state":3}
+			state  0 程序出错
+			       1 ok 数据在data
+			       2 添加失败
+	13.2 无码商品上架
+		url：/product/addNoCodeProduct
+	    参数
+			title:string//上架商品标题
+			categoryID:long//分类ID
+			brandid:long//品名ID
+			brandname:string  //品名
+			barcodeprice:string  //价格 字符串 单位-规格-进价-会员价-供货商价,单位-规格-进价-会员价-供货商价,.... 单个后面不加逗号
+			series:string	//系列
+			specs:string	//规格
+			img:string		//上架商品图片URL：服务器地址
+			merchantID:long   //商户ID
+			contentImg:string  //内容图片
+			istop		//是否置顶 1：为置顶，0：不置顶
+			调用：post
+			返回：{"result":"参数不全","state":3}
+				state  0 程序出错
+				       1 ok 数据在data
+				       2 添加失败
+
+13、修改商品
+url：/product/upProduct
+参数
+productID //产品id
+barcodeid //条形库存ID
+categoryID //分类ID
+brandname  //品名
+barcodeprice  //价格 字符串 ID-单位-规格-进价-会员价-供货商价,ID-单位-规格-进价-会员价-供货商价,.... 单个后面不加逗号
+contentImg  //内容图片
+调用：post
+返回：{"result":"参数不全","state":3}
+	state  0 程序出错
+	       1 ok 数据在data
+	       2 修改失败
+
+14、获取商户信息
+url：/merchant/getmerchant
+参数
+userid //用户ID
+调用：post
+返回：{"result":"商家不存在","state":2}
+	state  0 程序出错
+	       1 ok 数据在data
+	       2 商家不存在
+
+
+15、获取首页推荐商户列表
+url：/merchant/getRecommendMerchant
+参数
+limit //获取数量 不传默认6个
+调用：post
+返回：{"result":"ok","data":[{"id":201708181081447440,"shopName":"Ray测试商铺","merchantHead":"image/xxxxx"}],"state":1}
+
+
+16、修改店铺信息（分类，logo，商铺图片）
+url: /merchant/updateMerchant
+参数
+merchantID		//商家ID
+merchantClass;			//商家分类
+merchantLogo;         //店铺lo
+merchantHead;           //店铺头像
+merchantAddress;           //店铺地址
+merchantDes;          //店铺描述
+printRemarks;          //打印备注
+调用：post
+返回：{"result":"ok","state":1}
+
+
+
+17、 商户添加公告
+url：/news/addnews
+参数
+mid;		//商户ID
+title;		//公告标题
+content;	//公告内容
+调用：post
+返回：{"result":"ok","state":1}
+
+18、公告列表
+url：/news/newlist
+参数
+mid;		//商户ID  不传则获取后台发布公告
+调用：post
+返回：{"result":"ok","state":1,"data":[{"id":0000,"title":"公告标题","addtime":"2017-xxxx"}]}
+
+
+19、广告列表
+url：/getAdvert
+参数
+无
+调用：post
+返回：{"result":"ok","state":1,"data":[{"id":0000,"title":"广告标题","link":"跳转url","imageurl":"图片地址"}]}
+
+
+19、商家列表
+url：/merchant/getMerchantList
+参数
+p		//页数 不传默认第一页
+pagesize	//每页数量 不传默认10个
+categoryID      //分类id 不传默认全部
+provinceId	//省id 不传默认全部
+cityId		//市id 不传默认全部
+regionid	//区id 不传默认全部
+shopName        //商铺名称模糊搜索
+调用：post
+返回：{"pageCount":1,"result":"ok","data":[{"id":201708181081447440,"shopName":"Ray测试商铺","merchantHead":"null"}],"state":1,"pageNum":1}
+pageCount:总页数
+pageNum:当前页数
+
+
+20、商家商品列表
+url：/product/getMerchantProductList
+参数
+p		//页数 不传默认第一页
+pagesize	//每页数量 不传默认10个
+merchantID	//商户ID
+categoryID      //分类id 不传默认全部
+type		//排序属性1、品牌 2、发布时间
+title		//商品名称模糊搜索
+barcodeid	//商品条形码模糊搜索
+调用：post
+返回：{"pageCount":1,"result":"ok","data":[{"id":201709140352589541,"series":"御和园","title":"测试","contentImg":"","brandname":"测试","categoryID":201708040461691824,"img":"images\\/upload\\/2017\\/09\\/14\\/ad6b349f10bf42c0a853bb089cd74380.3.736-_9bdcfff553e74908bba61bea9f211984.jpg","brandid":1,"barcodeid":"6935960320032","specs":"1"},{"id":201709140397147767,"series":"黄鹤楼软包","title":"黄鹤楼","contentImg":"","brandname":"黄鹤楼","categoryID":201708040412492488,"img":"images\\/upload\\/2017\\/09\\/14\\/1e0247448b7b4915a410559ce9325dc8.jpg","brandid":1,"barcodeid":"6901028190596","specs":"红盒"}],"state":1,"pageNum":1}
+pageCount:总页数
+pageNum:当前页数
+price实体：
+	scode：条码
+	unit：单位
+	spec：规格
+	price：进价
+	vipprice：会员价
+	stockprice：供货商价
+
+
+21、获取个人收获地址列表
+url：/getaddresslist
+参数：
+userid  //登陆普通用户member id 
+pageNum //页数 不传默认第一页
+pagesize //每页数量 不传默认5个
+调用：post
+返回：
+{"result":[{"address":"","addtime":1505456834101,"cityId":0,"cityName":"","id":201709150299775399,"ids":"201709150299775399","isdefault":0,"mobile":"1333","provinceId":0,"provinceName":"","receiver":"123","region":"","regionid":0,"sex":0,"userid":201708160917800320,"zipcode":""}],"state":0,"counts":1,"pageNum":1}
+receiver	//收货人
+sex		//性别 0男1女
+mobile		//联系电话
+provinceName	//省名称
+provinceId	//省Id
+cityName	//市名称
+cityId		//市ID
+region		//区名称
+regionid	//区ID
+address		//收货地址
+zipcode		//邮编
+isdefault	//是否默认 0否1是
+
+22、添加个人收获地址
+url: /addaddress
+参数：
+userid  //登陆普通用户member id
+receiver	//收货人
+sex		//性别 0男1女
+mobile		//联系电话
+provinceName	//省名称
+provinceId	//省Id
+cityName	//市名称
+cityId		//市ID
+region		//区名称
+regionid	//区ID
+address		//收货地址
+zipcode		//邮编
+isdefault	//是否默认 0否1是
+调用：post
+返回：
+{"result":"添加成功","state":"1"}
+
+23、修改收货地址
+url:  /updateAddress
+参数：
+id	//address id
+userid  //登陆普通用户member id
+receiver	//收货人
+sex		//性别 0男1女
+mobile		//联系电话
+provinceName	//省名称
+provinceId	//省Id
+cityName	//市名称
+cityId		//市ID
+region		//区名称
+regionid	//区ID
+address		//收货地址
+zipcode		//邮编
+isdefault	//是否默认 0否1是
+返回：
+{"result":"修改成功","state":"1"}
+
+
+24、删除个人收货地址
+url：/delAddress
+参数：
+id	//address id
+调用：post
+返回：
+{"result":"删除成功","state":"1"}
+
+
+25、根据商品ID获取所有价格
+url：/product/getProductPrice
+参数：
+productID	//商品id
+调用：post
+返回：
+{"result":"ok","data":[{"barcodeid":201709140352589541,"id":201709140326013124,"isDel":0,"price":"50","scode":"6935960320032","spec":"yuh","stockprice":"30","unit":"盒","vipprice":"40"}],"state":1}
+scode：条码
+unit：单位
+spec：规格
+price：进价
+vipprice：会员价
+stockprice：供货商价
+
+
+26、添加购物车
+url: /addCar
+参数：
+userid		//用户ID
+pid		//产品ID
+param		//JSONArray字符串
+
+
+json对象param包含：
+barcodepriceid	//价格表id
+count		//商品数量
+ping		//是否拼单 0 不拼
+调用：post
+返回：{"result":"成功","state":1}
+
+27、获取购物车列表
+url：/getShopCatList
+参数：
+userid		//用户ID
+调用：post
+返回：{"result":"ok","state":1,"data":"...."}
+data集合内容
+id		//购物车ID
+img		//商品图片
+spec		//规格
+count		//购买数量
+brandname	//品名
+price		//进价
+vipprice	//会员价
+stockprice	//供货商价
+ping		//是否拼单 0 不拼
+
+
+28、删除购物车
+url: /delCar
+参数：param （json数组）
+	id： 购物车ID
+调用：post
+返回：{"result":"删除成功","state":1}
+
+
+29、获取员工列表
+url: /member/getMemberByMerchantid
+参数:
+   商户ID：merchantid
+调用方式： get post 
+返回结果：{"result":"ok","data":jsonlist,"state":"1"}
+   data： id : id
+	  realname: 姓名
+	  mobile： 电话
+	  state：当前状态 0在职 1离职
+
+29、删除用户
+url: /member/delmember
+参数: param （json数组）
+   
+   id : 用户ID 
+调用方式： get post 
+返回结果：{"result":"删除成功","state":"1"}
+
+
+30、修改员工状态
+url: /member/updatememberstate
+参数:param （json数组）
+   id : 用户ID 
+   state： 员工状态0在职 1离职
+调用方式： get post 
+返回结果：{"result":"修改成功","state":"1"}
+
+
+
+31、添加客户
+url: /customer/addcust
+参数:
+   createid : 销售id（当前登陆用户id）
+   relaid： 客户ID
+   address： 门店地址
+   contacts：联系人
+调用方式： get post 
+返回结果：{"result":"ok","state":1}
+	  {"result":"客户ID不存在","state":0}
+
+32、查询客户列表
+url: /customer/custlist
+参数:
+   createid : 销售id（当前登陆用户id）
+调用方式： get post 
+返回结果：{"pageCount":1,"result":"ok","data":[{"id":201710090693002944,"address":"门店","createid":201708160917800320,"contacts":"联系人"}],"state":1,"pageNum":1}
+	  {"result":"无数据","state":2}
+
+33、删除客户/关注
+url: /customer/delcust
+参数：param （json数组）
+	id： id
+调用方式： get post 
+返回结果：{"result":"ok","state":1}
+
+
+
+34、通过用户名查询用户实体
+url: /member/getMemberForUsername
+参数:
+   username : 用户名
+调用方式： get post 
+返回结果：{"result":"ok","data":{"headpic":"images\\/upload\\/2017\\/09\\/14\\/921a8180d7024c5ba71a679e92572046.png","username":"15010559209","wechatID":"CRay5201314","merchantID":201708181081447440,"userid":201708160917800320,"realname":"Ray雷","userType":1,"mobile":"15010559209"},"state":"1"}
+          {"result":"用户不存在","state":"2"}
+
+
+35、添加收藏商铺
+url: /customer/addcust
+参数:
+   createid : 当前登陆用户id
+   relaid： 收藏商铺ID
+   relatype=1  relatype固定为1 是收藏商铺
+调用方式： get post 
+返回结果：{"result":"ok","state":1}
+	  {"result":"商铺ID不存在","state":0}
+
+36、查询收藏商铺列表
+url: /customer/custlist
+参数:
+   createid : 当前登陆用户id
+   relatype=1  relatype固定为1 是收藏商铺
+   classid  分类ID 不传默认查全部
+调用方式： get post 
+返回结果：{"pageCount":1,"result":"ok","data":[{"createtime":1507900620752,"id":201710130982608768,"merchantLogo":"images/upload/2017/09/14/caeefa2e0fac4083af4fca0df37cb1a1.3.736-_929cfefb8ba647269094ec481e3aa174.jpg","createid":201708160917800320,"shopName":"Ray测试商铺0","merchantHead":"images/upload/2017/09/14/e413749f9efc443894387ce4191e10fc.3.734-_80940cb9df3a4b2ca6434f0a0002d0de.jpg","relaid":201708181081447440,"merchantAddress":""}],"state":1,"pageNum":1}
+
+37、添加订单
+url: /addOrder
+参数:
+   userid : 当前登陆用户id
+   addressid ：地址ID
+   saleid ： 销售ID
+   merchantid ： 商铺id
+   remark: 订单备注
+   param ： base64加密参数
+   参数规则： shopcarid&price&count&ispin
+	      多个则用#!#分割 如
+	      201710120223667136&201710120223667136&50&2&1
+调用方式： get post 
+返回结果：{"result":"订单添加成功","data":"201710110631400783","state":"1"}
+
+
+38、获取订单列表
+url: /getOrderlist
+参数:
+   id : 需要查本人 传当前登陆userid
+        需要查销售订单列表 传销售登陆id
+	需要查店铺所有id 传店铺merchantid
+   type ：查询属性 1 查userid 2 查saleid 3 查merchantid
+   pageNum ： 页码 不传默认第一页
+   pageSize： 每页数量 不传默认一页5个
+   
+调用方式： get post 
+返回结果：。。。。好多 自己看
+
+
+39、删除上架商品
+url: /product/delProduct
+参数:
+   pid : 产品id
+   
+调用方式： get post 
+返回结果：{"result":"ok","state":1}
+
+
+40、获取商户信息
+url：/merchant/getmerchantbyid
+参数
+merchantid //商户ID
+userid     //登陆用户ID
+调用：post
+返回：{"result":"商家不存在","state":2}
+	state  0 程序出错
+	       1 ok 数据在data
+	       2 商家不存在
+	isCollection 是否收藏 0 没收藏 1收藏
+	relationid   收藏id
+
+
+41、设置同品
+	/product/setSameGoods
+		参数：
+		barcodeId1	//商品1二维码 关联关系的主码
+		barcodeId2	//商品2二维码 关联关系的附属码
+		isAdd		//是否是添加，0：删除，1：是添加
+		调用：post
+		返回：
+		state  0 程序出错
+		       1 ok 设置成功
+		       2 设置失败
+		{"result":"ok","state":1}
+		
+42、更新购物车商品数量
+url: /updateCarCount
+参数：
+userid		// 用户ID
+carId       // 购物车ID
+count	    // 购物车数量
+返回：{"result":"成功","state":1}
+
+42、更新购物车是否拼单
+url: /updateCarFight
+参数：
+userid		// 用户ID
+carId       // 购物车ID
+fight	    // 是否拼单 0 不 1是
+返回：{"result":"成功","state":1}
+
+43、获取购物车列表---新
+url：/getShopCatList
+参数：
+userid		//用户ID
+调用：post
+返回：{"result":"ok","state":1,"data":"...."}
+data集合内容
+mid  店铺ID
+mname  店铺name
+carlist(购物车集合):id		//购物车ID
+		mid     // 商户ID
+		img		//商品图片
+		spec		//规格
+		count		//购买数量
+		brandname	//品名
+		price		//进价
+		vipprice	//会员价
+		stockprice	//供货商价
+		ping		//是否拼单 0 不拼
+		
+44、订单统计
+url: /getReport
+参数：
+mid    // 商户ID  
+type   // 类型：1按天统计  2按月统计  3按年统计 
+返回：{"result":"ok","state":1,"data":"...."}
+date集合内容：
+ornum   // 订单量
+ordate  // 日期
+totalmoney // 销量
+	
+==============================================================
+
+
+4、统计接口、各种搜索。
+
+
+6、列表排序：店铺里面商品列表、商品管理里面商品列表、订单列表
+
+
+product/getMerchantProductList   p=-1   获取所有商品的
+product/searchMerchantProductList 这个 是商家商品页面的 搜索， 包含条码、名称
+
+

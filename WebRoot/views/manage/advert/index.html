@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../css/admin/common.css" />
+	<link rel="stylesheet" href="../css/admin/tasktable.css" />
+	<script src="../js/jquery.min.js" ></script>
+	<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+	<script src="../js/upload.js"></script>
+	<script>
+		$(function(){		
+			$("#adtypeSelect").change(function(){
+				var typeid = $(this).children('option:selected').val();
+				if(typeid != 0){
+					location.href="advert?typeid="+typeid;
+				} 
+			});
+		
+			$("#saveBut").click(function(){
+				var flag = false;
+				$("#advertdiv").children("span").each(function(i,n){
+			    	var obj = $(n);
+			    	var title = obj.find("#title").val();
+			    	var link = obj.find("#link").val();
+			    	var url = obj.find("input").eq(2).val();
+			    	var id = obj.find("input").eq(2).attr("id");
+			    	aj.ajax({
+					    type : "POST",
+					    url : "advert/upadvert",
+					    async : false,
+					    data : {id: id, title: title, link: link,url:url},
+		   				success : function(msg) {
+		   					if(msg == 1){
+								flag = true;
+							}else{
+								flag = false;
+							}
+					    },
+					    error:function(msg){ 
+							alert("程序出错，请联系管理员");
+					    }
+					});
+			    });
+			});
+		});
+		function addadvert(){
+			var title = $("#title").val();
+			var link = $("#link").val();
+			var url = $("#url").val();
+			var typeid = '$!adtype.id';
+			//return null;
+			aj.ajax({
+			    type : "POST",
+			    url : "advert/addadvert",
+			    async : false,
+			    data : {title: title, link: link,url:url,typeid: typeid},
+  				success : function(msg) {
+	  				if(msg == 1){
+	  					alert("添加成功！");
+	  					location.reload();
+	  				}else{
+	  					alert("添加失败！");
+	  				}
+			    },
+			    error:function(msg){ 
+					alert("程序出错，请联系管理员");
+			    }
+			});
+		}
+		
+		function deladvert(aid){
+			if (confirm("是否确定删除？")) {
+				aj.ajax({
+				    type : "POST",
+				    url : "advert/deladvert",
+				    async : false,
+				    data : {aid:aid},
+	  				success : function(msg) {
+		  				if(msg == 1){
+		  					alert("删除成功！");
+		  					location.reload();
+		  				}else{
+		  					alert("删除失败！");
+		  				}
+				    },
+				    error:function(msg){ 
+						alert("程序出错，请联系管理员");
+				    }
+				});
+			}
+		}
+	</script>
+</head>
+<body>
+<div class="main_2" id="main_2">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box fixed">
+					<div class="box-title fixed">
+						<h3>广告管理</h3>
+					</div>
+					<div class="box-content_x fixed">
+                        <div class="form-horizontal">
+                        	<div class="serach_address">
+                        		选择广告类别：
+                        		<span>
+                        		<select id="adtypeSelect">
+                        			<option value="0">请选择类别</option>
+                        			#foreach($i in $aTypeList)
+                        			<option value="$!i.id" #if($!i.id == $!adtype.id) selected="selected" #end>$!i.adTypeName</option>
+                        			#end
+                        		</select>
+                        		</span>
+                                <span>
+                                    <a href="advert/typemanage">广告类别管理</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+					<div class="box-content_x">
+						#if($!typeid == 0)
+						请选择类别
+						#else
+						<div id="ui_alltasks" class="ui_wtable UI_task_table">
+	                        <table class="itable" width="100%" border="0" cellspacing="1" cellpadding="0">
+	                            <thead>
+	                              <tr>
+	                                <td>编号</td>
+	                                <td width="300px">广告标题</td>
+	                                <td>链接地址</td>
+	                                <td>图片路径</td>
+	                                <td width="120px">操作</td>
+	                              </tr>
+	                            </thead>
+	                            <tbody>
+	                            	#foreach($type in $adlist) 
+	                            	<tr>
+	                                    <td>$!type.id</td>
+	                                    <td>$!type.title</td>
+	                                    <td>$!type.link</td>
+	                                    <td>$!type.url</td>
+	                                    <td>
+	                                    <a href="advert/upadvert?id=$!type.id" >修改</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+	                                    <a href="javascript:void(0)" id="delete" onclick="deladvert('$!type.id')">删除</a>
+	                                    </td>
+	                                </tr>
+	                                #end
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                    <div class="control-group fixed">
+							<label for="select" class="control-label">添加$!adtype.adTypeName广告：</label>
+							<div class="controls" id="advertdiv">
+								<span>
+									<input type="text" id="title" class="input-xlarge" style="width: 200px;" placeholder="输入广告标题"/>
+									<input type="text" id="link" class="input-xlarge" style="width: 200px;" placeholder="输入连接地址"/>
+									<input type="text" class="input-xlarge" name="url" id="url" style="width: 200px;" placeholder="上传图片"/>
+									<input type="file" class="html_date" id="urlUp"  name="urlUp"/>
+	                                <input type="button" value="上传" onclick="ajaxFileUpload('..','/file/fileUpload','urlUp','url')"/>
+	                                <input type="button" value="添加" onclick="addadvert()"/>
+								</span><br/>
+							</div>
+						</div>
+						
+						#end
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

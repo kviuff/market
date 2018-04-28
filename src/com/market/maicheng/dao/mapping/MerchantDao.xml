@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.MerchantDao">
+	<resultMap type="com.market.maicheng.model.Merchant" id="resultList">
+		<id column="id" property="id" />
+		<result column="userid" property="userid" />
+		<result column="shopName" property="shopName" />
+		<result column="provinceId" property="provinceId" />
+		<result column="provinceName" property="provinceName" />
+		<result column="cityId" property="cityId" />
+		<result column="cityName" property="cityName" />
+		<result column="regionid" property="regionid" />
+		<result column="region" property="region" />
+		<result column="address" property="address" />
+		<result column="contacts" property="contacts" />
+		<result column="phone" property="phone" />
+		<result column="email" property="email" />
+		<result column="businessLicense" property="businessLicense" />
+		<result column="userName" property="userName" />
+		<result column="carid" property="carid" />
+		<result column="caridPhoto" property="caridPhoto" />
+		<result column="createTime" property="createTime" />
+		<result column="auditState" property="auditState" />
+		<result column="auditTime" property="auditTime" />
+		<result column="auditUserid" property="auditUserid" />
+		<result column="isdel" property="isdel" />
+		<result column="merchantType" property="merchantType" />
+		<result column="recommend" property="recommend" />
+		
+		<!-- <result column="merchantClass" property="merchantClass" /> -->
+		<result column="merchantLogo" property="merchantLogo" />
+		<result column="merchantHead" property="merchantHead" />
+		<result column="merchantAddress" property="merchantAddress" />
+		<result column="merchantDes" property="merchantDes" />
+		<result column="printRemarks" property="printRemarks" />
+		<result column="publicPric" property="publicPric" />
+	</resultMap>
+	
+	<insert id="addMerchant" parameterType="com.market.maicheng.model.Merchant" flushCache="true">
+		<![CDATA[insert into merchant (id,userid,shopName,provinceId,provinceName,cityId,cityName,regionid,region,address,contacts,phone,email,businessLicense,userName,carid,caridPhoto,createTime,auditState,auditTime,auditUserid,merchantType,recommend) values ]]>
+		<![CDATA[(#{id},#{userid},#{shopName},#{provinceId},#{provinceName},#{cityId},#{cityName},#{regionid},#{region},#{address},#{contacts},#{phone},#{email},#{businessLicense},#{userName},#{carid},#{caridPhoto},#{createTime},#{auditState},#{auditTime},#{auditUserid},#{merchantType},#{recommend})]]>
+	</insert>
+	
+	<update id="updateMerchant" parameterType="com.market.maicheng.model.Merchant" flushCache="true">
+		<![CDATA[update merchant set userid=#{userid},shopName=#{shopName},provinceId=#{provinceId},provinceName=#{provinceName},cityId=#{cityId},cityName=#{cityName},regionid=#{regionid},region=#{region},address=#{address},contacts=#{contacts},phone=#{phone},email=#{email},businessLicense=#{businessLicense},userName=#{userName},carid=#{carid},caridPhoto=#{caridPhoto},createTime=#{createTime},auditState=#{auditState},auditTime=#{auditTime},auditUserid=#{auditUserid},isdel=#{isdel},merchantType=#{merchantType} where id = #{id}]]>
+	</update>
+	
+	<update id="updateMerchantPubPric">
+		<![CDATA[update merchant set publicPric=#{publicPric} where id = #{id}]]>
+	</update>
+	
+	<select id="getMerchantList" resultMap="resultList">
+		<![CDATA[select distinct m.*  from merchant m left join merchant_category r on  m.id = r.mid   where  m.isdel = 0 ]]>
+		<if test="state != -1"> and auditState = #{state}</if>
+		<if test="categoryID != -1"> and r.cid=#{categoryID}</if>
+		<if test="provinceId != -1"> and m.provinceId = #{provinceId}</if>
+		<if test="cityId != -1"> and m.cityId = #{cityId}</if>
+		<if test="regionid != -1"> and m.regionid = #{regionid}</if>
+		<if test="shopName != null"> and m.shopName like '%${shopName}%'</if>
+    	<![CDATA[order by m.recommend desc,m.createTime desc limit #{offset},#{rows} ]]> 
+	</select>
+	
+	<select id="getMerchantByCount" resultType="int">  
+		<![CDATA[select count(*) from merchant m left join merchant_category r on  m.id = r.mid   where  m.isdel = 0 ]]>
+		<if test="state != -1"> and m.auditState = #{state}</if>
+		<if test="provinceId != -1"> and m.provinceId = #{provinceId}</if>
+		<if test="cityId != -1"> and m.cityId = #{cityId}</if>
+		<if test="regionid != -1"> and m.regionid = #{regionid}</if>
+		<if test="shopName != null"> and m.shopName like '%${shopName}%'</if>
+		<if test="categoryID != -1"> and r.cid=#{categoryID}</if>
+	</select>
+	
+	<select id="getMerchantByUserid" resultType="com.market.maicheng.model.Merchant">  
+		<![CDATA[select * from merchant where userid = #{userid} ]]>
+	</select>
+	
+	<select id="getMerchantByid" resultType="com.market.maicheng.model.Merchant">  
+		<![CDATA[select * from merchant where id = #{id} ]]>
+	</select>
+	
+	<update id="changeMerchantState">
+		<![CDATA[update merchant set auditState = #{state} where id = #{id} ]]>
+	</update>
+	
+	<update id="changeMerchantRecommend">
+		<![CDATA[update merchant set recommend = #{recommend} where id = #{id} ]]>
+	</update>
+	
+	<select id="getMerchantRecommendList" resultMap="resultList">
+		<![CDATA[select * from merchant where isdel = 0 and auditState = 1 order by recommend desc,updateTime desc,createTime desc ]]>
+		<if test="limit != -1"> limit #{limit}</if>
+	</select>
+	
+	<update id="updateMerchantInformation" parameterType="com.market.maicheng.model.Merchant" flushCache="true">
+		<![CDATA[update merchant set merchantLogo=#{merchantLogo},merchantHead=#{merchantHead},merchantAddress=#{merchantAddress},merchantDes=#{merchantDes},printRemarks=#{printRemarks} where id = #{id} ]]>
+	</update>
+</mapper>

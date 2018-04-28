@@ -1,0 +1,551 @@
+	.fl{
+		float: left;
+	}
+	.UI_worktask{
+		width: 1000px;
+		height: auto;
+		overflow: hidden;
+		margin:50px auto 0;
+	}
+	.UI_task{
+		width: 1000px;
+		overflow: hidden;
+	}
+	.UI_worktask_submit{
+		float: left;
+		width: 100%;
+		padding-top: 20px;
+	}
+
+	.UI_task_search{
+		width: 100%;
+		line-height: 25px;
+		overflow: hidden;
+		padding-top: 30px;
+	}
+	.UI_task_search div.fl{
+		margin-right: 15px;
+	}
+
+	.UI_task_table{
+		width: 1000px;
+		height: auto;
+		margin-top: 10px;
+		/*overflow: hidden;*/
+	}
+
+/* 未排活表 */
+
+	.UI_works{
+		width: auto;
+		padding: 20px;
+		/*overflow: hidden;*/
+		margin: 20px 0;
+		clear: both;
+	}
+	.UI_works_tit{
+		width: 100%;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		font-size: 14px;
+		font-weight: 700;
+	}
+
+
+	.UI_works_list{
+		position: relative;
+		padding: 0 10px;
+		border: 1px dashed #eee;
+	}
+	.UI_works_list_tip{
+		width: 100%;
+		line-height: 100px;
+		text-align: center;
+		font-size: 18px;
+		font-weight: 700;
+		color: #eee;
+	}
+	.UI_works_list ul{
+		position: absolute;
+		z-index: 100;
+		width: 100%;
+		min-height: 100px;
+	}
+	.UI_works_list li{
+		float: left;
+		width: 30%;
+		height: auto;
+		line-height: 22px;
+		padding: 4px 0;
+		border: 1px solid #ddd;
+		margin-top: 10px;
+		margin-right: 10px;
+		text-indent: 10px;
+		cursor: pointer;
+		z-index: 100;
+		background: #fff;
+	}
+	.UI_works_list li.work_clone{
+		border: 1px dashed #ddd;
+	}
+
+	.UI_works_list li.selected{
+		border-color: green;
+	}
+
+	.UI_works_list li:hover{
+		color: #C50000;
+	}
+	.UI_works_list li span{
+		margin-right: 5px;
+	}
+
+	.UI_works_edit{
+		position: absolute;
+		width: auto;
+		clear: both;
+		padding: 15px;
+		display: none;
+		border: 2px solid #000;
+		z-index: 10000;
+		background: #fff;
+	}
+
+	#uic_work_split_num{
+		width: 200px;
+	}
+
+	.UI_table_edit{
+		width: 100%;
+		clear: both;
+		padding: 15px 0;
+		display: none;
+	}
+	.UI_table_editmenu{
+		position: absolute;
+		width: 300px;
+		clear: both;
+		padding: 15px;
+		/*display: none;*/
+		border: 2px solid #000000;
+		background: #fff;
+		z-index: 1000;
+	}
+	.UI_table_editmenu #uic_table_taskhours{
+		width: 150px;
+	}
+/* 排活表 */
+	#UI_task_table_t{
+		width: 100%;
+	}
+	.UI_task_table_tit{
+		width: 100%;
+		line-height: 30px;
+		clear: both;
+		text-align: center;
+		font-size: 14px;
+	}
+	.UI_task_table .itable{
+		float: left;
+		background: #ddd;
+		/*overflow: hidden;*/
+		table-layout: fixed;
+	}
+	.UI_task_table td{
+		background: #fff;
+		line-height: 25px;
+		text-indent: 20px;
+	}
+	.UI_task_table thead td{
+		background: #efefef;
+		overflow: hidden;
+	}
+	.UI_task_table td div.t{
+		border-top: 1px solid #ddd;
+		margin-top: -1px;
+	}
+	.UI_task_table td.weeks{
+		/*width: 796px;*/
+		overflow: hidden;
+	}
+	.weektable{
+		table-layout: fixed;
+		width: 100%;
+		background: #ddd;
+	}
+	.weeksbox{
+		width: 100%;
+		/*overflow: hidden;*/
+	}
+	.weekdays{
+		overflow: hidden;
+	}
+	.weeksbox table{
+		width: 1420px;
+	}
+	.weeksbox table td{
+		/*width: 200px;*/
+		line-height: 25px;
+	}
+
+	.weektable .tr1 td.daytime{
+		border-right: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
+	}
+	.weektable .tr2 td.daytime{
+		border-right: 1px solid #ddd;
+	}
+	.itable thead .weektable td{
+		border-right: 1px solid #ddd;
+	}
+	.itable thead .weektable td.weekdays{
+		border-right: none;
+	}
+
+	.weeksbox table td{
+		border-right: 1px solid #ddd;
+		vertical-align: top;
+	}
+	.tr1 .weeksbox table td{
+		border-bottom: 1px solid #ddd;
+	}
+
+	.weeksbox_sbar{
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+		clear: both;
+	}
+	.weeksboxscroll{
+		float: right;
+		width: 695px;
+		overflow: auto;
+
+	}
+	.weeksboxscroll .c{
+		width: 1419px;
+		height: 1px;
+	}
+	.itable tbody .weeksbox table td .ui-draghover-obj{
+		background: #ddd;
+	}
+	.week_date{
+		color: blue;
+	}
+
+	.member_sortnum_edt{
+		display: none;
+		width: 30px;
+	}
+	.member_sortnum{
+
+	}
+
+/* 排活表项目 */
+	.ui_table_tasklist{
+		width: 100%;
+		height: auto;
+		min-height: 30px;
+		position: relative;
+		/*overflow: hidden;*/
+		text-indent: 0px;
+		border-bottom: 1px solid #efefef;
+	}
+	.ui_table_item{
+		position: relative;
+		top: -1px;
+		float: left;
+		width: 500px;
+		min-height: 30px;
+		font-weight: 100;
+		border-top: 1px solid #efefef;
+		border-right: 1px solid #efefef;
+		padding-left: 10px;
+		background: #fff;
+	}
+	.ui_table_item strong{
+		padding-right: 3px;
+	}
+	.ui_table_item span.iedit{
+		color: blue;
+		cursor: pointer;
+	}
+	.ui_table_addnew{
+		position: absolute;
+		right: 0px;
+		top: 7px;
+		width: 20px;
+		height: 15px;
+		text-align: center;
+		line-height: 15px;
+		text-indent: 0px;
+		cursor: pointer;
+		font-size: 14px;
+	}
+	.ui_table_delnew{
+		display: none;
+		position: absolute;
+		right: 0px;
+		top: 30px;
+		width: 20px;
+		height: 15px;
+		text-align: center;
+		line-height: 15px;
+		text-indent: 0px;
+		cursor: pointer;
+		font-size: 18px;
+	}
+
+	.selected{
+		background: #d2e4ff;
+	}
+
+
+
+	#UI_works_tools_split{
+		display: none;
+		width: 300px;
+		padding: 5px;
+		border: 1px solid #ddd;
+		margin-top: 5px;
+	}
+
+/* 序号 */
+
+.mnumber{
+	display: none;
+}
+
+
+/* 排活表修改工单数据 */
+
+#UI_task_change{
+	position: absolute;
+	z-index: 10000;
+	display: none;
+	z-index: 10000;
+	width: 755px;
+	height: auto;
+	margin: 0 auto;
+	border: 2px solid #000;
+	background: #fff;
+	padding: 15px;
+}
+#UI_task_change .itable{
+	background: #ddd;
+}
+#UI_task_change .itable td{
+	background: #fff;
+	padding: 3px 10px;
+}
+#UI_task_change .itable td.table_tit{
+	background: #efefef;
+}
+#UI_task_change .itable td textarea{
+	width: 600px;
+	line-height: 22px;
+}
+#UI_task_change .itable td .tskdata_title{
+	width: 300px;
+}
+.UI_task_change_ctrl{
+	width: 753px;
+	border: 1px solid #ddd;
+	border-top: none;
+	padding: 10px 0;
+}
+
+
+
+
+/* 所有工单  */
+.ui_tabbox{
+	width: 1000px;
+	height: auto;
+	overflow: hidden;
+	margin: 50px auto;
+}
+.ui_tabtags{
+	line-height: 30px;
+	overflow: hidden;
+	text-align: left;
+}
+.ui_tabtags li{
+	display: inline-block;
+	padding: 0 15px;
+	margin-right: 30px;
+	background: #fefefe;
+	cursor: pointer;
+}
+.ui_tabtags li.on{
+	background: #C50000;
+	color: #fff;
+}
+.ui_tabcont{
+	display: none;
+	width: 100%;
+	overflow: hidden;
+}
+
+
+/**/
+
+.ui_tabbox2{
+	width: 1000px;
+	height: auto;
+	overflow: hidden;
+	margin: 50px auto;
+}
+.ui_tab2tags{
+	line-height: 20px;
+	overflow: hidden;
+	text-align: right;
+}
+.ui_tab2tags li{
+	display: inline-block;
+	padding: 0 15px;
+	margin-right: 20px;
+	background: #fefefe;
+	cursor: pointer;
+}
+.ui_tab2tags li.on{
+	background: #eee;
+}
+.ui_tab2cont{
+	display: none;
+	width: 100%;
+	overflow: hidden;
+}
+
+
+
+/**/
+
+.ui_tab2cont_tit{
+	width: 100%;
+	line-height: 30px;
+	font-size: 16px;
+}
+.ui_wtable_search{
+	width: 100%;
+	overflow: hidden;
+}
+.ui_wtable_search dl{
+	float: left;
+	width: auto;
+}
+.ui_wtable_search dt, .ui_wtable_search dd{
+	float: left;
+	line-height: 25px;
+	margin-right: 15px;
+}
+.ui_wtable_search dd{
+	margin-right: 30px;
+}
+.ui_wtable_search dt input{
+	margin-right: 5px;
+}
+
+td.table_tit{
+	background:  #EFEFEF;
+}
+.space20{
+	clear: both;
+	width: 100%;
+	height: 20px;
+}
+
+
+/* 创建工单 */
+.ui_task_steps{
+	padding-top: 20px;
+}
+.ui_tast_step{
+	display: none;
+}
+.ui_task_steplist{
+	width: 100%;
+	height: 25px;
+	line-height: 25px;
+}
+.ui_task_steplist li{
+	float: left;
+	/*width: 33.3%;*/
+	text-align: center;
+	color: #333;
+	font-style: 14px;
+	/*font-weight: 700;*/
+	/*margin: 0px;*/
+}
+.ui_task_steplist li.on {
+	color:  #C50000;
+}
+
+.ui_task_step_ctrl{
+	clear: both;
+	width: 100%;
+	padding-top: 15px;
+	overflow: hidden;
+}
+
+
+.ui_wtable{
+	overflow: hidden;
+}
+.ui_wtable table{
+	margin-top: 20px;
+}
+
+
+/* 解决冲突 */
+
+.UI_task_table{
+    width: auto;
+    padding: 0 20px;
+}
+.UI_task_table .itable{
+   border-collapse: separate;
+   border-spacing: 1px;
+}
+#UI_task_change .itable{
+   border-collapse: separate;
+   border-spacing: 1px;
+}
+.UI_task_btns{
+	overflow: hidden;
+	padding-top: 20px;
+}
+
+.UI_task_table .itable thead td{
+    font-size: 100%;
+    padding: 8px 0;
+    color: #C50000;
+}
+
+.UI_task_table .itable tbody td{
+    padding: 0px;
+}
+
+.ui_tast_step .itable tbody td{
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.tr { text-align: right; }
+.tl { text-align: left; }
+.tc { text-align:center; }
+
+
+/* 隔行换色 */
+
+.grey td {
+	background: #fcfcfc;
+}
+.grey td .ui_table_item {
+	background: #fcfcfc;
+}
+
+.grey td .ui_table_item.selected{
+	background: #D2E4FF;
+}

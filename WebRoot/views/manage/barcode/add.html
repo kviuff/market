@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../css/admin/common.css" />
+	<script src="../../js/jquery.min.js" ></script>
+	<script type="text/javascript">
+		window.BasePath = "../../";
+		window.UEDITOR_HOME_URL = "../../";
+	</script>
+    <script type="text/javascript" charset="utf-8" src="../../js/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/ueditor/ueditor.all.min.js"> </script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="../../js/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="../../js/My97DatePicker/WdatePicker.js"></script>
+    <script src="../../js/upload.js"></script>
+	<script type="text/javascript" src="../../js/ajaxfileupload.js"></script>
+	<title>产品管理系统</title>
+</head>
+<body>
+<div  class="main_2" id="main_2">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box fixed">
+					<div class="box-title fixed">
+						<h3>
+							条形码库存管理
+						</h3>
+                        <ul class="ul_1">
+                            <li>条形码产品添加</li>
+                        </ul>
+					</div>
+					<div class="box-content_x">
+<!-- 					<form action="toadd" method="post" id="projectFrom" name="projectFrom" onsubmit="return fromSub();" enctype="multipart/form-data" > -->
+						<div class="form-horizontal">
+                            <div class="control-group fixed">
+                            	<div style="float: left;width: 40%;">
+	                                <label for="select" class="control-label">产品名称：</label>
+	                                <div class="controls" style="width: 40%;">
+	                                    <input type="text" name="title" id="title"/>
+	                                </div>
+                                </div>
+                            </div>
+                            <div class="control-group fixed">
+                            	<div style="float: left;width: 40%;">
+	                                <label for="select" class="control-label">条形码ID：</label>
+	                                <div class="controls" style="width: 40%;">
+	                                    <input type="text" name="barcodeid" id="barcodeid"/>
+	                                </div>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group fixed" id="cdate" style="float:left;width:100%">
+                                <label for="select" class="control-label">产品分类：</label>
+                                <div class="controls" id="cat">
+                                    <select id="cate" name="cate" style="width: 140px;float:left;" onchange="forchange(this)">
+                                    	<option value="0">请选择分类</option>
+                                    	#foreach($p in $cateList) 
+                                    	<option value="$!p.id">$!p.cateName</option>
+                                    	#end
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group fixed" id="cdate" style="float:left;width:100%">
+                                <label for="select" class="control-label">品牌：</label>
+                                <div class="controls" id="cat">
+                                    <select id="brand" name="brand" style="width: 140px;float:left;">
+                                    	<option value="0">请选择品牌</option>
+                                    	#foreach($p in $brandlist) 
+                                    	<option value="$!p.id">$!p.brandName</option>
+                                    	#end
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group fixed" id="cdate" style="float:left;width:100%">
+                                <label for="select" class="control-label">品名：</label>
+                                <div class="controls" style="width: 40%;">
+                                    <input type="text" name="brandname" id="brandname"/>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group fixed" id="cdate" style="float:left;width:100%">
+                                <label for="select" class="control-label">系列：</label>
+                                <div class="controls" style="width: 40%;">
+                                    <input type="text" name="series" id="series"/>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group fixed" id="cdate" style="float:left;width:100%">
+                                <label for="select" class="control-label">规格：</label>
+                                <div class="controls" style="width: 40%;">
+                                    <input type="text" name="specs" id="specs"/>
+                                </div>
+                            </div>
+                            <div class="control-group fixed">
+                                <label for="select" class="control-label">产品简介：</label>
+                                <div class="controls">
+                                    <textarea id="titleContent" name="titleContent" rows="3" cols="50"></textarea>
+                                </div>
+                            </div>
+                            
+							<div class="control-group fixed">
+								<label for="textfield" class="control-label">产品图片：</label>
+								<div class="controls">
+									<div class="log_data2">
+                                       	<span>
+                                       		<input type="text" class="html_date" id="pIndexPic"  name="pIndexPic"/>
+	                                       	<input type="file" class="html_date" id="pIndexPicUp"  name="pIndexPicUp"/>
+	                                       	<input type="button" value="上传" onclick="ajaxFileUpload('../../','/file/fileUpload','pIndexPicUp','pIndexPic')"/>
+                                       	</span>
+                                    </div> 
+								</div>
+								
+							</div>
+							<div class="control-group fixed">
+                                <label for="select" class="control-label">产品价格：</label><br/>
+                                <div class="log_data2">
+                                       	<span id="pIntroSpanM">
+                                       		<dl id="1">
+		                                       	条码：<input type="text" style="width: 50px;" name="scode" id="scode"/>
+		                                       	单位：<input type="text" style="width: 50px;" name="unit" id="unit"/>
+		                                       	规格：<input type="text" style="width: 50px;" name="spec" id="spec"/>
+		                                       	
+		                                       	进价：<input type="text" style="width: 50px;" name="price" id="price"/>
+		                                       	会员价：<input type="text" style="width: 50px;" name="vipprice" id="vipprice"/>
+		                                       	供货商价：<input type="text" style="width: 50px;" name="stockprice" id="stockprice"/>
+	                                       	</dl>
+                                       	</span>
+                                        <a onclick="addpIntroDiv1()">+</a>
+                                    </div>
+                                    </div>
+                            </div>
+                            </div>
+                            <div class="form-actions fixed">
+								<button type="button" class="btn btn-primary" onclick="_save()">提交</button>
+							</div>
+						</div>
+<!-- 					</form> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+// 	1.删除指定属性后面的所有元素（不是同级）
+// 2.清空div里面的所有元素
+	function forchange(obj){
+		html="";
+// 		分类联动
+		var cid = $(obj).children('option:selected').val();
+// 		var states = $(obj).children('option:selected').attr("states");
+// 		div下的最后一个小div的id
+// 		var num = $("#cdate>div:last").attr("id");
+		if(cid != 0){
+			aj.ajax({
+			    type : "POST",
+			    url : "../category/getlistforpid",
+			    data : {cateid:cid },
+			    dataType: "json",
+				success : function(json) {
+					if(json != "error"){
+						if(json.length==0){
+							$("#subclass").html("");
+							$(obj).nextAll().remove();
+						}
+	// 					是属性
+						if(json[0].states == 0){
+							$("#subclass").html("");
+							html="";
+							for(var i=0;i<json.length;i++){
+								html += json[i].cateName+":&nbsp&nbsp&nbsp<select name='pattr' id=\"cate"+json[i].sid+"\" style='width: 150px;'> <option value=\"0\">请选择分类</option>";	
+								for(var j=0;j<json[i].cateList.length;j++){
+									html += "<option value="+json[i].cateList[j].sid+">"+json[i].cateList[j].cateName+"</option>";
+								}
+								html += "</select>";
+							}
+							html += "<span>数量：<input type='text' name='count' id='count' style='width: 50px;'/>  原价：<input type='text' name='money' id='money' style='width: 50px;'/>元 ";
+							html += "现价：<input type='text' name='tmoney' id='tmoney' style='width: 50px;'/>元<input type='button' value='添加' onclick='addspec(this)'/>";
+							html += "</span>";
+							if(json.length>0){
+								$("#subclass").append(html);
+							}
+						}else{
+		// 					不是属性
+							html = "";
+							$(obj).nextAll().remove();
+							$("#subclass").html("");
+								html += "<select name='cate' id=\"cate"+cid+"\" style='width: 150px;'> <option value=\"0\">请选择分类</option>";	
+								for(var i=0;i<json.length;i++){
+									html += "<option value=\""+json[i].sid+"\">"+json[i].cateName+"</option>";
+								}
+								html += "</select>";
+	// 						最后没有数据的时候不添加
+							if(json.length>0){
+								$("#cat").append(html);
+							}
+						}
+					}
+			    },
+			    error:function(msg){ 
+					alert("程序出错，请联系管理员");
+			    }
+			});
+		}
+	}	
+	
+	function addpIntroDiv1(){
+		var num = $("#pIntroSpanM>dl:last").attr("id");
+		num = parseInt(num)+1;
+		var html = "<dl id=\""+num+"\">"+
+				   "条码：<input type=\"text\" style=\"width: 50px;\" name=\"scode\" id=\"scode\"/>"+
+                   "单位：<input type=\"text\" style=\"width: 50px;\" name=\"unit\" id=\"unit\"/>"+
+                   "规格：<input type=\"text\" style=\"width: 50px;\" name=\"spec\" id=\"spec\"/>"+
+                               	
+                   "进价：<input type=\"text\" style=\"width: 50px;\" name=\"price\" id=\"price\"/>"+
+                   "会员价：<input type=\"text\" style=\"width: 50px;\" name=\"vipprice\" id=\"vipprice\"/>"+
+                   "供货商价：<input type=\"text\" style=\"width: 50px;\" name=\"stockprice\" id=\"stockprice\"/>"+
+		           "<a onclick='removeDom(this)'>-</a></dl>";
+		 $("#pIntroSpanM").append(html);
+	}
+	
+	function removeDom(obj){
+		$(obj).parent().remove();
+	}
+
+function _save(){
+	
+	//产品名称
+	var title = $("#title").val();
+	if(title.length == 0){
+		alert("请输入产品名称");
+		$("#title").focus();
+		return false;
+	}
+	//条形码ID
+	var barcodeid = $("#barcodeid").val();
+	if(barcodeid.length == 0){
+		alert("请输入条形码ID");
+		$("#barcodeid").focus();
+		return false;
+	}
+	//产品分类
+	var cateids = "";
+	$("select[name='cate']").each(function(){
+		if($(this).val()!=0){
+			cateids = $(this).val();
+		}
+	});
+	if(cateids.indexOf("-")>-1){
+		cateids = cateids.substring(0,cateids.length-1);
+	}
+	if(cateids.length == 0){
+		alert("请选择产品分类");
+		$("#cateids").focus();
+		return false;
+	}
+	
+	//品牌
+	var brand = $("#brand option:selected").val();
+	if(brand == 0){
+		$("#brand").focus();
+		alert("请选择产品品牌");
+		return false;
+	}
+	//品名
+	var brandname = $("#brandname").val();
+	if(brandname.length == 0){
+		alert("请输入品名");
+		$("#brandname").focus();
+		return false;
+	}
+	
+	//系列
+	var series = $("#series").val();
+	if(series.length == 0){
+		alert("请输入系列");
+		$("#series").focus();
+		return false;
+	}
+	
+	//规格
+	var specs = $("#specs").val();
+	if(specs.length == 0){
+		alert("请输入规格");
+		$("#specs").focus();
+		return false;
+	}
+	
+	//图片
+	var img = $("#pIndexPic").val();
+	if(img.length == 0){
+		alert("请输入图片");
+		$("#img").focus();
+		return false;
+	}
+	
+	//产品价格
+	var barcodePrice = "";
+	$("#pIntroSpanM").children("dl").each(function(i,n){
+    	var obj = $(n);
+    	barcodePrice += obj.find("#scode").val() +"-"+obj.find("#unit").val()+"-"+obj.find("#spec").val()+"-"+obj.find("#price").val()+"-"+obj.find("#vipprice").val()+"-"+obj.find("#stockprice").val() + ",";
+    });
+	if(barcodePrice.length == 0){
+		alert("请输入产品价格");
+		return false;
+	}else{
+		barcodePrice = barcodePrice.substring(0,barcodePrice.length-1)
+	}
+	
+	
+	title,barcodeid,cateids,brand,brandname,series,specs,img,barcodePrice;
+// 	cateids  pattr pTitle cate oprice pprice titleContent pIndexPic pListPic pIntroPic rebate pIndexPicM  pListPicM  pIntroPicM
+	aj.ajax({
+	    type : "POST",
+	    url : "toadd",
+	    data : {title:title,barcodeid:barcodeid,cateids:cateids,brand:brand,brandname:brandname,series:series,specs:specs,img:img,barcodePrice:barcodePrice},
+	    dataType: "json",
+		success : function(result) {
+			alert(result.state);
+	    },
+	    error:function(){ 
+			alert("程序出错，请联系管理员");
+	    }
+	});
+	
+	
+	
+	
+}
+</script>
+</body>
+</html>

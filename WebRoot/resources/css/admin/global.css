@@ -1,0 +1,738 @@
+@charset "utf-8";
+/* CSS Document */
+/*normal*/
+* { -webkit-text-size-adjust: none; }/*用于清除移动设备浏览器自定义字体设置*/
+html, body, div, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, fieldset, input, abbr, article, aside, command, details, figcaption, figure, footer, header, hgroup, mark, meter, nav, output, progress, section, summary, time { margin: 0; padding: 0; font-family: '微软雅黑', 'Microsoft YaHei', '黑体', Helvetica, Arial; _font-family: '宋体'; }
+h1, h2, h3, h4, h5, h6, pre, code, address, caption, cite, code, em, th, figcaption { font-size: 1em; /*font-weight: 100; */ font-style: normal; }
+img, fieldset, iframe { border: none; }/*图片，框架的边框清除*/
+caption, th { text-align: left; }
+body { color: #888888; font-size: 12px;/*font-weight:lighter;*/ }
+article, aside, footer, header, hgroup, nav, section, figure, figcaption { display: block; }
+ul, li { list-style: none; }/*列表符清除*/
+/*常规链接*/
+a { text-decoration: none; cursor: pointer; color: #333; outline: none; blr:expression(this.onFocus=this.blur());
+}
+a:link { color: #333; }
+a:visited { color: #333; }
+a:hover { color: #d80c18; }
+a:hover .blue, .blue:hover { text-decoration: underline; }
+/*font-family*/
+.MSyh { font-family: '微软雅黑', 'Microsoft YaHei'; }
+.simhei { font-family: '黑体', 'Simhei'; }
+.simsun { font-family: '宋体', 'Simsun'; }
+.Arial { font-family: Helvetica, Arial; }
+/*font-color*/
+.black { color: #000000; }
+.dark { color: #333333; }
+.heavy { color: #666; }
+.gray { color: #888888; }
+.gray_2 { color: #999999; }
+.white { color: #ffffff; }
+.red { color: #d80c18; }
+.blue { color: #256bbb; }
+/*font-size*/
+.font12 { font-size: 12px; }
+.font14 { font-size: 14px; }
+.font16 { font-size: 16px; }
+.font18 { font-size: 18px; }
+.font20 { font-size: 20px; }
+.font22 { font-size: 22px; }
+.font24 { font-size: 24px; }
+.font30 { font-size: 30px; }
+.font36 { font-size: 36px; }
+.font42 { font-size: 42px; }
+.font48 { font-size: 48px; }
+.font56 { font-size: 56px; }
+/* text-align */
+.t_l { text-align: left; }
+.t_r { text-align: right; }
+.t_c { text-align: center; }
+.t_j { text-align: justify; }
+.wspace1 { word-spacing: 1em; }/*字间距*/
+.bold { font-weight: bold; }/*文字加粗*/
+.italic { font-style: italic; }/*文字倾斜*/
+.underline { text-decoration: underline; }/*文字下划线*/
+.overline { text-decoration: overline; }/*文字上划线*/
+.through { text-decoration: line-through; }/*文字删除线*/
+/*margin&padding*/
+.m5 { margin: 5px; }
+.m10 { margin: 10px; }
+.m15 { margin: 15px; }
+.m20 { margin: 20px; }
+.m25 { margin: 25px; }
+.m30 { margin: 30px; }
+.m35 { margin: 35px; }
+.m40 { margin: 40px; }
+.m45 { margin: 45px; }
+.m50 { margin: 50px; }
+.mt5 { margin-top: 5px; }
+.mt10 { margin-top: 10px; }
+.mt15 { margin-top: 15px; }
+.mt20 { margin-top: 20px; }
+.mt25 { margin-top: 25px; }
+.mt30 { margin-top: 30px; }
+.mt35 { margin-top: 35px; }
+.mt40 { margin-top: 40px; }
+.mt45 { margin-top: 45px; }
+.mt50 { margin-top: 50px; }
+.mb5 { margin-bottom: 5px; }
+.mb10 { margin-bottom: 10px; }
+.mb15 { margin-bottom: 15px; }
+.mb20 { margin-bottom: 20px; }
+.mb25 { margin-bottom: 25px; }
+.mb30 { margin-bottom: 30px; }
+.mb35 { margin-bottom: 35px; }
+.mb40 { margin-bottom: 40px; }
+.mb45 { margin-bottom: 45px; }
+.mb50 { margin-bottom: 50px; }
+.ml5 { margin-left: 5px; }
+.ml10 { margin-left: 10px; }
+.ml15 { margin-left: 15px; }
+.ml20 { margin-left: 20px; }
+.ml25 { margin-left: 25px; }
+.ml30 { margin-left: 30px; }
+.ml35 { margin-left: 35px; }
+.ml40 { margin-left: 40px; }
+.ml45 { margin-left: 45px; }
+.ml50 { margin-left: 50px; }
+.mr5 { margin-right: 5px; }
+.mr10 { margin-right: 10px; }
+.mr15 { margin-right: 15px; }
+.mr20 { margin-right: 20px; }
+.mr25 { margin-right: 25px; }
+.mr30 { margin-right: 30px; }
+.mr35 { margin-right: 35px; }
+.mr40 { margin-right: 40px; }
+.mr45 { margin-right: 45px; }
+.mr50 { margin-right: 50px; }
+.p5 { padding: 5px; }
+.p10 { padding: 10px; }
+.p15 { padding: 15px; }
+.p20 { padding: 20px; }
+.p25 { padding: 25px; }
+.p30 { padding: 30px; }
+.p35 { padding: 35px; }
+.p40 { padding: 40px; }
+.p45 { padding: 45px; }
+.p50 { padding: 50px; }
+.p55 { padding: 55px; }
+.p60 { padding: 60px; }
+.p65 { padding: 65px; }
+.p70 { padding: 70px; }
+.p75 { padding: 75px; }
+.p80 { padding: 80px; }
+.p85 { padding: 85px; }
+.p90 { padding: 90px; }
+.p95 { padding: 95px; }
+.p100 { padding: 100px; }
+.pt5 { padding-top: 5px; }
+.pt10 { padding-top: 10px; }
+.pt15 { padding-top: 15px; }
+.pt20 { padding-top: 20px; }
+.pt25 { padding-top: 25px; }
+.pt30 { padding-top: 30px; }
+.pt35 { padding-top: 35px; }
+.pt40 { padding-top: 40px; }
+.pt45 { padding-top: 45px; }
+.pt50 { padding-top: 50px; }
+.pt55 { padding-top: 55px; }
+.pt60 { padding-top: 60px; }
+.pt65 { padding-top: 65px; }
+.pt70 { padding-top: 70px; }
+.pt75 { padding-top: 75px; }
+.pt80 { padding-top: 80px; }
+.pt85 { padding-top: 85px; }
+.pt90 { padding-top: 90px; }
+.pt95 { padding-top: 95px; }
+.pt100 { padding-top: 100px; }
+.pl5 { padding-left: 5px; }
+.pl10 { padding-left: 10px; }
+.pl15 { padding-left: 15px; }
+.pl20 { padding-left: 20px; }
+.pl25 { padding-left: 25px; }
+.pl30 { padding-left: 30px; }
+.pl35 { padding-left: 35px; }
+.pl40 { padding-left: 40px; }
+.pl45 { padding-left: 45px; }
+.pl50 { padding-left: 50px; }
+.pl55 { padding-left: 55px; }
+.pl60 { padding-left: 60px; }
+.pl65 { padding-left: 65px; }
+.pl70 { padding-left: 70px; }
+.pl75 { padding-left: 75px; }
+.pl80 { padding-left: 80px; }
+.pl85 { padding-left: 85px; }
+.pl90 { padding-left: 90px; }
+.pl95 { padding-left: 95px; }
+.pl100 { padding-left: 100px; }
+.pr5 { padding-right: 5px; }
+.pr10 { padding-right: 10px; }
+.pr15 { padding-right: 15px; }
+.pr20 { padding-right: 20px; }
+.pr25 { padding-right: 25px; }
+.pr30 { padding-right: 30px; }
+.pr35 { padding-right: 35px; }
+.pr40 { padding-right: 40px; }
+.pr45 { padding-right: 45px; }
+.pr50 { padding-right: 50px; }
+.pr55 { padding-right: 55px; }
+.pr60 { padding-right: 60px; }
+.pr65 { padding-right: 65px; }
+.pr70 { padding-right: 70px; }
+.pr75 { padding-right: 75px; }
+.pr80 { padding-right: 80px; }
+.pr85 { padding-right: 85px; }
+.pr90 { padding-right: 90px; }
+.pr95 { padding-right: 95px; }
+.pr100 { padding-right: 100px; }
+.pb5 { padding-bottom: 5px; }
+.pb10 { padding-bottom: 10px; }
+.pb15 { padding-bottom: 15px; }
+.pb20 { padding-bottom: 20px; }
+.pb25 { padding-bottom: 25px; }
+.pb30 { padding-bottom: 30px; }
+.pb35 { padding-bottom: 35px; }
+.pb40 { padding-bottom: 40px; }
+.pb45 { padding-bottom: 45px; }
+.pb50 { padding-bottom: 50px; }
+.pb55 { padding-bottom: 55px; }
+.pb60 { padding-bottom: 60px; }
+.pb65 { padding-bottom: 65px; }
+.pb70 { padding-bottom: 70px; }
+.pb75 { padding-bottom: 75px; }
+.pb80 { padding-bottom: 80px; }
+.pb85 { padding-bottom: 85px; }
+.pb90 { padding-bottom: 90px; }
+.pb95 { padding-bottom: 95px; }
+.pb100 { padding-bottom: 100px; }
+.zindex1 { z-index: 1; }
+.zindex9 { z-index: 9; }
+.zindex19 { z-index: 19; }
+.zindex29 { z-index: 29; }
+.zindex99 { z-index: 99; }
+.zindex199 { z-index: 199; }
+.zindex299 { z-index: 299; }
+.zindex999 { z-index: 999; }
+/*浮动&定位*/
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
+.clearfix:after { visibility: hidden; display: block; content: " "; clear: both; }
+.clearfix { zoom: 1; } /* IE6 */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.block { display: block; }
+.inline_block { display: inline-block; *display:inline;
+*zoom:1;
+}
+.block_center { display: block; margin: 0 auto; }
+.hidden { display: none; }
+.hand { cursor: pointer; }
+.default { cursor: default; }
+/*border*/
+.border { border: 1px solid #dfdfdf; }
+.line_t { border-top: 1px solid #dfdfdf; }
+.line_b { border-bottom: 1px solid #dfdfdf; }
+.line_l { border-left: 1px solid #dfdfdf; }
+.line_r { border-right: 1px solid #dfdfdf; }
+.border_nt { border: 1px solid #dfdfdf; border-top: 0px; }
+.border_nb { border: 1px solid #dfdfdf; border-bottom: 0px; }
+.border_nl { border: 1px solid #dfdfdf; border-left: 0px; }
+.border_nr { border: 1px solid #dfdfdf; border-right: 0px; }
+/*background*/
+.white_bg { background-color: #ffffff; }
+.f8_bg, .light_bg { background-color: #f8f8f8; }
+.f6_bg { background-color: #f6f6f6; }
+.fb_bg { background-color: #fbfbfb; }
+.ef_bg { background-color: #efefef; }
+.gray_bg { background-color: #aaaaaa; }
+.dark_bg { background-color: #666666; }
+.black_bg { background-color: #000000; }
+/******公共元素********/
+/*buttons*/
+.red_bt_l { background: #d80c18; width: 148px; height: 36px; line-height: 36px; font-size: 16px; border: 1px solid #d80c18; text-align: center; color: #fff!important; border-radius: 3px; cursor: pointer; }
+.red_bt_m { background: #d80c18; width: 108px; height: 28px; line-height: 28px; font-size: 14px; border: 1px solid #d80c18; text-align: center; color: #fff!important; border-radius: 3px; cursor: pointer; }
+.red_bt_s { background: #d80c18; width: 88px; height: 20px; line-height: 20px; font-size: 12px; border: 1px solid #d80c18; text-align: center; color: #fff!important; border-radius: 3px; cursor: pointer; }
+.red_bt_short { background: #d80c18; width: 58px; height: 20px; line-height: 20px; font-size: 12px; border: 1px solid #d80c18; text-align: center; color: #fff!important; border-radius: 3px; cursor: pointer; }
+.red_bt_l:hover, .red_bt_m:hover, .red_bt_s:hover, .red_bt_short:hover { background-color: #b0000a; border: 1px solid #b0000a; cursor: pointer; }
+.red_bt_l span, .red_bt_m span, .red_bt_s span, .red_bt_short span { color: #fff!important; }
+.gray_bt_l { width: 148px; height: 36px; line-height: 36px; font-size: 16px; background: #f8f8f8; border: 1px solid #dfdfdf; text-align: center; color: #333333; border-radius: 3px; }
+.gray_bt_m { width: 108px; height: 28px; line-height: 28px; font-size: 14px; background: #f8f8f8; border: 1px solid #dfdfdf; color: #333333; text-align: center; border-radius: 3px; }
+.gray_bt_s { width: 88px; height: 20px; line-height: 20px; font-size: 12px; background: #f8f8f8; border: 1px solid #dfdfdf; color: #333333; text-align: center; border-radius: 3px; }
+.gray_bt_short { width: 58px; height: 20px; line-height: 20px; font-size: 12px; background: #f8f8f8; border: 1px solid #dfdfdf; color: #333333; text-align: center; border-radius: 3px; }
+.gray_bt_l:hover, .gray_bt_m:hover, .gray_bt_s:hover, .gray_bt_short:hover { background-color: #333333; border: 1px solid #333333; color: #fff; }
+.gray_bt_l:hover span, .gray_bt_m:hover span, .gray_bt_s:hover span, .gray_bt_short:hover span { color: #fafafa; }
+div.gray_bt_l:hover, div.gray_bt_m:hover, div.gray_bt_s:hover, div.gray_bt_short:hover { background-color: #f8f8f8; border: 1px solid #dfdfdf; color: #333; }
+div.gray_bt_l:hover span, div.gray_bt_m:hover span, div.gray_bt_s:hover span, div.gray_bt_short:hover span { color: #333; }
+.bt_oline_service { width: 100px; height: 35px; line-height: 43px; margin-top: -5px; margin-left: 25px; background-image: url(http://img3.hdletv.com/file/20140926/default/48153963266197603); background-repeat: no-repeat; background-position: 5px 0; text-indent: 44px; }
+.bt_oline_service:hover { background-position: -102px 0; color: #fff!important; }
+.topicons { background-image: url(http://img1.hdletv.com/file/20140923/default/47850062027569750); }
+.loading { background: url(/htmlResource/images/loading.gif) no-repeat center center; }
+a .lower, a .higher { display: inline-block; *display:inline;
+zoom: 1; width: 16px; height: 16px; margin: 0 5px; font-size: 16px; border: 1px solid #dfdfdf; line-height: 15px; text-align: center; }
+/*****************************常规表格**************************/
+#chansu table, .parame table, .parameter table, .product_tab table { width: 100%; background: #dfdfdf; border-spacing: 1; }
+#chansu table th, .parame table th, .parameter table th, .product_tab table th { height: 30px; line-height: 30px; background: #e7e7e7; }
+#chansu table td, .parame table td, .parameter table td, .product_tab table td { background: #fff; line-height: 30px; padding-left: 10px; }
+.parameter th, .parame th, .chansu th { text-align: center; }
+/*********************header*******************************/
+body { width: 100%; background: #ffffff; font-size: 12px; /*font-weight:lighter;*/ -moz-overflow-y: scroll; }
+@media screen and (max-width: 1200px) { /*当屏幕尺寸小于1200px时，应用下面的CSS样式*/
+body { width: 1200px; }
+html { width: 1200px; }
+}
+.center { width: 1200px; margin-left: auto; margin-right: auto; }
+.header { }
+.top_link { height: 32px; font-size: 14px; line-height: 32px; color: #cecece; font-size: 12px; }
+.top_link .quick_links { width: 695px; }
+.top_link a span { color: #888; }
+.top_link a:hover span { color: #d80c18; }
+.top_link .quick_links li { float: left; color: #cecece; }
+.top_link .log_order { width: 500px; }
+.top_link .log_order li { display: inline-block;  *display: inline;
+ *zoom:1;
+}
+.top_link .hd_list { background-image: url(http://img1.hdletv.com/file/20140923/default/47850062027569750); position: relative; background-repeat: no-repeat; background-position: 63px -30px; background-position: 57px -30px\9; z-index: 900; }
+/*.top_link .hd_list:hover dl{display:block;}
+.top_link .hd_list.hover dl{display:block;}*/
+.top_link .hd_list dl { position: absolute; display: none; top: 0px; left: 0; z-index: 999; border: 1px solid #dfdfdf; background: #fff; cursor: pointer; }
+.top_link .hd_list dl dt { background: #fff; padding-left: 14px; padding-right: 24px; padding-left: 9px\9; padding-right: 14px\9; height: 31px; line-height: 31px; color: #333; background-image: url(http://img1.hdletv.com/file/20140923/default/47850062027569750); background-repeat: no-repeat; background-position: 63px 10px; background-position: 57px 10px\9; }
+.top_link .hd_list dl dd { background: #fff; text-align: center; color: #333; border-top: none; line-height: 28px; }
+.top_link dl dd a:hover { color: #d80c18; }
+.top_link .hd_list { background-image: none\9; }
+.top_link .hd_list span, .top_link .hd_list dl dt { padding: 0 10px\9; }
+.abroad { background-position: 52px -30px!important; }
+.abroad dl dt { background-position: 52px 10px!important; }
+.mzhan { position: relative; z-index: 300; }
+.mzhan #mzhan { display: none; position: absolute; left: 0; top: 32px; width: 200px; height: 95px; padding: 8px; line-height: 20px; background-color: #fff; }
+.mzhan:hover #mzhan { display: block; }
+.head_tips { background-image: url("http://img1.hdletv.com/file/20150828/default/6121887672220456"); height: 80px; left: -190px; position: absolute; top: 24px; width: 292px; z-index: 999; line-height: 20px; }
+/*.logo{
+	width: 230px;
+	height: 45px;
+	margin: 14px 40px 12px 0;
+	background-image: url(http://img1.hdletv.com/file/20140818/default/44741458687132642);
+	background-repeat: no-repeat;
+}*/
+.logo { background-image: url(http://img1.hdletv.com/file/20150723/default/3008610192944075); background-image: url(http://img1.hdletv.com/file/20140818/default/44741458687132642)\9; background-repeat: no-repeat; background-position: center center; }
+.logo_right { margin-top: 25px; }
+.head_cart { width: 94px; height: 30px; border-radius: 3px; background-color: #333; line-height: 30px; float: right; margin: 30px 10px 0 0; background-image: url(http://img1.hdletv.com/file/20140903/default/46153230016668227); background-repeat: no-repeat; background-position: 10px 6px; position: relative; text-align: center; z-index: 1; }
+.head_cart .had_num { position: absolute; width: 16px; height: 16px; right: -8px; top: -8px; text-align: center; color: #fff; background-color: #d80c18; line-height: 16px; border-radius: 8px; }
+.nav { height: 44px; width: 100%; min-width: 1200px; background-color: #333; font-size: 16px; font-weight: 100; line-height: 44px; }
+.nav a span { font-weight: 100; }
+.nav .main_nav, .nav .yinxiao { height: 39px; padding-top: 5px; line-height: 33px; }
+.nav .main_nav li, .nav .yinxiao li { display: inline-block;  *display: inline;
+padding-left: 1px\9;  *padding-left:0;
+zoom: 1; height: 39px; line-height: 33px; _display: inline-block; _float: left; }
+.nav .main_nav li:hover, .nav .yinxiao li:hover { }
+.nav .main_nav li a, .nav .yinxiao li a { padding: 0 15px; color: #ffffff; display: inline-block;  *display: inline;
+ *zoom:1;
+height: 39px; }
+.nav .main_nav li a:hover, .nav .yinxiao li a:hover { padding: 0 15px; color: #ffffff; }
+.nav .main_nav li a:visited, .nav .yinxiao li a:visited { padding: 0 15px; color: #ffffff; }
+.nav ul .hadlist a span { background-image: url(http://img1.hdletv.com/file/20140923/default/47850062027569750); background-repeat: no-repeat; background-position: 68px -115px; padding-right: 15px; }
+.nav_leme a span { background-position: 68px -115px!important; _padding-right: 25px!important; }
+.nav .main_nav li:hover, .nav .yinxiao li:hover { background: #222222; }
+.nav .main_nav .hover, .nav .yinxiao .hover { background: #222222; }
+.nav .main_nav .hadlist:hover { background: #ffffff; }
+.nav .main_nav .hadlist:hover a { color: #333333; }
+.nav .main_nav .hadlist.hover { background: #ffffff; }
+.nav .main_nav .hadlist.hover a { color: #333333; }
+.nav ul .hadlist:hover a span { background-image: url(http://img1.hdletv.com/file/20140923/default/47850062027569750); background-repeat: no-repeat; background-position: 64px 5px; padding-right: 15px; line-height: 33px; }
+.nav ul .hadlist.hover a span { background-image: url(http://img1.hdletv.com/file/20140923/default/47850062027569750); background-repeat: no-repeat; background-position: 64px 5px; padding-right: 15px; line-height: 33px; }
+.nav_leme:hover a span { background-position: 64px 5px!important; _padding-right: 25px!important; }
+.nav_leme.hover a span { background-position: 64px 5px!important; _padding-right: 25px!important; }
+/*.main_nav .parts a span{background-position: 35px -115px;}
+.main_nav .parts a:hover span{background-position: 33px 5px;}*/
+.nav_parts a span { background-position: 35px -115px!important; }
+.nav_parts:hover a span { background-position: 35px -115px!important; }
+.nav_parts.hover a span { background-position: 33px 5px!important; }
+.all_product, .all_phone, .all_tv, .all_leme, .all_parts { clear: both; min-height: 150px; display: none; z-index: 997; top: 44px; border-left: 1px solid #dfdfdf; border-right: 1px solid #dfdfdf; width: 1200px; background-color: #fff; position: absolute; }
+.all_product .product_list, .all_phone .product_list, .all_tv .product_list, .all_leme .product_list, .all_parts .product_list { height: 140px; clear: both; background-color: #fff; padding: 10px 0px 0; border-bottom: 1px solid #dfdfdf; }
+.all_product .product_list li, .all_phone .product_list li, .all_tv .product_list li, .all_leme .product_list li, .all_parts .product_list li { width: 148px; height: 132px; _height: 131px; float: left; text-align: center; padding-top: 5px; font-size: 14px; line-height: 20px; border: 1px solid #fff; }
+.all_product .product_list li:hover, .all_phone .product_list li:hover, .all_tv .product_list li:hover, .all_leme .product_list li:hover, .all_prats .product_list li:hover { border-top: 1px solid #dfdfdf; border-left: 1px solid #dfdfdf; border-right: 1px solid #dfdfdf; background-color: #fafafa; border-bottom: 2px solid #fafafa; }
+.all_product .product_list li.hover, .all_phone .product_list li.hover, .all_tv .product_list li.hover, .all_leme .product_list li.hover, .all_parts .product_list li.hover { border-top: 1px solid #dfdfdf; border-left: 1px solid #dfdfdf; border-right: 1px solid #dfdfdf; background-color: #fafafa; border-bottom: 3px solid #fafafa; margin-bottom: -2px; }
+.all_product .tab_detail_box, .all_phone .tab_detail_box, .all_tv .tab_detail_box, .all_leme .tab_detail_box, .all_parts .tab_detail_box { background-color: #fafafa; padding-bottom: 10px; clear: both; width: 1200px; overflow-x: hidden; border-bottom: 1px solid #dfdfdf; border-top: 0px solid #dfdfdf; }
+.all_product .tab_detail_box ul, .all_phone .tab_detail_box ul, .all_tv .tab_detail_box ul, .all_leme .tab_detail_box ul, .all_parts .tab_detail_box ul { width: 12000px; }
+.all_product .product_show { padding: 10px 0px; width: 1200px; float: left; }
+.all_product .product_show dl, .all_parts .product_show dl { float: left; width: 299px; height: 280px; }
+.all_product .product_show dl dt, .all_parts .product_show dl dt { text-align: center; font-size: 18px; color: #333; }
+.all_product .product_show dl dd, .all_parts .product_show dl dd { line-height: 30px; text-indent: 50px; font-size: 14px; }
+.all_phone .product_show, .all_tv .product_show, .all_leme .product_show, .all_parts .product_show { width: 1200px; float: left; }
+.all_phone .product_show .pro_text, .all_tv .product_show .pro_text, .all_leme .product_show .pro_text, .all_parts .product_show .pro_text { line-height: 24px; padding-top: 10px; }
+.main { min-height: 300px; }
+.cart_top_border { height: 0px; width: 100%; border-bottom: 2px solid #666666; }
+/***************919top****************/
+
+.header_links { height: 40px; background-color: #121212; font-size: 12px; }
+.header_link { float: left; }
+.header_link li, .header_right li { display: inline-block; }
+.header_link li>a, .header_right li>a { display: inline-block; padding: 0 13px; color: #b1b1b1; }
+.header_link li dl, .header_right li dl, .header_right li .tips { display: none; }
+.header_link li:first-child a { padding-left: 0px; }
+.header_links .hd_list { position: relative; z-index: 900; }
+/*.top_link .hd_list:hover dl{display:block;}
+.top_link .hd_list.hover dl{display:block;}*/
+.header_links .hd_list dl { position: absolute; display: none; top: -8px; left: 0; z-index: 999; border: 1px solid #dfdfdf; background: #fff; cursor: pointer; }
+.header_links .hd_list dl dt { background: #fff; height: 31px; line-height: 31px; color: #333; }
+.header_links .hd_list dl dd { background: #fff; text-align: center; color: #333; border-top: none; line-height: 28px; }
+.header_links .hd_list dl dt, .header_links .hd_list dl dd { padding: 0 12px; }
+.header_links dl dd a:hover { color: #d80c18; }
+.header_right { float: right; }
+.header_login { }
+.header_order { }
+.header_help { }
+.header_other { }
+/*.header_main{height:102px;background-color: #fff;}*/
+.header_main { height: 110px; background-color: #fff; }
+/*.header_logo,.header_logo_right{display: inline-block;padding-top: 30px;}*/
+.header_logo, .header_logo_right, .header_search { float: left; }
+.header_logo { width: 285px; padding-top: 30px; }
+/*.header_logo .logo{width: 285px;height: 43px;background-size: 285px auto;margin: 0;padding: 0;}*/
+.header_logo .logo { width: 204px; height: 30px; background-size: 204px auto; padding: 0; margin: 0 auto; }
+.header_cart { background-color: #f9f9fa; border: 1px solid #c1c1c1; float: right; height: 32px; line-height: 32px; position: relative; text-align: center; width: 132px; z-index: 1; }
+.header_cart .had_num { position: absolute; width: 16px; height: 16px; right: -8px; top: -8px; text-align: center; color: #fff; background-color: #d80c18; line-height: 16px; border-radius: 8px; }
+.header_menu { height: 38px; border-bottom: 2px solid #333; }
+.header_menu .all_products { width: 285px; height: 38px; float: left; position: relative; }
+.header_menu .all_products dl { width: 285px; position: absolute; left: 0; top: 0; z-index: 300; }
+.header_menu .all_products dl dt { width: 285px; height: 40px; line-height: 38px; background-color: #333; color: #fff; text-align: center; font-size: 16px; }
+.header_menu .all_products dl dt span { display: inline-block; padding-left: 35px; background: url(http://img1.hdletv.com/file/20150914/default/7622647954875928)no-repeat left center; }
+.header_menu .all_products dl dd { width: 285px; height: 80px; background-color: #fbfbfb; color: #333; }
+.header_menu .all_products dl dd a { display: block; padding: 0 20px; }
+.header_menu .all_products dl dd a:hover { background-color: #fff; }
+.header_menu .all_products dl dd a span { display: block; padding: 20px 0; height: 39px; line-height: 39px; border-bottom: 1px solid #eaeaea; text-indent: 20px; font-size: 16px; background-image: url(http://img1.hdletv.com/file/20150914/default/7623976131216503); background-repeat: no-repeat; background-position: right top; }
+.header_menu .all_products dl dd a:hover span { background-position: right bottom; }
+.header_menu .all_products dl dd.cur a { background-color: #fff; }
+/*.header_menu .all_product_list dd.cur a:hover{background-color: red;}*/
+.header_menu .all_products dl dd.cur a span { background-position: right bottom; color: #d80c18; }
+/*.header_menu .all_product_list dd.cur a:hover span{color: #fff;}*/
+
+.header_menu .all_products .goto_index { width: 285px; height: 40px; line-height: 38px; background-color: #333; color: #fff; text-align: center; font-size: 16px; }
+.header_menu .all_products .goto_index span { display: inline-block; padding-left: 35px; background: url(http://img1.hdletv.com/file/20151120/default/13369697730468882)no-repeat left center; }
+.product_class_list { position: absolute; left: 285px; top: 40px; width: 915px; height: 480px; display: none; z-index: 299; -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18); -moz-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18); -o-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18); -ms-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18); }
+.product_class_list.cur { display: block; }
+.product_class_list ul { width: 305px; height: 480px; float: left; background: #fff; }
+.product_class_list ul li { height: 60px; width: 265px; padding: 30px 10px 30px 30px; }
+.product_class_list ul li .pic { width: 90px; height: 60px; float: left; }
+.product_class_list ul li .pic img { width: 90px; height: 60px; }
+.yule_list .pic, .yule_list .pic img, .tv_list .pic, .tv_list .pic img, .bike_list .pic, .bike_list .pic img { width: 80px!important; height: 80px!important; }
+.product_class_list ul li .text { height: 80px; padding-left: 20px; float: left; }
+.product_class_list ul li .text .title { font-size: 16px; line-height: 36px; }
+/*.product_class_list  ul li .text .title{font-size:16px; line-height: 80px; vertical-align: center;}由于取消了三级分类，所以将文字垂直居中显示了*/
+.product_class_list ul li .text .link { font-size: 12px; }
+.product_class_list ul li .text .link a { color: #666; }
+.product_class_list ul li .text .link a:hover { color: #d80c18; }
+.product_class_list ul li .text .link span { padding: 0 10px; }
+/*.product_class_list  ul li .text .link span{padding: 0 5px;}*/
+.product_class_list.yule_list .peripheral { float: left; background: #fff; }
+.product_class_list.yule_list .per_1 { width: 395px; height: 480px; }
+.product_class_list.yule_list .per_2, .product_class_list.yule_list .per_3, .product_class_list.yule_list .per_4 { width: 260px; height: 240px; }
+.product_class_list.yule_list .per_5, .product_class_list.yule_list .per_6 { width: 130px; height: 130px; }
+.product_class_list.yule_list .per_7 { width: 260px; height: 110px; }
+.header_menu .main_nav_list { float: left; }
+.header_menu .main_nav_list li { height: 38px; line-height: 38px; display: inline-block; }
+.header_menu .main_nav_list li a { height: 38px; line-height: 38px; display: inline-block; font-size: 16px; padding: 0 25px; position: relative; }
+.header_menu .main_nav_list li:first-child a { padding-left: 50px; }
+.header_menu .main_nav_list li a .ico_new { display: inline-block; min-width: 16px; height: 16px; font-size: 10px; text-align: center; color: #fff; background-color: #C80000; line-height: 16px; border-radius: 8px; padding: 0 5px; }
+.ico_new { width: 0\9; height: 0\9; display: none\9; }
+.header_menu .yinxiao li { height: 38px; line-height: 38px; display: inline-block; }
+.header_menu .yinxiao li a { height: 38px; line-height: 38px; display: inline-block; font-size: 14px; padding: 0 12px; }
+.header_menu .yinxiao li a.qipao i { background: url(http://img1.hdletv.com/file/20151120/default/13382044318659443) no-repeat 2px 1px; background-size: 15px 15px; display: inline-block; width: 18px; height: 18px; vertical-align: middle; margin-right: 5px; }
+.pro_top_piao { width: 100%; min-width: 1200px; height: 70px; position: absolute; z-index: 200; padding: 0; top: 193px; background-color: #fff; }
+/**************footer***************/
+.footer { background: #fff; }
+.footer .icon_list { padding: 40px 0px; font-size: 0; }
+.footer .icon_list li { float: left; *display: inline;
+*zoom:1;
+margin-left: 32px; }
+.footer .icon_list .zheng { float: left; *display: inline;
+*zoom:1;
+width: 128px; height: 64px; line-height: 64px; padding-left: 80px; font-size: 18px; color: #333; }
+.footer .icon_list .zheng span{padding-left:0!important;}
+.footer .icon_list li a { float: left; *display: inline;
+*zoom:1;
+width: 128px; height: 64px; line-height: 64px; padding-left: 80px; font-size: 18px; color: #333; }
+.footer .icon_list .zheng { background: url(http://img1.hdletv.com/file/20150716/default/2422792237914504) no-repeat left center; }
+.footer .icon_list .service { background: url(http://img3.hdletv.com/file/20150716/default/2422835357605256) no-repeat left center; }
+.footer .icon_list .returns { background: url(http://img1.hdletv.com/file/20150716/default/2422848794044795) no-repeat left center; }
+.footer .icon_list .notips { background: url(http://img3.hdletv.com/file/20150716/default/2422863967346657) no-repeat left center; }
+.footer .icon_list .policy { background: url(http://img1.hdletv.com/file/20150716/default/2422892065786179) no-repeat left center; }
+.footer .icon_list .zheng:hover { background: url(http://img1.hdletv.com/file/20150717/default/2476482239344768) no-repeat left center; }
+.footer .icon_list .service:hover { background: url(http://img3.hdletv.com/file/20150717/default/2476522946071951) no-repeat left center; }
+.footer .icon_list .returns:hover { background: url(http://img1.hdletv.com/file/20150717/default/2476535927715821) no-repeat left center; }
+.footer .icon_list .notips:hover { background: url(http://img3.hdletv.com/file/20150717/default/2476548152244101) no-repeat left center; }
+.footer .icon_list .policy:hover { background: url(http://img1.hdletv.com/file/20150717/default/2476562557917967) no-repeat left center; }
+.footer .icon_list li a:hover { color: #d80c18; }
+.footer .icon_list .zheng:hover { color: #d80c18; }
+.footer .help_list dl { float: left; width: 205px; padding-left: 35px; }
+.footer .help_list dl dt { font-size: 18px; color: #333; padding-bottom: 10px; }
+.footer .help_list dl dd a { font-size: 14px; line-height: 30px; text-indent: 5px; color: #888; }
+.footer .service_online { width: 220px; padding-left: 20px; }
+.footer .service_online dl { padding-left: 15px; }
+.footer .service_online dl dt { font-size: 18px; color: #333; padding-bottom: 10px; }
+.footer .service_online dl dd { height: 50px; padding-left: 45px; font-size: 14px; color: #888888; line-height: 16px; cursor: pointer; }
+.footer .service_online .phone400 { background: url(http://img3.hdletv.com/file/20150717/default/2478112125828209) no-repeat 2px top; }
+.footer .service_online .kf_online { background: url(http://img1.hdletv.com/file/20150717/default/2478093417636046) no-repeat left 1px; }
+.footer .service_online .kf_online:hover { background: url(http://img1.hdletv.com/file/20150717/default/2478130123081659) no-repeat left top; }
+.footer .service_online .phone400 span { color: #d80c18; }
+.footer .service_online .kf_online:hover span { color: #d80c18; }
+.friendly_tit { width: 82px; height: 20px; text-align: center; float: left; font-size: 14px; color: #333; }
+.friendly { width: 1118px; *width:1115px;
+font-size: 14px; color: #333; height: 20px; overflow: hidden; float: left; }
+.friendly .friendly_con { width: 100%; }
+.friendly ul { height: auto; }
+.friendly ul li { display: inline-block; padding-right: 12px; height: 20px; *display: inline;
+*zoom:1;
+}
+.copyright { background: #fff; }
+/* 100%滑动轮播 */
+.slide { width: 100%; position: relative; overflow: hidden; margin: 0 auto; z-index: 1; }
+.slide ul { width: 100%; z-index: 2; }
+.slide ul li { width: 100%; float: left; background-position: center 0; background-repeat: no-repeat; }
+.slide ul li .slide_con { width: 100%; height: 470px; background-position: center 0; background-repeat: no-repeat; }
+.slide ul li .slide_bg a { display: block; cursor: pointer; }
+.slide .slide_cotrl_point { position: absolute; left: -35px; bottom: 5px; height: 20px; width: 100%; text-align: right; font-size: 14px; font-family: Arial, Helvetica, sans-serif; line-height: 24px; }
+.slide .slide_cotrl_point a { display: inline-block; width: 8px; height: 8px; margin: 2px 5px; color: #fff; cursor: pointer; background: none repeat scroll 0 0 #808080; border: 0px solid #ccc; border-radius: 50%; box-shadow: none; left: 2px; outline: medium none; top: 2px; }
+/*.slide .slide_cotrl a:hover{width:8px; height:8px;  background-color:#999; border:0px solid #999; }*/
+.slide .slide_cotrl_point .cur { width: 8px; height: 8px; top: 0px; left: 0px; margin: 0px 5px; background-color: rgba(0, 0, 0, 0); background: transparent; border: 2px solid #808080; }
+.slide .slide_cotrl2 { width: 100%; position: relative; height: 0; }
+.slide .slide_cotrl2 .pre { width: 40px; height: 80px; position: absolute; top: -303px; left: 15px; background-image: url(http://img1.hdletv.com/file/20140923/default/47850062027569750); background-repeat: no-repeat; background-position: -127px -60px; cursor: pointer; }
+.slide .slide_cotrl2 .pre:hover { background-position: -160px -60px; }
+.slide .slide_cotrl2 .next { width: 40px; height: 80px; position: absolute; top: -303px; right: 15px; background-image: url(http://img1.hdletv.com/file/20140923/default/47850062027569750); background-repeat: no-repeat; background-position: -210px -60px; cursor: pointer; }
+.slide .slide_cotrl2 .next:hover { background-position: -241px -60px; }
+/* 定宽滑动轮播 */
+.pic_gallery .slide_cotrl_point { bottom: 20px; font-size: 14px; height: 20px; line-height: 24px; position: absolute; text-align: center; width: 100%; z-index: 10; }
+.pic_gallery .slide_cotrl_point a { background: none repeat scroll 0 0 #ccc; border: 0 solid #333; border-radius: 50%; box-shadow: none; color: #fff; cursor: pointer; display: inline-block; height: 12px; left: 2px; margin: 3px 8px; outline: medium none; top: 2px; width: 12px; }
+.pic_gallery .slide_cotrl_point a.cur { background: none repeat scroll 0 0 #333; border: 0 solid #ccc; }
+.pic_gallery .slide_cotrl_button { font-size: 14px; height: 35px; line-height: 33px; position: absolute; width: 100%; z-index: 99; }
+.pic_gallery .slide_cotrl_button a { display: inline-block; height: 33px; width: 118px; text-align: center; border-radius: 5px; background: none repeat scroll 0 0 #fff; border: 1px solid #999; color: #999; cursor: pointer; }
+.pic_gallery .slide_cotrl_button a:hover { color: #333; }
+.pic_gallery .slide_cotrl_button a.cur { background-color: #999; color: #fff; }
+.black_bg .pic_gallery .slide_cotrl_button a { background: none repeat scroll 0 0 #000; border: 1 solid #dbdbdb; color: #fff; }
+.black_bg .pic_gallery .slide_cotrl_button a:hover { color: #ccc; }
+.black_bg .pic_gallery .slide_cotrl_button a.cur { background-color: #999; color: #000; }
+.pic_gallery .slide_cotrl_button a.btn_l { border-radius: 5px 0 0 5px; }
+.pic_gallery .slide_cotrl_button a.btn_r { border-radius: 0 5px 5px 0; border-left: none; }
+.pic_gallery .slide_cotrl_button a.btn_m { border-radius: 0; border-left: none; }
+/*视频播放钮*/
+.play_bt { display: block; width: 50px; height: 50px; background-image: url(http://img1.hdletv.com/file/20140828/default/45636360765657964);  _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://img1.hdletv.com/file/20140828/default/45636360765657964', sizingMethod='scale');
+_background: none; position: absolute; z-index: 29; }
+/* 头部下拉广告 开始 */
+.top_fadeIn_big { width: 100%; margin: 0 auto; position: absolute; z-index: 998; }
+.top_fadeIn_small .center, .top_fadeIn_big .center { width: 1200px; position: relative; }
+.top_fadeIn_big .close { width: 63px; height: 20px; border: 1px solid #dfdfdf; background-image: url(http://img1.hdletv.com/file/20140903/default/46133875911114507); position: absolute; right: 1px; top: 1px; z-index: 999; }
+.top_fadeIn_small { width: 100%; height: 80px; margin: 0 auto; background-position: center 0; }
+.top_fadeIn_small .close { width: 20px; height: 20px; border: 1px solid #dfdfdf; background-image: url(http://img1.hdletv.com/file/20140903/default/46134194135953024); margin-bottom: -21px; position: absolute; right: 1px; top: 1px; z-index: 999; }
+/***********************协议/弹出框*************************/
+.xieyi { width: 800px; height: auto; background: #fff; border: 3px solid #efefef; padding: 0 0 20px 0; }
+.xieyi .title { height: 50px; text-align: center; font-size: 30px; line-height: 50px; }
+.xieyi .content { padding: 10px 20px; font-size: 12px; font-family: "宋体"; line-height: 20px; }
+.xieyi .content p { text-indent: 2em; }
+.xieyi .close { width: 14px; height: 14px; text-align: center; line-height: 14px; }
+.video_tc { height: 557px; padding: 8px 0 0 5px; width: 855px; background: url(../images/super_videobg.png) no-repeat 0 0; }
+.video_tc .title { height: 8px; text-align: center; line-height: 20px; }
+.video_tc #videoPop { margin: 0 7px; }
+.video_tc .content { padding: 10px 20px; height: 400px; font-size: 12px; font-family: "宋体"; line-height: 20px; }
+.video_tc .close { width: 40px; line-height: 30px; font-size: 14px; margin-top: 0px; margin-right: 0px; background: #000; text-align: center; }
+.video_tc .close a { color: #fff; }
+.tanc_bg { background: none repeat scroll 0 0 #FFFFFF; border: 1px solid #CCCCCC; width: 450px; margin: 100px auto; position: relative; }
+.tanc_bg .close { width: 14px; height: 14px; text-align: center; line-height: 14px; position: absolute; background: #eee; right: 10px; top: 10px; }
+.tanc_bg .title { }
+.TAN_g { background: none repeat scroll 0 0 #FFFFFF; border: 1px solid #CCCCCC; margin: 100px auto; padding: 20px 10px 10px; width: 450px; position: relative; }
+.TAN_g .close { width: 14px; height: 14px; text-align: center; line-height: 14px; position: absolute; right: 10px; top: 10px; }
+.TAN_gx { display: block; height: 15px; margin: 5px 5px 0 0; position: absolute; right: 0; top: 0; width: 15px; }
+.TAN_gcc01 { width: 380px; }
+.TAN_gcw { width: 50px; height: 50px; background: url(images/gwc.png); margin-right: 10px; }
+/***********************弹出框*************************/
+#wjAlert-body, #wjConfirm-body { position: fixed; border: 1px solid #999; width: 400px; background-color: #fff; z-index: 1500; color: #666; }
+#wjAlert-content, #wjConfirm-content { clear: both; text-align: center; padding: 40px; color: #666; }
+#wjAlert-title { height: 33px; line-height: 33px; padding: 0 10px; font-size: 14px; background: #f9f9f9; border-bottom: 1px solid #ddd; }
+#wjAlert-close { cursor: pointer; float: right; width: 20px; height: 25px; margin-top: 8px; background: url(../images/alertCls.png) no-repeat 0 0; text-align: middle; *margin-top:-22px;
+*zoom:1;
+}
+#wjAlert-close:hover, #wjAlert-close:visited { -webkit-animation: close_eff 0.1s linear; -moz-animation: close_eff 0.1s linear; }
+@-webkit-keyframes close_eff { 0% {
+-webkit-transform:rotate(0deg);
+}
+100% {
+-webkit-transform:rotate(90deg);
+}
+}
+@-moz-keyframes close_eff { 0% {
+-moz-transform:rotate(0deg);
+}
+100% {
+-moz-transform:rotate(90deg);
+}
+}
+@-ms-keyframes close_eff { 0% {
+-moz-transform:rotate(0deg);
+}
+100% {
+-moz-transform:rotate(90deg);
+}
+}
+#shadeLayer { z-index: 999; position: fixed; top: 0px; left: 0px; width: 100%; background: #000; filter: alpha(opacity=50); opacity: 0.5; }
+@media screen and (max-width: 1200px) { /*当屏幕尺寸小于1200px时，应用下面的CSS样式*/
+#shadeLayer { width: 1200px; }
+}
+#wjLoad-body { position: fixed; border: 5px solid #ccc; width: 250px; z-index: 1000; text-align: center; font-weight: bold; background: #fff; }
+.wjLoad-text { font-size: 16px; }
+#wjConfirm-Footer { height: 30px; line-height: 30px; padding-top: 10px; text-align: center; }
+#wjConfirm-ok, #wjConfirm-cancel { height: 28px; width: 98px; line-height: 28px; margin: 10px 10px 0; border: 1px solid #dfdfdf; border-radius: 3px; text-align: center; display: inline-block; *display:inline;
+*zoom:1;
+}
+#wjConfirm-ok:hover, #wjConfirm-cancel:hover { background-color: #f8f8f8; }
+#wjConfirm-ok.hover, #wjConfirm-cancel.hover { background-color: #f8f8f8; }
+.wj-button { border: 1px solid #999; background: #fff; padding: 0px 14px; -webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px; -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0; -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0; box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0; font-size: 12px; text-decoration: none; vertical-align: middle; cursor: pointer; color: #333; }
+.button:hover { border: 1px solid #d10000; text-shadow: #80697d 0 1px 0; background: #eb2cce; background: -webkit-gradient(linear, left top, left bottom, from(#edabde), to(#eb2cce)); background: -webkit-linear-gradient(top, #edabde, #eb2cce); background: -moz-linear-gradient(top, #edabde, #eb2cce); background: -ms-linear-gradient(top, #edabde, #eb2cce); background-image: -ms-linear-gradient(top, #edabde 0%, #eb2cce 100%); color: #000000; }
+.loadStyle30 { display: inline-block; margin: 0px auto; width: 30px; height: 30px; background: url("../images/loading.png") no-repeat scroll 0 0 transparent; *display:inline;
+*zoom:1;
+}
+#wjPop-body { position: fixed; z-index: 1500; *zoom:1;
+}
+/************返回顶部*********************/
+.ft-top { bottom: 100px; position: fixed; right: 48px; }
+.pop_head_btn_close { height: 33px; width: 62px; text-indent: -30000px; background: url("http://i2.letvimg.com/img/201308/09/1545/login_icon.png") no-repeat scroll 0 0; cursor: pointer; position: absolute; right: 0; top: 0; z-index: 12 }
+.pop_head_btn_close:hover { background-position: 0 -33px }
+/*帮助中心*/
+.help_category { width: 200px; height: auto; }
+.help_category dl { border: 1px solid #cccccc; margin-bottom: 10px; }
+.help_category dl dt { background: #eaeaea; text-align: center; border-bottom: 1px solid #cccccc; height: 40px; line-height: 40px; }
+.help_category dl dd { height: 30px; line-height: 30px; text-indent: 35px; background: url(../images/helplist-icon.jpg) no-repeat 20px center; }
+.help_category dl dd a { font-size: 14px; }
+.help_category dl dd .hover { color: #d10000; }
+/* 新帮助中心-左侧帮助大全 开始 2015-4-10*/
+.help_crumb { height: 56px; line-height: 56px; }
+.help_category_new { height: auto; width: 160px; padding-left: 20px; background-image: url(http://img1.hdletv.com/file/20140825/default/45363713923949584); background-repeat: repeat-y; background-position: 0 0; }
+.help_category_new dd a span { color: #888; }
+.help_category_new dd a:hover span, .help_category_new dd a.hover span { color: #d80c18; }
+.help_category_new dd a.on span { color: #888; }
+.help_category_new dd a { width: 138px; height: 42px; line-height: 42px; display: block; padding-left: 22px; }
+.help_category_new dd a.on { width: 140px; height: 42px; line-height: 42px; background-image: url(http://img1.hdletv.com/file/20140825/default/45357169302449664); background-repeat: no-repeat; background-position: 0 0; }
+.help_category_new dd a.onward { background-image: url(http://img3.hdletv.com/file/20140905/default/46316292734137017); background-position: 30px 0; background-repeat: no-repeat; height: 40px; line-height: 40px; width: 100%; display: block; padding-left: 0;  _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://img3.hdletv.com/file/20140905/default/46316292734137017', sizingMethod='scale');
+_background: none; }
+.help_result { border-top: 1px solid #dfdfdf; height: 130px; }
+.help_result a { width: 108px; height: 28px; display: inline-block; line-height: 28px; text-align: center; background-color: #f8f8f8; border: 1px solid #dfdfdf; border-radius: 2px; }
+.help_result .help_tijiao { padding: 3px 7px; background-color: #fff; border: 1px solid #dfdfdf; border-radius: 2px; left: 20px; _left: -20px; top: 42px; }
+.help_result .help_tijiao i { width: 6px; height: 7px; left: 74px; top: -7px; _top: -10px; background: url(http://img1.hdletv.com/file/20141217/default/55212598159818648) no-repeat center; }
+/* 新帮助中心-左侧帮助大全 开始 2015-4-10*/
+.help_main { width: 990px; height: auto; }
+.help_main .title { height: 40px; line-height: 40px; text-indent: 20px; }
+.help_main .content { padding: 0 20px; /*line-height:25px; font-size:12px;font-family:'Microsoft YaHei',"微软雅黑"!important;*/ }
+.help_main .help_submenu { line-height: 25px; }
+.help_main .help_submenu a { padding: 0px 20px; border-right: 1px solid #ccc; }
+.help_main .content table { width: 100%; border: 0px; border-collapse: collapse; border-spacing: 1; background-color: #dfdfdf; }
+/*.help_main .content table td{background-color:#fff;}
+.help_main .content table th{background-color:#fafafa;}
+.help_main .content p{ text-indent:2em;}
+.help_main .content .time_list li{list-style:outside; margin:5px 10px;}*/
+.help_main .Society dl { margin-top: 20px; }
+.help_main .Society dl dt { }
+.help_main .Society dl dd { text-indent: 20px; }
+.help_main .brand li { width: 176px; height: 120px; padding: 20px; float: left; }
+/*资讯页css*/
+
+.bread { line-height: 60px; font-size: 14px; }
+.ban-pic { margin: 5px auto; text-align: center; }
+.newscontent { line-height: 2em; }
+.newscontent p { text-indent: 2em; padding-top: 5px; }
+/*新闻列表*/
+.newsmain { width: 800px; }
+.newsmain ul li { height: 40px; line-height: 40px; border-bottom: 1px dashed #efefef; list-style: inside; }
+.newsmain ul li .date { float: right; font-stretch: normal; font-style: normal; *margin-top:-1.5em;
+}
+.newstop10 { width: 390px; }
+.newstop10 ul { padding-top: 10px; background: url(http://www.lemall.com/htmlResource/images/news_num.jpg) no-repeat 5px 8px; }
+.newstop10 ul li { height: 32px; line-height: 32px; border-bottom: 1px dashed #efefef; text-indent: 35px; }
+/*关注我们 弹框*/
+.careus .sina, .careus .weixin { background-image: url(http://img1.hdletv.com/file/20141010/default/49333722414247501); background-repeat: no-repeat; }
+.careus .sina { background-position: 5px 5px; }
+.careus .weixin { background-position: 5px -75px; }
+.careus .weixin span { line-height: 60px; }
+.careus .sina a { vertical-align: middle; }
+#guanzhuPOP .title { height: 35px; line-height: 35px; }
+#guanzhuPOP .title a { right: 10px; font-size: 24px; color: #666; *top:-2px;
+}
+#guanzhuPOP .title a:hover { color: #333; }
+/*右侧浮动边栏（返回顶部）*/
+
+.top_float { width: 50px; height: 50px; z-index: 90000; position: fixed; bottom: 50px; right: 15px; _position: absolute;  _left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft, 10)||0)-(parseInt(this.currentStyle.marginRight, 10)||0)-15);
+ _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop, 10)||0)-(parseInt(this.currentStyle.marginBottom, 10)||0))-50);
+}
+.top_float .is_top { height: 48px; background-image: url(http://img1.hdletv.com/file/20141203/default/53996954976698909); background-repeat: no-repeat; background-position: 0px 0px; }
+.top_float .is_top:hover, .top_float .hover { background-position: -48px 0px; }
+.top_float .top_show, .sidebar_float .top_show { display: none; }
+/*.top_float .is_top:hover .top_show,.top_float .hover .top_show{ display:block;}*/
+
+.sidebar_float { width: 48px; }
+.sidebar_float .is_share { background-image: url(http://img1.hdletv.com/file/20141203/default/53997454017469041); background-repeat: no-repeat; background-position: 0px 0px; }
+.sidebar_float .is_share:hover, .sidebar_float .hover { background-position: -48px 0px; }
+.sidebar_float .share_show { display: none; }
+/*.sidebar_float .is_share:hover .share_show,.sidebar_float .hover .share_show { display:block;}*/
+.sidebar_float .is_survey { background-image: url(http://img3.hdletv.com/file/20150313/default/62622448174413049); background-repeat: no-repeat; background-position: 0px 0px; }
+.sidebar_float .is_survey:hover, .sidebar_float .hover { background-position: -48px 0px; }
+/*.sidebar_float .is_survey:hover .top_show,.sidebar_float .hover .top_show { display:block;}*/
+.sidebar_float .is_king { background-image: url(http://img1.hdletv.com/file/20150708/default/1717761944150561); background-repeat: no-repeat; background-position: 0px 0px; }
+/*.sidebar_float .is_king { background-image:url(http://img1.hdletv.com/file/20150907/default/7009653802916196); background-repeat:no-repeat; background-position:0px 0px;}*/
+.sidebar_float .is_king:hover, .sidebar_float .hover { background-position: -48px 0px; }
+.sidebar_float .top_show { display: none; }
+/*.sidebar_float .is_king:hover .top_show,.sidebar_float .hover .top_show { display:block;}*/
+
+.sidebar_float .is_app { background-image: url(http://img1.hdletv.com/file/20150114/default/57639973946716827); background-repeat: no-repeat; background-position: 0px 0px; }
+.sidebar_float .is_app:hover, .sidebar_float .hover { background-position: -48px 0px; }
+.sidebar_float .app_show { display: none; }
+.top_float .arrow, .sidebar_float .arrow { width: 3px; height: 7px; background-image: url(http://img3.hdletv.com/file/20141031/default/51156240616583958); background-repeat: no-repeat; left: -4px; top: 17px; }
+.top_float .red_bg, .sidebar_float .red_bg { background-color: #c10b0b; height: 20px; line-height: 20px; padding: 0 5px; color: #fff; left: -62px; top: 10px; }
+.sidebar_float .share_bg { height: 48px; right: 50px; top: 2px; width: 310px; }
+.sidebar_float .app_bg { height: 113px; right: 48px; top: -1px; width: 86px; padding: 8px; padding-top: 0px; background-color: #fff; }
+.sidebar_float .show1 { width: 48px; height: 48px; z-index: 90000; position: fixed; bottom: 105px; right: 15px; _position: absolute;  _left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft, 10)||0)-(parseInt(this.currentStyle.marginRight, 10)||0)-15);
+ _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop, 10)||0)-(parseInt(this.currentStyle.marginBottom, 10)||0))-105);
+}
+.sidebar_float .show2 { width: 48px; height: 48px; z-index: 90000; position: fixed; bottom: 154px; right: 15px; _position: absolute;  _left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft, 10)||0)-(parseInt(this.currentStyle.marginRight, 10)||0)-15);
+ _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop, 10)||0)-(parseInt(this.currentStyle.marginBottom, 10)||0))-154);
+}
+.sidebar_float .show3 { width: 48px; height: 48px; z-index: 90000; position: fixed; bottom: 203px; right: 15px; _position: absolute;  _left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft, 10)||0)-(parseInt(this.currentStyle.marginRight, 10)||0)-15);
+ _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop, 10)||0)-(parseInt(this.currentStyle.marginBottom, 10)||0))-203);
+}
+.sidebar_float .show4 { width: 48px; height: 48px; z-index: 90000; position: fixed; bottom: 252px; right: 15px; _position: absolute;  _left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft, 10)||0)-(parseInt(this.currentStyle.marginRight, 10)||0)-15);
+ _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop, 10)||0)-(parseInt(this.currentStyle.marginBottom, 10)||0))-252);
+}
+.sidebar_float .show5 { width: 48px; height: 48px; z-index: 90000; position: fixed; bottom: 271px; right: 15px; _position: absolute;  _left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft, 10)||0)-(parseInt(this.currentStyle.marginRight, 10)||0)-15);
+ _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop, 10)||0)-(parseInt(this.currentStyle.marginBottom, 10)||0))-271);
+}
+.ShareWindow { width: 278px; height: 40px; z-index: 999; position: fixed; right: 65px; bottom: 154px; _position: absolute;  _left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft, 10)||0)-(parseInt(this.currentStyle.marginRight, 10)||0)-65);
+ _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop, 10)||0)-(parseInt(this.currentStyle.marginBottom, 10)||0))-154);
+}
+.share_show .bdshare-button-style0-32 a { float: right; }
+.product_info #piao { top: 200px\9; }
+/*常用分享按钮*/
+.share_btn_normal { display: inline-block; height: 56px; line-height: 56px; background-color: #d80c10; text-align: center; padding: 0 10px; }
+.share_btn_normal span { background: url(http://img1.hdletv.com/file/20151019/default/10615385434923968)no-repeat 0 center; padding-left: 50px; color: #fff; font-size: 30px; }
+/*搜索框下拉临时样式*/
+
+.autoComplete table { background: none repeat scroll 0 0 #FFFFFF; cursor: default; width: 100%; }
+.autoComplete td { color: #666; padding: 0 8px; text-align: left; }
+/*搜索框临时样式*/
+.header_search { padding-top: 25px; text-align: center; width: 750px; height: 80px; }
+.header_search .search_input_div { width: 493px; height: 32px; position: relative; border: 1px solid #aaa8a8; display: inline-block; }
+.header_search .search_input_div .text { position: absolute; left: 0; top: 0; width: 402px; height: 32px; border: none; text-indent: 10px; font-size: 14px; color: #ccc; }
+.header_search .search_input_div .btn { position: absolute; right: 0; top: 0; width: 90px; height: 32px; border: none; border-left: 1px solid #aaa8a8; background: #f9f9f9; font-size: 14px; color: #c80000; }
+.autoComplete { position: absolute; background: #fff; border: 1px solid #d3d3d3; left: 0px; top: 38px; width: 402px; max-height: 200px; z-index: 9999; display: none; }
+.autoComplete table td { height: 28px; line-height: 28px; color: #666; }
+.autoComplete .nowRow td { color: #fff; background-color: #c80000; }
+/*推荐商品列表*/
+.recommend_list { width: 100%; background-color: #f6f6f6; border-top: 2px solid #ebebeb; }
+.recommend_list .title { height: 30px; clear: both; zoom: 1; padding: 15px 20px; }
+.recommend_list .title .list_name { float: left; font-size: 16px; color: #666; line-height: 30px; }
+.recommend_list .title .change_btn { float: right; display: block; width: 80px; height: 28px; line-height: 28px; border: 1px solid #dcdcdc; border-radius: 1px; text-align: center; background: url(http://img1.hdletv.com/file/20151102/default/11847079076035666)no-repeat 15px center #fff; padding-left: 20px; }
+.recommend_list ul { padding: 0 15px 10px; }
+.recommend_list ul li { position: relative; width: 183px; height: 258px; display: inline-block; background: #fff; text-align: center; border: 1px solid #fff; margin: 0px 5px 10px; overflow: hidden; }
+.recommend_list ul li .pic { padding: 9px 9px 10px; }
+.recommend_list ul li .pic img { width: 165px; height: 165px; }
+.recommend_list ul li .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0px 12px 12px; font-size: 14px; color: #333; text-align: left; }
+.recommend_list ul li .price { padding: 0px 12px 12px; font-size: 14px; color: #f05353; text-align: left; }
+.recommend_list ul li .add_to_cart { display: block; width: 100%; height: 40px; line-height: 40px; text-align: center; font-size: 14px; background-color: #e25252; color: #fff; position: absolute; bottom: -40px; }
+.recommend_list ul li:hover { border-color: #c80000; }
+.recommend_list ul li:hover .add_to_cart { bottom: 0; }

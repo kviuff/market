@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="../../css/admin/common.css" />
+		<link rel="stylesheet" href="../../css/admin/tasktable.css" />
+		<script src="../../js/jquery.min.js" ></script>
+	</head>
+<body>
+<script>
+	function deluser(userid){
+		if (confirm("确认要删除？")) {
+        	aj.ajax({
+			    type : "POST",
+			    url : "delmember",
+			    data : {id:userid},
+   				success : function(msg) {
+					if(msg == "3"){
+						alert("不能删除自己");
+					}else if(msg == "1"){
+						alert("删除失败");
+					}else{
+						alert("删除成功");
+						location.reload();
+					}
+			    },
+			    error:function(msg){ 
+					alert("程序出错，请联系管理员");
+			    }
+			});
+        }		
+	}
+	
+</script>
+<div  class="main_2" id="main_2">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="box fixed">
+                    <div class="box-title fixed">
+                        <h3> 会员管理 </h3>
+                        <ul class="ul_1">
+                            <li><a href="javascript:;">添加会员</a><i class="icon-angle-right"></i></li>
+                        </ul>
+                    </div>
+                    <div class="box-content_x fixed">
+                    	<form action="../member/memberlist" method="get">
+                        <div class="form-horizontal">
+                            <div class="serach_address"> 
+                                <span>
+                                会员名&nbsp;&nbsp;
+                                    <input class="html_date" id="uic_vtask_date_day1" name="username" type="text" value="$!{username}"/>
+                                </span> 
+
+
+                                <span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<button id="uic_wtable_search_submit"  type="submit" class="btn btn-primary">查询</button>
+                                </span> 
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <div id="ui_alltasks" class="ui_wtable UI_task_table">
+                        <table class="itable" width="100%" border="0" cellspacing="1" cellpadding="0">
+                            <thead>
+                              <tr>
+                                <td>编号</td>
+                                <td>用户名</td>
+                                <td>微信号</td>
+                                <td>注册时间</td>
+                                <td>上次登录时间</td>
+                                #if($!state == 1)
+                                <td>会员等级</td>
+                                #end
+                                <td>操作</td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            	#foreach($member in $pageVo.list) 
+                            	<tr>
+                                    <td>$!member.id</td>
+                                    <td>$!member.userName</td>
+                                    <td>$!member.wechatID</td>
+                                    <td>$!DateUtil.getLongToDateTime($!member.createTime)</td>
+                                    <td>#if($!member.loginTime != 0) $!DateUtil.getLongToDateTime($!member.loginTime) #end</td>
+                                     #if($!state == 1)
+	                                	<td>$!member.memberlevelname</td>
+	                                #end
+                                    <td>
+                                    <!--  <a href="membermodify?id=$!member.id">修改</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    #if($!state == 0)
+                                    <a href="applymember?id=$!member.id" id="unlock" onclick="unlockuser('$!adminUser.adminuserid')">申请会员</a>
+                                    #end
+                                    </td>-->
+                                    <a href="javascript:void(0)" id="delete" onclick="deluser('$!member.id')">删除</a>
+                                    
+                                </tr>
+                                #end
+                            </tbody>
+                        </table>
+                    </div>
+					
+					<div class="bontom_bon fixed">
+                        <div class="page">
+                        	$pageVo.pageNumHtml
+    						<span class="page_z">第<em>$pageVo.pageNum</em>页，共<em>$pageVo.pageCount</em>页</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>

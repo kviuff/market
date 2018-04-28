@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.maicheng.dao.NewsDao">
+	<resultMap type="com.market.maicheng.model.News" id="resultList">
+		<id column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="addtime" property="addtime" />
+		<result column="author" property="author" />
+		<result column="isdel" property="isdel" />
+		<result column="types" property="types" />
+	</resultMap>
+	
+	<insert id="addNews" parameterType="com.market.maicheng.model.News" flushCache="true">
+		<![CDATA[insert into news (id,title,content,addtime,author,isdel,types)]]>
+		<![CDATA[ values (#{id},#{title},#{content},#{addtime},#{author},#{isdel},#{types})]]>
+	</insert>
+	
+	<update id="updateNews" parameterType="com.market.maicheng.model.News">
+		<![CDATA[update news set title=#{title},content=#{content},addtime=#{addtime},author=#{author},isdel=#{isdel},types=#{types} where id = #{id}]]>
+    </update>
+<!--     查询为删除 -->
+    <select id="getNewsList" resultMap="resultList">
+    	<![CDATA[select * from news where isdel = 0 ]]>
+    	<![CDATA[order by addtime asc]]>
+    </select>
+<!--     根据id差 -->
+    <select id="getNewsById" resultType="com.market.maicheng.model.News">
+    	<![CDATA[select * from news where isdel = 0 and id=#{id}]]>
+    </select>
+<!--     根据类型查询 -->
+     <select id="getNewsByTypes" resultMap="resultList">
+    	<![CDATA[select * from news where isdel = 0 and types=#{types}]]>
+    	<if test="author != 0"> and author = #{author}</if>
+    	<![CDATA[ order by addtime desc ]]>
+    </select>
+    
+<!--     修改删除状态 -->
+    <update id="delNews" parameterType="long">
+		<![CDATA[update news set isdel = 1 where id = #{id}]]>
+    </update>
+    
+     <select id="getNewsBySearch" resultType="com.market.maicheng.model.News">  
+		<![CDATA[select * from news where isdel = 0 ]]>
+		<if test="title != null"> and title like '%${title}%'</if>
+	</select>
+	
+<!-- 	获取数量 -->
+	 <select id="getNewsListByCount" resultType="int">  
+		<![CDATA[select count(*) from news where isdel = 0 ]]>
+		<if test="types != -1"> and types=#{types}</if>
+		<if test="title != null"> and title like '%${title}%'</if>
+	</select>
+	
+	<select id="getNewsListForPage" resultMap="resultList">
+		<![CDATA[select * from news where isdel=0]]>
+		<if test="types != -1"> and types=#{types}</if>
+		<if test="title != null"> and title like '%${title}%'</if>
+		<![CDATA[ limit #{offset},#{rows} ]]>
+    </select>
+</mapper>
