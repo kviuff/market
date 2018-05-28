@@ -1,5 +1,6 @@
 package com.market.maicheng.controllers.web;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.market.maicheng.common.utils.Constants;
+import com.market.maicheng.common.utils.FileUtils;
 import com.market.maicheng.common.utils.PageVo;
 import com.market.maicheng.common.utils.RetInfo;
 import com.market.maicheng.common.utils.StrUtils;
@@ -157,6 +159,21 @@ public class FavoriteController extends BaseController{
 			jsonObject.put("state", 1);
 			jsonObject.put("result", "ok");
 
+		return jsonObject;
+	}
+	
+	@RequestMapping(value = "/getLastVersion",method = {RequestMethod.POST, RequestMethod.GET})  
+	@ResponseBody
+	public JSONObject getVersion(HttpServletRequest request,HttpServletResponse response, ModelMap modelMap) throws IOException{
+		JSONObject jsonObject = new JSONObject();
+		FileUtils fu = new FileUtils();
+		String result = fu.readAbsolutelyFile("E:\\tomcat7\\apache-tomcat-7.0.84\\webapps\\version.txt");
+		//String result = fu.readAbsolutelyFile("/Users/kanglan/Documents/workspace/Eclipse/market/market/version.txt");
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.add(result);
+		jsonObject.put("state", 1);
+		jsonObject.put("result", "ok");
+		jsonObject.put("data", jsonArray);
 		return jsonObject;
 	}
 

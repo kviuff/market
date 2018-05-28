@@ -8,6 +8,7 @@ url: /member/regist
    真实姓名：realname
    联系方式：mobile
    微信号：wechatID
+   门店：storeName
 
    （添加员工需要参数）
    用户类型： usertype（固定2）
@@ -662,6 +663,10 @@ date集合内容：
 ornum   // 订单量
 ordate  // 日期
 totalmoney // 销量
+
+45、APP最新版本
+url:/favorite/getLastVersion
+返回：{"result":"ok","state":1,"data":"...."}
 	
 ==============================================================
 

@@ -48,7 +48,7 @@ public class AndroidPushMsgToSingleDevice {
 			notification.put("custom_content", jsonCustormCont);
 
 			PushMsgToSingleDeviceRequest request = new PushMsgToSingleDeviceRequest()
-					.addChannelId("xxxxxxxxxxxxxxxxxxxxx")
+					.addChannelId("4335558316964504896")
 					.addMsgExpires(new Integer(3600)). // message有效时间
 					addMessageType(1).// 1：通知,0:透传消息. 默认为0 注：IOS只有通知.
 					addMessage(notification.toString()).

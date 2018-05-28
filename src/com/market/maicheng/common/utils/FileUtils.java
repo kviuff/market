@@ -80,9 +80,32 @@ public class FileUtils {
 	    return flag;  
 	} 
 	
+	/**
+	 * 读取文件
+	 * @param path
+	 * @return
+	 */
+	public String readAbsolutelyFile(String path){
+		File file = new File(path);
+		StringBuffer sb = new StringBuffer();
+        try {
+        	InputStreamReader insReader = new InputStreamReader(new FileInputStream(file) ,"UTF-8");
+        	BufferedReader bufReader = new BufferedReader(insReader);
+        	String line = new String();
+        	while ((line = bufReader.readLine()) != null ) {
+        		sb.append(line+"\n");
+			}
+        	bufReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+        return sb.toString();
+	}
+	
 	public static void main(String[] a){
 		FileUtils fu = new FileUtils();
 		//fu.writeFile("/education.txt", "woc1111");
-		System.out.println(fu.readFile("/education.txt"));
+		System.out.println(fu.readAbsolutelyFile("/Users/kanglan/Documents/workspace/Eclipse/market/market/version.txt"));
 	}
 }
