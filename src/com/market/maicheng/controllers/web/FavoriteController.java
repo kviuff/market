@@ -1,6 +1,9 @@
 package com.market.maicheng.controllers.web;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -170,11 +173,42 @@ public class FavoriteController extends BaseController{
 		String result = fu.readAbsolutelyFile("E:\\tomcat7\\apache-tomcat-7.0.84\\webapps\\version.txt");
 		//String result = fu.readAbsolutelyFile("/Users/kanglan/Documents/workspace/Eclipse/market/market/version.txt");
 		JSONArray jsonArray = new JSONArray();
-		jsonArray.add(result);
+		JSONObject json = new JSONObject();
+		json.put("version", result);
+		json.put("downurl", "http://39.104.91.38/market/favorite/downloadLocal");
+		jsonArray.add(json);
 		jsonObject.put("state", 1);
 		jsonObject.put("result", "ok");
-		jsonObject.put("data", jsonArray);
+		jsonObject.put("data", json);
 		return jsonObject;
 	}
+	
+	/**
+	 * 文件下载
+	 * @param response
+	 * @throws FileNotFoundException
+	 */
+	@RequestMapping(value = "/downloadLocal",method = {RequestMethod.POST, RequestMethod.GET})  
+	@ResponseBody
+	public void downloadLocal(HttpServletResponse response) throws FileNotFoundException {
+        // 下载本地文件
+        String fileName = "market.apk".toString(); // 文件的默认保存名
+        // 读到流中
+        InputStream inStream = new FileInputStream("E:\\tomcat7\\apache-tomcat-7.0.84\\webapps\\market.apk");// 文件的存放路径
+        // 设置输出的格式
+        response.reset();
+        response.setContentType("bin");
+        response.addHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+        // 循环取出流中的数据
+        byte[] b = new byte[100];
+        int len;
+        try {
+            while ((len = inStream.read(b)) > 0)
+                response.getOutputStream().write(b, 0, len);
+            inStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
