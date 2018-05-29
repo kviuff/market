@@ -58,9 +58,9 @@ public class MerchantServiceImpl implements MerchantService {
 	}
 
 	@Override
-	public int changeMerchantState(long id, int state) {
+	public int changeMerchantState(long id, int state, long audittime) {
 		// TODO Auto-generated method stub
-		return merchantDao.changeMerchantState(id, state);
+		return merchantDao.changeMerchantState(id, state, audittime);
 	}
 
 	@Override

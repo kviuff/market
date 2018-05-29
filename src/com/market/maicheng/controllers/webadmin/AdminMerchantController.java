@@ -82,7 +82,7 @@ public class AdminMerchantController extends BaseController{
 		int state = StrUtils.getInt(request, "state");
 		
 		JSONObject jsonObject = new JSONObject();
-			int res = merchantService.changeMerchantState(id, state);
+			int res = merchantService.changeMerchantState(id, state, System.currentTimeMillis());
 			
 			if(res==0){
 				jsonObject.put("state", 0);

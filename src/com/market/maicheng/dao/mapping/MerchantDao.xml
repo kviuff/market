@@ -80,7 +80,7 @@
 	</select>
 	
 	<update id="changeMerchantState">
-		<![CDATA[update merchant set auditState = #{state} where id = #{id} ]]>
+		<![CDATA[update merchant set auditState = #{state}, auditTime = #{audittime} where id = #{id} ]]>
 	</update>
 	
 	<update id="changeMerchantRecommend">

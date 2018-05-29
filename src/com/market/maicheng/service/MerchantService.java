@@ -64,7 +64,7 @@ public interface MerchantService {
 	 * @param state
 	 * @return
 	 */
-	public int changeMerchantState(long id,int state);
+	public int changeMerchantState(long id,int state, long audittime);
 	
 	/**
 	 * 修改商户推荐状态

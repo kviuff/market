@@ -51,7 +51,7 @@ public interface MerchantDao {
 	 * @param state
 	 * @return
 	 */
-	public int changeMerchantState(@Param("id")long id,@Param("state")int state);
+	public int changeMerchantState(@Param("id")long id,@Param("state")int state, @Param("audittime")long audittime);
 	
 	/**
 	 * 修改商户推荐状态
