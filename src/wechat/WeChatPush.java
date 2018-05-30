@@ -63,13 +63,12 @@ public class WeChatPush {
             wxMpService.setWxMpConfigStorage(config);
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                     .toUser(map.get("openId").toString())
-                    .templateId("jJz3VWhqs17M1f6hz1Kt2MlAscacmy2FWW8xiMVSbC0")
+                    .templateId("wtes9DrruMVhNKbcJ3avndmFvd_lPn8LmSZ329iculU")
                     .build();
             templateMessage.addData(new WxMpTemplateData("first", map.get("first").toString()));
-            templateMessage.addData(new WxMpTemplateData("orderType", map.get("orderType").toString())); //订单编号
-            templateMessage.addData(new WxMpTemplateData("customerInfo", map.get("customerInfo").toString()));
-            templateMessage.addData(new WxMpTemplateData("orderItemName", map.get("orderItemName").toString()));
-            templateMessage.addData(new WxMpTemplateData("orderItemData", map.get("orderItemData").toString()));
+            templateMessage.addData(new WxMpTemplateData("keyword1", map.get("name").toString())); // 查看人
+            templateMessage.addData(new WxMpTemplateData("keyword2", map.get("accountnumber").toString()));// 查看账号
+            templateMessage.addData(new WxMpTemplateData("keyword3", map.get("applytime").toString())); // 申请时间
             templateMessage.addData(new WxMpTemplateData("remark", map.get("remark").toString()));
             result =  wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
             System.out.println("微信推送发送返回信息:" + result);
