@@ -12,41 +12,33 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 
 public class WeChatPush {
 	private static WxMpService wxMpService;
+	private static final String APP_ID = "wx00859ea61ad39301";
+	private static final String APP_SECRET = "621f7264072c8b6bd83a3fcd6170f2a8";
 	
 	/**
-     * 微信模板消息
+     * 微信模板消息--给商户的订单提醒
      * @param map   map
      * @return  String
      * @throws WxErrorException
      */
-    public static String deliverTemplateSend(Map<String, Object> map) throws WxErrorException {
+    public static String deliverTemplateSendToStoreForOrder(Map<String, Object> map) throws WxErrorException {
         String result = "";
-        if(map.get("AppId") != null && map.get("AppSecret") != null && map.get("openId") != null && map.get("templateId") != null){
+        if(map.get("openId") != null){
             WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
-            config.setAppId(map.get("AppId").toString()); //设置微信公众号的appId
-            config.setSecret(map.get("AppSecret").toString()); //设置微信公众号的appSecret
+            config.setAppId(APP_ID); //设置微信公众号的appId
+            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
             wxMpService = new WxMpServiceImpl();
             wxMpService.setWxMpConfigStorage(config);
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                     .toUser(map.get("openId").toString())
-                    .templateId(map.get("templateId").toString())
-                    .url(map.get("url").toString()) //设置点击消息跳转的url
+                    .templateId("jJz3VWhqs17M1f6hz1Kt2MlAscacmy2FWW8xiMVSbC0")
                     .build();
-            templateMessage.addData(new WxMpTemplateData("first", map.get("first").toString(),"#8B1A1A"));
-            templateMessage.addData(new WxMpTemplateData("keyword1", map.get("keyword1").toString(), "#949494")); //订单编号
-            if (map.get("keyword2") != null) {
-                templateMessage.addData(new WxMpTemplateData("keyword2", map.get("keyword2").toString(), "#949494")); //物流公司
-            }
-            if (map.get("keyword3") != null) {
-                templateMessage.addData(new WxMpTemplateData("keyword3", map.get("keyword3").toString(), "#949494")); //物流单号
-            }
-            if (map.get("keyword4") != null) {
-                templateMessage.addData(new WxMpTemplateData("keyword4", map.get("keyword4").toString(), "#949494")); //物流单号
-            }
-            if (map.get("keyword5") != null) {
-                templateMessage.addData(new WxMpTemplateData("keyword5", map.get("keyword5").toString(), "#949494")); //物流单号
-            }
-            templateMessage.addData(new WxMpTemplateData("remark", map.get("remark").toString(), "#A020F0"));
+            templateMessage.addData(new WxMpTemplateData("first", map.get("first").toString()));
+            templateMessage.addData(new WxMpTemplateData("orderType", map.get("orderType").toString())); //订单编号
+            templateMessage.addData(new WxMpTemplateData("customerInfo", map.get("customerInfo").toString()));
+            templateMessage.addData(new WxMpTemplateData("orderItemName", map.get("orderItemName").toString()));
+            templateMessage.addData(new WxMpTemplateData("orderItemData", map.get("orderItemData").toString()));
+            templateMessage.addData(new WxMpTemplateData("remark", map.get("remark").toString()));
             result =  wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
             System.out.println("微信推送发送返回信息:" + result);
         } else {
@@ -55,16 +47,88 @@ public class WeChatPush {
         return result;
     }
     
+    /**
+     * 微信模板消息--申请价格
+     * @param map   map
+     * @return  String
+     * @throws WxErrorException
+     */
+    public static String deliverTemplateSendToStoreForApplyPrice(Map<String, Object> map) throws WxErrorException {
+        String result = "";
+        if(map.get("openId") != null){
+            WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
+            config.setAppId(APP_ID); //设置微信公众号的appId
+            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            wxMpService = new WxMpServiceImpl();
+            wxMpService.setWxMpConfigStorage(config);
+            WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+                    .toUser(map.get("openId").toString())
+                    .templateId("jJz3VWhqs17M1f6hz1Kt2MlAscacmy2FWW8xiMVSbC0")
+                    .build();
+            templateMessage.addData(new WxMpTemplateData("first", map.get("first").toString()));
+            templateMessage.addData(new WxMpTemplateData("orderType", map.get("orderType").toString())); //订单编号
+            templateMessage.addData(new WxMpTemplateData("customerInfo", map.get("customerInfo").toString()));
+            templateMessage.addData(new WxMpTemplateData("orderItemName", map.get("orderItemName").toString()));
+            templateMessage.addData(new WxMpTemplateData("orderItemData", map.get("orderItemData").toString()));
+            templateMessage.addData(new WxMpTemplateData("remark", map.get("remark").toString()));
+            result =  wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
+            System.out.println("微信推送发送返回信息:" + result);
+        } else {
+        		System.out.println("微信推送参数有错!");
+        }
+        return result;
+    }
+    
+    /**
+     * 微信模板消息--商户入驻
+     * @param map   map
+     * @return  String
+     * @throws WxErrorException
+     */
+    public static String deliverTemplateSendToForApplyStore(Map<String, Object> map) throws WxErrorException {
+        String result = "";
+        if(map.get("openId") != null){
+            WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
+            config.setAppId(APP_ID); //设置微信公众号的appId
+            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            wxMpService = new WxMpServiceImpl();
+            wxMpService.setWxMpConfigStorage(config);
+            WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+                    .toUser(map.get("openId").toString())
+                    .templateId("-j0Wf7r6hKdwb2kJ6pbeL4cenRzb5oE_lg_51srzY2o")
+                    .build();
+            templateMessage.addData(new WxMpTemplateData("first", map.get("first").toString()));
+            templateMessage.addData(new WxMpTemplateData("keyword1", map.get("applyname").toString())); //订单编号
+            templateMessage.addData(new WxMpTemplateData("keyword2", map.get("applytime").toString()));
+            templateMessage.addData(new WxMpTemplateData("remark", map.get("remark").toString()));
+            result =  wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
+            System.out.println("微信推送发送返回信息:" + result);
+        } else {
+        		System.out.println("微信推送参数有错!");
+        }
+        return result;
+    }
+    
+    
+    
+    
+    
+    
     public static void main(String[] args){
         try {
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("openId", "oS8vSwHZZIUzerlKwL2NRjBMlcV0");
-            map.put("url", "http://h5.leimingtech.com/dist/home.html#/orderDetail/" + "87de447dc285494f8f210e18064294f7");
-            map.put("message", "亲，宝贝已经启程了，好想快点来到你身边吖");
-            map.put("orderSn", "orderSn");
-            map.put("expressSn", "expressSn");
-            map.put("expressName", "顺丰快递");
-            deliverTemplateSend(map);
+            map.put("AppId", "wx00859ea61ad39301");
+            map.put("AppSecret", "621f7264072c8b6bd83a3fcd6170f2a8");
+            //map.put("openId", "o5rpjxJYBIbns5x1xC3nAhPuzoA0");
+            map.put("openId", "o5rpjxNlot7xA6r63rvVUNjBoTB4");
+            map.put("templateId", "jJz3VWhqs17M1f6hz1Kt2MlAscacmy2FWW8xiMVSbC0");
+            map.put("first", "您有新订单，请查收");
+            map.put("orderType", "新订单");
+            map.put("customerInfo", "张三");
+            map.put("orderItemName", "商品名称");
+            map.put("orderItemData", "手机");
+            map.put("remark", "请尽快发货");
+            //deliverTemplateSend(map);
         } catch (Exception we) {
             we.printStackTrace();
         }

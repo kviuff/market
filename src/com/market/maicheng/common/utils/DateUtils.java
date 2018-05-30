@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * 日期工具类
@@ -127,6 +129,24 @@ public class DateUtils {
 		dateTime.set(Calendar.SECOND,dateTime.get(Calendar.SECOND) - second);
 		return dateTime.getTime();
 	}
+	
+	
+	/**
+     * long 转为 日期
+     *
+     * @param time
+     * @return
+     */
+    public static String formatLongToStr(long time, String pattern) {
+        if (StringUtils.isEmpty(pattern)) {
+            pattern = FORMAT_DATE_TIME;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        Date date = new Date(time);
+        String sDateTime = sdf.format(date);
+        return sDateTime;
+    }
+	
 	public static void main(String[] a){
 		System.out.println(DateUtils.getLongToDateTime(20150424103816L));;
 	}

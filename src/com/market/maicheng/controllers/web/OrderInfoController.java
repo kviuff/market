@@ -45,6 +45,8 @@ import com.market.maicheng.service.ProductService;
 import com.market.maicheng.service.RelationService;
 import com.market.maicheng.service.ShopCarService;
 
+import wechat.WeChatPush;
+
 @Controller
 @RequestMapping(value = "/")
 public class OrderInfoController {
@@ -180,16 +182,6 @@ public class OrderInfoController {
 								newList.add(newresultList);
 							}
 
-//							for (Map<String, Object> remap : resultList) {
-//								for (String mid : storeIds) {
-//									List<Map<String, Object>> newresultList = new ArrayList<Map<String, Object>>();
-//									if (mid.equals(remap.get("mid") + "")) {
-//										newresultList.add(remap);
-//									}
-//									newList.add(newresultList);
-//								}
-//							}
-
 							for (List<Map<String, Object>> resultList1 : newList) {
 
 								long orderid = IDGenerator.getID();
@@ -293,6 +285,12 @@ public class OrderInfoController {
 									}
 
 									orderInfoService.updateByPrimaryKey(order);
+									
+									// 微信推送消息给商户
+									Map<String, Object> weixinmap = new HashMap<String, Object>();
+									weixinmap.put("openId", "");
+									WeChatPush.deliverTemplateSendToStoreForOrder(weixinmap);
+									
 									jsonObject.put("state", "1");
 									jsonObject.put("result", "订单添加成功");
 									jsonObject.put("data", orderid + "");
