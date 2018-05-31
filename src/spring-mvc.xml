@@ -27,6 +27,7 @@
 	<mvc:resources location="/resources/images/" mapping="/images/**"/>   
 	<mvc:resources location="/resources/js/" mapping="/js/**"/>    
 	<mvc:resources location="/resources/css/" mapping="/css/**"/> 
+	<mvc:resources location="/" mapping="/**"/> 
   
     <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->  
     <bean id="mappingJacksonHttpMessageConverter"  
