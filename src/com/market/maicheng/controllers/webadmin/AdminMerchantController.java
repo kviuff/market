@@ -113,7 +113,7 @@ public class AdminMerchantController extends BaseController {
 			if (1 == state) { // 审核通过
 				// 给管理员发送微信消息
 				Map<String, Object> weixinmap = new HashMap<String, Object>();
-				weixinmap.put("openId", "");
+				weixinmap.put("openId", member.getOpenID());
 				weixinmap.put("first", "您好，您的入驻申请已经审核通过。");
 				weixinmap.put("applyname", merchant.getShopName());
 				weixinmap.put("applystatus", "入驻成功");
@@ -122,7 +122,7 @@ public class AdminMerchantController extends BaseController {
 			} else { // 审核失败
 				// 给管理员发送微信消息
 				Map<String, Object> weixinmap = new HashMap<String, Object>();
-				weixinmap.put("openId", "");
+				weixinmap.put("openId", member.getOpenID());
 				weixinmap.put("first", "抱歉审核失败");
 				weixinmap.put("applyname", merchant.getShopName());
 				weixinmap.put("info", "抱歉，您的帐号审核失败，请您重新申请");

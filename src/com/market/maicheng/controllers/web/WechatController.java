@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.market.maicheng.model.Member;
+import com.market.maicheng.service.MemberService;
 import com.wechat.common.WeChatConstat;
 import com.wechat.model.ReceiveXmlEntity;
 import com.wechat.model.ReceiveXmlProcess;
@@ -25,6 +28,9 @@ import com.wechat.utils.HttpUtils;
 @RequestMapping(value = "/wechat")
 public class WechatController extends BaseController {
 
+	@Autowired
+	private MemberService memberService;
+	
 	/**
 	 * 微信消息接收和token验证
 	 * @param model
@@ -84,9 +90,14 @@ public class WechatController extends BaseController {
 				errorCode = jsonObject.getString("errcode");
 				if (StringUtils.isEmpty(errorCode)) {
 					String nickName = userInfoJson.getString("nickname");
-					System.out.println("openId====" + openId);
-					System.out.println("accessToken====" + accessToken);
-					System.out.println("nickname====" + nickName);
+					Member member = memberService.getMemberByWechat(nickName);
+					if (StringUtils.isEmpty(member.getOpenID())) {// 如果没有绑定过openID,更新一下用户的openID
+						member.setOpenID(openId);
+						memberService.updateMember(member);
+					}
+					//System.out.println("openId====" + openId);
+					//System.out.println("accessToken====" + accessToken);
+					//System.out.println("nickname====" + nickName);
 				} else {
 					System.out.println("userInfo_errorcode===" + errorCode);
 				}

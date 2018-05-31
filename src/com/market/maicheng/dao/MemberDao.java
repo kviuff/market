@@ -89,4 +89,11 @@ public interface MemberDao {
 	 * @return
 	 */
 	public int updateMemberState(@Param("id")long id,@Param("state")int state);
+	
+	/**
+	 * 通过微信号获取用户信息
+	 * @param wechat
+	 * @return
+	 */
+	public Member getMemberByWechat(@Param("wechat")String wechat);
 }

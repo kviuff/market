@@ -88,4 +88,11 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.updateMemberState(id, state);
 	}
+
+	@Override
+	public Member getMemberByWechat(String wechat) {
+		return null;
+	}
+	
+	
 }

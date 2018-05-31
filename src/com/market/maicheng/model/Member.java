@@ -61,6 +61,11 @@ public class Member {
 	 */
 	private String storeName;
 	
+	/**
+	 * 用户的微信openID
+	 */
+	private String openID;
+	
 	public String getStoreName() {
 		return storeName;
 	}
@@ -144,6 +149,12 @@ public class Member {
 	}
 	public void setState(int state) {
 		this.state = state;
+	}
+	public String getOpenID() {
+		return openID;
+	}
+	public void setOpenID(String openID) {
+		this.openID = openID;
 	}
 	
 	

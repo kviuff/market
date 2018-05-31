@@ -293,7 +293,7 @@ public class OrderInfoController {
 									// 微信推送消息给商户
 									Member member1 = memberService.getMemberForid(order.getUserid());
 									Map<String, Object> weixinmap = new HashMap<String, Object>();
-									weixinmap.put("openId", "");
+									weixinmap.put("openId", member.getOpenID());
 									weixinmap.put("ordersn", orderid);
 									weixinmap.put("ordergoods", productName.substring(0, productName.length() - 1));
 									weixinmap.put("orderamount", paymoney + "元");

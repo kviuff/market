@@ -69,4 +69,8 @@
 	<update id="updateMemberState">
 		<![CDATA[update member set state=#{state} where ID = #{id}]]>	
 	</update>
+	
+	<select id="getMemberByWechat" resultType="com.market.maicheng.model.Member">
+		<![CDATA[select * from member where wechatID = #{wechat} ]]>
+	</select>
 </mapper>

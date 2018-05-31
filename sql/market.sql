@@ -4588,3 +4588,12 @@ CREATE TABLE `merchant` (
 -- ----------------------------
 -- Records of merchant
 -- ----------------------------
+
+
+
+
+
+
+ALTER TABLE `member` ADD COLUMN `openID` varchar(50) COMMENT 'openID' AFTER `storeName`;
+
+

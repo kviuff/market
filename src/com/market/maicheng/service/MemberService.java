@@ -88,4 +88,11 @@ public interface MemberService {
 	 * @return
 	 */
 	public int updateMemberState(long id,int state);
+	
+	/**
+	 * 通过微信号获取用户信息
+	 * @param wechat
+	 * @return
+	 */
+	public Member getMemberByWechat(String wechat);
 }

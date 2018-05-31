@@ -141,10 +141,11 @@ public class RelationController extends BaseController {
 			}
 			if (state > 0) {
 				for (String uid : uids) {
+					Member member = memberService.getMemberForid(Long.valueOf(uidsStr));
 					// 给商户发送微信消息
 					Merchant merchant = merchantService.getMerchantByUserid(Long.valueOf(uid));
 					Map<String, Object> weixinmap = new HashMap<String, Object>();
-					weixinmap.put("openId", "");
+					weixinmap.put("openId", member.getOpenID());
 					weixinmap.put("first", "申请查看价格通知");
 					weixinmap.put("name", merchant.getShopName());
 					weixinmap.put("authorizetime", DateUtils.formatLongToStr(System.currentTimeMillis(), ""));
@@ -229,7 +230,7 @@ public class RelationController extends BaseController {
 					// 给商户发送微信消息
 					Member member = memberService.getMemberForid(createid);
 					Map<String, Object> weixinmap = new HashMap<String, Object>();
-					weixinmap.put("openId", "");
+					weixinmap.put("openId", member.getOpenID());
 					weixinmap.put("first", "申请查看价格通知");
 					weixinmap.put("name", member.getRealName());
 					weixinmap.put("accountnumber", member.getUserName());
