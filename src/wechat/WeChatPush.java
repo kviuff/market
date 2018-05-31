@@ -31,13 +31,107 @@ public class WeChatPush {
             wxMpService.setWxMpConfigStorage(config);
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                     .toUser(map.get("openId").toString())
-                    .templateId("jJz3VWhqs17M1f6hz1Kt2MlAscacmy2FWW8xiMVSbC0")
+                    .templateId("_IjA2-8gHu8anxeC5CcVummejx2ITptxeP8ejSBL9dw")
                     .build();
             templateMessage.addData(new WxMpTemplateData("first", map.get("first").toString()));
-            templateMessage.addData(new WxMpTemplateData("orderType", map.get("orderType").toString())); //订单编号
-            templateMessage.addData(new WxMpTemplateData("customerInfo", map.get("customerInfo").toString()));
-            templateMessage.addData(new WxMpTemplateData("orderItemName", map.get("orderItemName").toString()));
-            templateMessage.addData(new WxMpTemplateData("orderItemData", map.get("orderItemData").toString()));
+            templateMessage.addData(new WxMpTemplateData("keyword1", map.get("ordersn").toString()));      // 订单编号
+            templateMessage.addData(new WxMpTemplateData("keyword2", map.get("ordergoods").toString()));   // 订单商品
+            templateMessage.addData(new WxMpTemplateData("keyword3", map.get("orderamount").toString()));  // 订单金额
+            //templateMessage.addData(new WxMpTemplateData("keyword4", map.get("paymenttype").toString()));  // 交易方式
+            templateMessage.addData(new WxMpTemplateData("keyword5", map.get("memberinfo").toString()));   // 会员信息
+            templateMessage.addData(new WxMpTemplateData("remark", map.get("remark").toString()));
+            result =  wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
+            System.out.println("微信推送发送返回信息:" + result);
+        } else {
+        		System.out.println("微信推送参数有错!");
+        }
+        return result;
+    }
+    
+    /**
+     * 微信模板消息--商户入驻申请通知
+     * @param map   map
+     * @return  String
+     * @throws WxErrorException
+     */
+    public static String deliverTemplateSendToForApplyStore(Map<String, Object> map) throws WxErrorException {
+        String result = "";
+        if(map.get("openId") != null){
+            WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
+            config.setAppId(APP_ID); //设置微信公众号的appId
+            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            wxMpService = new WxMpServiceImpl();
+            wxMpService.setWxMpConfigStorage(config);
+            WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+                    .toUser(map.get("openId").toString())
+                    .templateId("OuSMp2ZiZcJ8tXAOCuw9V-FPbPDdX0KW6kGhUPJImz8")
+                    .build();
+            templateMessage.addData(new WxMpTemplateData("first", map.get("first").toString()));
+            templateMessage.addData(new WxMpTemplateData("keyword1", map.get("storename").toString())); //商户名称
+            templateMessage.addData(new WxMpTemplateData("keyword2", map.get("area").toString())); //所属区域
+            templateMessage.addData(new WxMpTemplateData("keyword3", map.get("applytime").toString())); //申请时间
+            templateMessage.addData(new WxMpTemplateData("keyword4", map.get("applyinfo").toString())); //申请信息
+            templateMessage.addData(new WxMpTemplateData("remark", map.get("remark").toString()));
+            result =  wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
+            System.out.println("微信推送发送返回信息:" + result);
+        } else {
+        		System.out.println("微信推送参数有错!");
+        }
+        return result;
+    }
+    
+    /**
+     * 微信模板消息--商户入驻审核通过
+     * @param map   map
+     * @return  String
+     * @throws WxErrorException
+     */
+    public static String deliverTemplateSendToForApplyStoreForSuccess(Map<String, Object> map) throws WxErrorException {
+        String result = "";
+        if(map.get("openId") != null){
+            WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
+            config.setAppId(APP_ID); //设置微信公众号的appId
+            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            wxMpService = new WxMpServiceImpl();
+            wxMpService.setWxMpConfigStorage(config);
+            WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+                    .toUser(map.get("openId").toString())
+                    .templateId("Doeszfh08GFecKU9OVemh5Y-oU0SfuCufAkmZZlaZCs")
+                    .build();
+            templateMessage.addData(new WxMpTemplateData("first", map.get("first").toString()));
+            templateMessage.addData(new WxMpTemplateData("keyword1", map.get("storename").toString())); //企业名称
+            templateMessage.addData(new WxMpTemplateData("keyword2", map.get("info").toString())); //入驻状态
+            templateMessage.addData(new WxMpTemplateData("remark", map.get("remark").toString()));
+            result =  wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
+            System.out.println("微信推送发送返回信息:" + result);
+        } else {
+        		System.out.println("微信推送参数有错!");
+        }
+        return result;
+    }
+    
+    /**
+     * 微信模板消息--商户入驻审核失败
+     * @param map   map
+     * @return  String
+     * @throws WxErrorException
+     */
+    public static String deliverTemplateSendToForApplyStoreForError(Map<String, Object> map) throws WxErrorException {
+        String result = "";
+        if(map.get("openId") != null){
+            WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
+            config.setAppId(APP_ID); //设置微信公众号的appId
+            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            wxMpService = new WxMpServiceImpl();
+            wxMpService.setWxMpConfigStorage(config);
+            WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+                    .toUser(map.get("openId").toString())
+                    .templateId("RLk7_-IneCKv4rwR_b42g8SVyQvIRLl0C4Z-IomhTsA")
+                    .build();
+            templateMessage.addData(new WxMpTemplateData("first", map.get("first").toString()));
+            templateMessage.addData(new WxMpTemplateData("keyword1", map.get("storename").toString())); //账号
+            templateMessage.addData(new WxMpTemplateData("keyword2", map.get("info").toString())); //内容
+            templateMessage.addData(new WxMpTemplateData("keyword3", map.get("applytime").toString())); //时间
             templateMessage.addData(new WxMpTemplateData("remark", map.get("remark").toString()));
             result =  wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
             System.out.println("微信推送发送返回信息:" + result);
@@ -79,12 +173,12 @@ public class WeChatPush {
     }
     
     /**
-     * 微信模板消息--商户入驻
+     * 微信模板消息--申请价格授权状态通知
      * @param map   map
      * @return  String
      * @throws WxErrorException
      */
-    public static String deliverTemplateSendToForApplyStore(Map<String, Object> map) throws WxErrorException {
+    public static String deliverTemplateSendToStoreForApplyPriceForResult(Map<String, Object> map) throws WxErrorException {
         String result = "";
         if(map.get("openId") != null){
             WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
@@ -94,11 +188,12 @@ public class WeChatPush {
             wxMpService.setWxMpConfigStorage(config);
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                     .toUser(map.get("openId").toString())
-                    .templateId("-j0Wf7r6hKdwb2kJ6pbeL4cenRzb5oE_lg_51srzY2o")
+                    .templateId("K1q198kY__c56lZmga9O1Y7GI8xWorcsaF9Zf88QHRg")
                     .build();
             templateMessage.addData(new WxMpTemplateData("first", map.get("first").toString()));
-            templateMessage.addData(new WxMpTemplateData("keyword1", map.get("applyname").toString())); //订单编号
-            templateMessage.addData(new WxMpTemplateData("keyword2", map.get("applytime").toString()));
+            templateMessage.addData(new WxMpTemplateData("keyword1", map.get("name").toString())); // 店铺名称
+            templateMessage.addData(new WxMpTemplateData("keyword2", map.get("authorizetime").toString()));// 授权时间
+            templateMessage.addData(new WxMpTemplateData("keyword3", map.get("authorizestatus").toString())); // 授权状态
             templateMessage.addData(new WxMpTemplateData("remark", map.get("remark").toString()));
             result =  wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
             System.out.println("微信推送发送返回信息:" + result);

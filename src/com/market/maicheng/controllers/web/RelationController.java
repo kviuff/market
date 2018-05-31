@@ -143,16 +143,15 @@ public class RelationController extends BaseController {
 			if (state > 0) {
 				for (String uid : uids) {
 					// 给商户发送微信消息
-					Member member = memberService.getMemberForid(Long.valueOf(uid));
-					Merchant merchant = merchantService.getMerchantByid(merchantID);
+					Merchant merchant = merchantService.getMerchantByUserid(Long.valueOf(uid));
 					Map<String, Object> weixinmap = new HashMap<String, Object>();
 					weixinmap.put("openId", "");
 					weixinmap.put("first", "申请查看价格通知");
-					weixinmap.put("name", member.getRealName());
-					weixinmap.put("accountnumber", member.getUserName());
-					weixinmap.put("applytime", DateUtils.formatLongToStr(System.currentTimeMillis(), ""));
+					weixinmap.put("name", merchant.getShopName());
+					weixinmap.put("authorizetime", DateUtils.formatLongToStr(System.currentTimeMillis(), ""));
+					weixinmap.put("authorizestatus", "授权成功");
 					weixinmap.put("remark", "您向供货商" + merchant.getShopName() + "申请查看价格已通过商家审核！");
-					WeChatPush.deliverTemplateSendToForApplyStore(weixinmap);
+					WeChatPush.deliverTemplateSendToStoreForApplyPriceForResult(weixinmap);
 				}
 				
 				jsonObject.put("state", "1");
@@ -237,7 +236,7 @@ public class RelationController extends BaseController {
 					weixinmap.put("accountnumber", member.getUserName());
 					weixinmap.put("applytime", DateUtils.formatLongToStr(nowTime, ""));
 					weixinmap.put("remark", "您好，有用户提出申请查看价格，请及时处理审核授权！");
-					WeChatPush.deliverTemplateSendToForApplyStore(weixinmap);
+					WeChatPush.deliverTemplateSendToStoreForApplyPrice(weixinmap);
 				}
 			}
 		} catch (Exception e) {

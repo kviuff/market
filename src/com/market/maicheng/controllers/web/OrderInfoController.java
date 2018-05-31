@@ -218,6 +218,9 @@ public class OrderInfoController {
 								// 主订单添加成功，添加子订单
 								double paymoney = 0D;
 								long merchantid = 0;
+								
+								String productName = "";
+								
 								if (orderInfoService.insert(order) == 1) {
 									// 提交订单之前根据加入购物车的时间先后顺序进行排序
 									Collections.sort(resultList1, comparatorByTime);
@@ -228,11 +231,13 @@ public class OrderInfoController {
 										BarcodePrice barcodePrice = (BarcodePrice) remap.get("barcodePrice");
 										int ispin = Integer.parseInt(remap.get("ispin").toString());
 										order = new OrderInfo();
+										String pname = product.getTitle();
+										productName = productName + pname + ",";
 										// 添加子订单
 										order.setId(IDGenerator.getID());
 										order.setPid(product.getId());
 										order.setPcount(buycount);
-										order.setPname(product.getTitle());
+										order.setPname(pname);
 										order.setPurl(product.getImg());
 										order.setIsdel(0);
 										order.setMerchantid(product.getMerchantID());
@@ -287,8 +292,15 @@ public class OrderInfoController {
 									orderInfoService.updateByPrimaryKey(order);
 									
 									// 微信推送消息给商户
+									Member member1 = memberService.getMemberForid(order.getUserid());
 									Map<String, Object> weixinmap = new HashMap<String, Object>();
 									weixinmap.put("openId", "");
+									weixinmap.put("ordersn", orderid);
+									weixinmap.put("ordergoods", productName.substring(0, productName.length() - 1));
+									weixinmap.put("orderamount", paymoney + "元");
+									weixinmap.put("paymenttype", "");
+									weixinmap.put("memberinfo", member1.getRealName() + "," + member1.getMobile());
+									weixinmap.put("remark", "请注意查收！");
 									WeChatPush.deliverTemplateSendToStoreForOrder(weixinmap);
 									
 									jsonObject.put("state", "1");

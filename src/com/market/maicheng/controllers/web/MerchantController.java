@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.market.maicheng.common.utils.Constants;
+import com.market.maicheng.common.utils.DateUtils;
 import com.market.maicheng.common.utils.IDGenerator;
 import com.market.maicheng.common.utils.PageVo;
 import com.market.maicheng.common.utils.RetInfo;
@@ -253,10 +254,12 @@ public class MerchantController extends BaseController {
 					
 					// 给管理员发送微信消息
 					Map<String, Object> weixinmap = new HashMap<String, Object>();
-					weixinmap.put("openId", "");
-					weixinmap.put("first", "入驻申请通知");
-					weixinmap.put("applyname", userName);
-					weixinmap.put("applytime", nowTime);
+					weixinmap.put("openId", "o5rpjxJYBIbns5x1xC3nAhPuzoA0");
+					weixinmap.put("first", "您有一个新的商户入驻申请");
+					weixinmap.put("storename", userName);
+					weixinmap.put("area", provinceName + " " + cityName + " " + region + " " + address);
+					weixinmap.put("applytime", DateUtils.formatLongToStr(nowTime, ""));
+					weixinmap.put("applyinfo", contacts + " " + phone);
 					weixinmap.put("remark", "有新商家申请入驻平台，请您及时审核！");
 					WeChatPush.deliverTemplateSendToForApplyStore(weixinmap);
 					

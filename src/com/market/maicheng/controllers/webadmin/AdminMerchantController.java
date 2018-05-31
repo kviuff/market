@@ -25,7 +25,6 @@ import com.market.maicheng.common.utils.StrUtils;
 import com.market.maicheng.controllers.web.BaseController;
 import com.market.maicheng.model.Member;
 import com.market.maicheng.model.Merchant;
-import com.market.maicheng.model.Product;
 import com.market.maicheng.service.MemberService;
 import com.market.maicheng.service.MerchantService;
 
@@ -112,24 +111,25 @@ public class AdminMerchantController extends BaseController {
 			res = memberService.updateMember(member);
 			jsonObject.put("state", res);
 			// 审核通过，给用户发送微信推送
-			if (1 == state) {
+			if (1 == state) { // 审核通过
 				// 给管理员发送微信消息
 				Map<String, Object> weixinmap = new HashMap<String, Object>();
 				weixinmap.put("openId", "");
-				weixinmap.put("first", "入驻通知");
-				weixinmap.put("applyname", "尊敬的（" + merchant.getShopName() + "），您的申请已成功通过！");
-				weixinmap.put("applytime", DateUtils.formatLongToStr(nowTime, ""));
-				weixinmap.put("remark", "感谢加入天岐进货大家庭，立刻前往尽情发挥吧！");
-				WeChatPush.deliverTemplateSendToForApplyStore(weixinmap);
-			} else {
+				weixinmap.put("first", "您好，您的入驻申请已经审核通过。");
+				weixinmap.put("applyname", merchant.getShopName());
+				weixinmap.put("applystatus", "入驻成功");
+				weixinmap.put("remark", "您好，您的入驻申请已经审核通过。");
+				WeChatPush.deliverTemplateSendToForApplyStoreForSuccess(weixinmap);
+			} else { // 审核失败
 				// 给管理员发送微信消息
 				Map<String, Object> weixinmap = new HashMap<String, Object>();
 				weixinmap.put("openId", "");
-				weixinmap.put("first", "入驻通知");
-				weixinmap.put("applyname", "尊敬的（" + merchant.getShopName() + "），您的申请未通过审核！");
+				weixinmap.put("first", "抱歉审核失败");
+				weixinmap.put("applyname", merchant.getShopName());
+				weixinmap.put("info", "抱歉，您的帐号审核失败，请您重新申请");
 				weixinmap.put("applytime", DateUtils.formatLongToStr(nowTime, ""));
-				weixinmap.put("remark", "请重新修改商家信息再提交，有助审核通过！");
-				WeChatPush.deliverTemplateSendToForApplyStore(weixinmap);
+				weixinmap.put("remark", "您的帐号审核未通过，请您重新提交。");
+				WeChatPush.deliverTemplateSendToForApplyStoreForError(weixinmap);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
