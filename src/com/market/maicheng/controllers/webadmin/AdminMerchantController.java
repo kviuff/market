@@ -27,8 +27,7 @@ import com.market.maicheng.model.Member;
 import com.market.maicheng.model.Merchant;
 import com.market.maicheng.service.MemberService;
 import com.market.maicheng.service.MerchantService;
-
-import wechat.WeChatPush;
+import com.wechat.WeChatPush;
 
 /**
  * 商户后台控制类

@@ -44,8 +44,7 @@ import com.market.maicheng.service.OrderInfoService;
 import com.market.maicheng.service.ProductService;
 import com.market.maicheng.service.RelationService;
 import com.market.maicheng.service.ShopCarService;
-
-import wechat.WeChatPush;
+import com.wechat.WeChatPush;
 
 @Controller
 @RequestMapping(value = "/")

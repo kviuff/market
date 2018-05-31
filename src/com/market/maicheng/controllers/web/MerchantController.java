@@ -33,8 +33,7 @@ import com.market.maicheng.service.FavoriteService;
 import com.market.maicheng.service.MemberService;
 import com.market.maicheng.service.MerchantService;
 import com.market.maicheng.service.RelationService;
-
-import wechat.WeChatPush;
+import com.wechat.WeChatPush;
 
 @Controller
 @RequestMapping(value = "/merchant")

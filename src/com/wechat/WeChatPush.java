@@ -1,7 +1,11 @@
-package wechat;
+package com.wechat;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.wechat.common.WeChatConstat;
 
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
@@ -12,8 +16,6 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 
 public class WeChatPush {
 	private static WxMpService wxMpService;
-	private static final String APP_ID = "wx00859ea61ad39301";
-	private static final String APP_SECRET = "621f7264072c8b6bd83a3fcd6170f2a8";
 	
 	/**
      * 微信模板消息--给商户的订单提醒
@@ -25,8 +27,8 @@ public class WeChatPush {
         String result = "";
         if(map.get("openId") != null){
             WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
-            config.setAppId(APP_ID); //设置微信公众号的appId
-            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            config.setAppId(WeChatConstat.APP_ID); //设置微信公众号的appId
+            config.setSecret(WeChatConstat.APP_SECRET); //设置微信公众号的appSecret
             wxMpService = new WxMpServiceImpl();
             wxMpService.setWxMpConfigStorage(config);
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
@@ -58,8 +60,8 @@ public class WeChatPush {
         String result = "";
         if(map.get("openId") != null){
             WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
-            config.setAppId(APP_ID); //设置微信公众号的appId
-            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            config.setAppId(WeChatConstat.APP_ID); //设置微信公众号的appId
+            config.setSecret(WeChatConstat.APP_SECRET); //设置微信公众号的appSecret
             wxMpService = new WxMpServiceImpl();
             wxMpService.setWxMpConfigStorage(config);
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
@@ -90,8 +92,8 @@ public class WeChatPush {
         String result = "";
         if(map.get("openId") != null){
             WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
-            config.setAppId(APP_ID); //设置微信公众号的appId
-            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            config.setAppId(WeChatConstat.APP_ID); //设置微信公众号的appId
+            config.setSecret(WeChatConstat.APP_SECRET); //设置微信公众号的appSecret
             wxMpService = new WxMpServiceImpl();
             wxMpService.setWxMpConfigStorage(config);
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
@@ -120,8 +122,8 @@ public class WeChatPush {
         String result = "";
         if(map.get("openId") != null){
             WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
-            config.setAppId(APP_ID); //设置微信公众号的appId
-            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            config.setAppId(WeChatConstat.APP_ID); //设置微信公众号的appId
+            config.setSecret(WeChatConstat.APP_SECRET); //设置微信公众号的appSecret
             wxMpService = new WxMpServiceImpl();
             wxMpService.setWxMpConfigStorage(config);
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
@@ -151,8 +153,8 @@ public class WeChatPush {
         String result = "";
         if(map.get("openId") != null){
             WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
-            config.setAppId(APP_ID); //设置微信公众号的appId
-            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            config.setAppId(WeChatConstat.APP_ID); //设置微信公众号的appId
+            config.setSecret(WeChatConstat.APP_SECRET); //设置微信公众号的appSecret
             wxMpService = new WxMpServiceImpl();
             wxMpService.setWxMpConfigStorage(config);
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
@@ -182,8 +184,8 @@ public class WeChatPush {
         String result = "";
         if(map.get("openId") != null){
             WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
-            config.setAppId(APP_ID); //设置微信公众号的appId
-            config.setSecret(APP_SECRET); //设置微信公众号的appSecret
+            config.setAppId(WeChatConstat.APP_ID); //设置微信公众号的appId
+            config.setSecret(WeChatConstat.APP_SECRET); //设置微信公众号的appSecret
             wxMpService = new WxMpServiceImpl();
             wxMpService.setWxMpConfigStorage(config);
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
@@ -209,22 +211,26 @@ public class WeChatPush {
     
     
     public static void main(String[] args){
-        try {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("AppId", "wx00859ea61ad39301");
-            map.put("AppSecret", "621f7264072c8b6bd83a3fcd6170f2a8");
-            //map.put("openId", "o5rpjxJYBIbns5x1xC3nAhPuzoA0");
-            map.put("openId", "o5rpjxNlot7xA6r63rvVUNjBoTB4");
-            map.put("templateId", "jJz3VWhqs17M1f6hz1Kt2MlAscacmy2FWW8xiMVSbC0");
-            map.put("first", "您有新订单，请查收");
-            map.put("orderType", "新订单");
-            map.put("customerInfo", "张三");
-            map.put("orderItemName", "商品名称");
-            map.put("orderItemData", "手机");
-            map.put("remark", "请尽快发货");
-            //deliverTemplateSend(map);
-        } catch (Exception we) {
-            we.printStackTrace();
-        }
+//        try {
+//            Map<String, Object> map = new HashMap<String, Object>();
+//            map.put("AppId", "wx00859ea61ad39301");
+//            map.put("AppSecret", "621f7264072c8b6bd83a3fcd6170f2a8");
+//            //map.put("openId", "o5rpjxJYBIbns5x1xC3nAhPuzoA0");
+//            map.put("openId", "o5rpjxNlot7xA6r63rvVUNjBoTB4");
+//            map.put("templateId", "jJz3VWhqs17M1f6hz1Kt2MlAscacmy2FWW8xiMVSbC0");
+//            map.put("first", "您有新订单，请查收");
+//            map.put("orderType", "新订单");
+//            map.put("customerInfo", "张三");
+//            map.put("orderItemName", "商品名称");
+//            map.put("orderItemData", "手机");
+//            map.put("remark", "请尽快发货");
+//            //deliverTemplateSend(map);
+//        } catch (Exception we) {
+//            we.printStackTrace();
+//        }
+    	
+    		String str = "{\"access_token\":\"10_XjDpRuSz9PNDeXkXpN_6BdkYdGFio2MczFvPaXZBmM5Me89Nzn9Kouinl1yshadwmxFyV4qr311yGS1EFKVdEyIs727nC8erxMtQ2I6M__qmDXwvy69rQpdyydfhAfO5J_B84L-5bWiAtXJUEQBiAJAPBM\",\"expires_in\":7200}";
+    		JSONObject jsonObject = JSON.parseObject(str);
+    		System.out.println(jsonObject.getString("access_token"));
     }
 }

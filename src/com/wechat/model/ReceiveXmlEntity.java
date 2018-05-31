@@ -1,4 +1,4 @@
-package com.market.maicheng.model;
+package com.wechat.model;
 
 
 /** 

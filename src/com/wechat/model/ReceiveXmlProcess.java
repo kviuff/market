@@ -1,4 +1,4 @@
-package com.market.maicheng.model;
+package com.wechat.model;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -31,7 +31,7 @@ public class ReceiveXmlProcess {
             msg = new ReceiveXmlEntity();  
             //利用反射机制，调用set方法  
             //获取该实体的元类型  
-            Class<?> c = Class.forName("com.igoxin.weixin.custom.ReceiveXmlEntity");  
+            Class<?> c = Class.forName("com.wechat.model.ReceiveXmlEntity");  
             msg = (ReceiveXmlEntity)c.newInstance();//创建这个实体的对象  
               
             while(iter.hasNext()){  
