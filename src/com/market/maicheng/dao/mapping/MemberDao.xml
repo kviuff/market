@@ -17,6 +17,7 @@
 		<result column="isdel" property="isdel" />
 		<result column="state" property="state" />
 		<result column="storeName" property="storeName" />
+		<result column="openID" property="openID" />
 	</resultMap>
 	
 	<insert id="addMember" parameterType="com.market.maicheng.model.Member">
@@ -25,7 +26,7 @@
 	</insert>
 	
 	<update id="updateMember" parameterType="com.market.maicheng.model.Member">
-		<![CDATA[update member set password=#{password},realName=#{realName},mobile=#{mobile},userType=#{userType},merchantid=#{merchantid},wechatID=#{wechatID},headpic=#{headpic},storeName=#{storeName} where id = #{id} ]]>
+		<![CDATA[update member set password=#{password},realName=#{realName},mobile=#{mobile},userType=#{userType},merchantid=#{merchantid},wechatID=#{wechatID},headpic=#{headpic},storeName=#{storeName},openID=#{openID}  where id = #{id} ]]>
 	</update>
 
 	<select id="getMemberForid" resultType="com.market.maicheng.model.Member">

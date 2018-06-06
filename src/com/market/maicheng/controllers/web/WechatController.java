@@ -133,7 +133,7 @@ public class WechatController extends BaseController {
 	        		String accessToken = jsonObject.getString("access_token");
 	        		String openId = jsonObject.getString("openid");
 	        		// 获取用户信息
-				String userInfo_url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + accessToken + "&openid=" + openId + "&lang=zh_CN";
+				String userInfo_url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + accessToken + "&openid=" + openId + "&lang=zh_CN";
 				String userInfoResult = HttpUtils.doGet(userInfo_url);
 				JSONObject userInfoJson = JSON.parseObject(userInfoResult);
 				errorCode = jsonObject.getString("errcode");
@@ -147,7 +147,10 @@ public class WechatController extends BaseController {
 						if (StringUtils.isEmpty(member.getOpenID())) {// 如果没有绑定过openID,更新一下用户的openID
 							member.setOpenID(openId);
 							memberService.updateMember(member);
+							System.out.println("授权成功===");
 						}
+					} else {
+						System.out.println("member====空");
 					}
 				} else {
 					System.out.println("userInfo_errorcode===" + errorCode);

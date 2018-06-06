@@ -91,7 +91,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member getMemberByWechat(String wechat) {
-		return null;
+		return memberDao.getMemberByWechat(wechat);
 	}
 	
 	
