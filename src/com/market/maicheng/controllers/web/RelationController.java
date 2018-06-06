@@ -140,19 +140,19 @@ public class RelationController extends BaseController {
 				state += relationService.updatePricLevel(merchantID, Long.parseLong(uid), pricLevel);
 			}
 			if (state > 0) {
-				for (String uid : uids) {
-					Member member = memberService.getMemberForid(Long.valueOf(uidsStr));
-					// 给商户发送微信消息
-					Merchant merchant = merchantService.getMerchantByUserid(Long.valueOf(uid));
-					Map<String, Object> weixinmap = new HashMap<String, Object>();
-					weixinmap.put("openId", member.getOpenID());
-					weixinmap.put("first", "申请查看价格通知");
-					weixinmap.put("name", merchant.getShopName());
-					weixinmap.put("authorizetime", DateUtils.formatLongToStr(System.currentTimeMillis(), ""));
-					weixinmap.put("authorizestatus", "授权成功");
-					weixinmap.put("remark", "您向供货商" + merchant.getShopName() + "申请查看价格已通过商家审核！");
-					WeChatPush.deliverTemplateSendToStoreForApplyPriceForResult(weixinmap);
-				}
+//				for (String uid : uids) {
+//					Member member = memberService.getMemberForid(Long.valueOf(uidsStr));
+//					// 给商户发送微信消息
+//					Merchant merchant = merchantService.getMerchantByUserid(Long.valueOf(uid));
+//					Map<String, Object> weixinmap = new HashMap<String, Object>();
+//					weixinmap.put("openId", member.getOpenID());
+//					weixinmap.put("first", "申请查看价格通知");
+//					weixinmap.put("name", merchant.getShopName());
+//					weixinmap.put("authorizetime", DateUtils.formatLongToStr(System.currentTimeMillis(), ""));
+//					weixinmap.put("authorizestatus", "授权成功");
+//					weixinmap.put("remark", "您向供货商" + merchant.getShopName() + "申请查看价格已通过商家审核！");
+//					WeChatPush.deliverTemplateSendToStoreForApplyPriceForResult(weixinmap);
+//				}
 				
 				jsonObject.put("state", "1");
 				jsonObject.put("result", "设置成功");
@@ -228,15 +228,15 @@ public class RelationController extends BaseController {
 					jsonObject.put("state", 1);
 					jsonObject.put("result", "ok");
 					// 给商户发送微信消息
-					Member member = memberService.getMemberForid(createid);
-					Map<String, Object> weixinmap = new HashMap<String, Object>();
-					weixinmap.put("openId", member.getOpenID());
-					weixinmap.put("first", "申请查看价格通知");
-					weixinmap.put("name", member.getRealName());
-					weixinmap.put("accountnumber", member.getUserName());
-					weixinmap.put("applytime", DateUtils.formatLongToStr(nowTime, ""));
-					weixinmap.put("remark", "您好，有用户提出申请查看价格，请及时处理审核授权！");
-					WeChatPush.deliverTemplateSendToStoreForApplyPrice(weixinmap);
+//					Member member = memberService.getMemberForid(createid);
+//					Map<String, Object> weixinmap = new HashMap<String, Object>();
+//					weixinmap.put("openId", member.getOpenID());
+//					weixinmap.put("first", "申请查看价格通知");
+//					weixinmap.put("name", member.getRealName());
+//					weixinmap.put("accountnumber", member.getUserName());
+//					weixinmap.put("applytime", DateUtils.formatLongToStr(nowTime, ""));
+//					weixinmap.put("remark", "您好，有用户提出申请查看价格，请及时处理审核授权！");
+//					WeChatPush.deliverTemplateSendToStoreForApplyPrice(weixinmap);
 				}
 			}
 		} catch (Exception e) {

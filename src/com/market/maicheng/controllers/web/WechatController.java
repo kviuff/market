@@ -91,13 +91,15 @@ public class WechatController extends BaseController {
 				if (StringUtils.isEmpty(errorCode)) {
 					String nickName = userInfoJson.getString("nickname");
 					Member member = memberService.getMemberByWechat(nickName);
-					if (StringUtils.isEmpty(member.getOpenID())) {// 如果没有绑定过openID,更新一下用户的openID
-						member.setOpenID(openId);
-						memberService.updateMember(member);
+					if (null != member) {
+						if (StringUtils.isEmpty(member.getOpenID())) {// 如果没有绑定过openID,更新一下用户的openID
+							member.setOpenID(openId);
+							memberService.updateMember(member);
+						}
+						//System.out.println("openId====" + openId);
+						//System.out.println("accessToken====" + accessToken);
+						//System.out.println("nickname====" + nickName);
 					}
-					//System.out.println("openId====" + openId);
-					//System.out.println("accessToken====" + accessToken);
-					//System.out.println("nickname====" + nickName);
 				} else {
 					System.out.println("userInfo_errorcode===" + errorCode);
 				}
@@ -106,5 +108,59 @@ public class WechatController extends BaseController {
 			}
 		}
 	}
+	
+	/**
+	 * 获取用户信息
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "weixinUserInfo")
+	public void weixinUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		try {
+			// 授权成功后获取code
+			String code = request.getParameter("code");
+			// 根据code获取access_token
+			String accessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WeChatConstat.APP_ID 
+					+ "&secret=" + WeChatConstat.APP_SECRET + "&code=" + code + "&grant_type=authorization_code";
+			
+	        // 获取返回信息
+	        String strResult = HttpUtils.doGet(accessTokenUrl);
+	        JSONObject jsonObject = JSON.parseObject(strResult);
+	        String errorCode = jsonObject.getString("errcode");
+	        
+	        if(StringUtils.isEmpty(errorCode)){ // 无errorcode表示正常返回
+	        		String accessToken = jsonObject.getString("access_token");
+	        		String openId = jsonObject.getString("openid");
+	        		// 获取用户信息
+				String userInfo_url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + accessToken + "&openid=" + openId + "&lang=zh_CN";
+				String userInfoResult = HttpUtils.doGet(userInfo_url);
+				JSONObject userInfoJson = JSON.parseObject(userInfoResult);
+				errorCode = jsonObject.getString("errcode");
+				if (StringUtils.isEmpty(errorCode)) {
+					String nickName = userInfoJson.getString("nickname");
+					System.out.println("openId====" + openId);
+					System.out.println("accessToken====" + accessToken);
+					System.out.println("nickname====" + nickName);
+					Member member = memberService.getMemberByWechat(nickName);
+					if (null != member) {
+						if (StringUtils.isEmpty(member.getOpenID())) {// 如果没有绑定过openID,更新一下用户的openID
+							member.setOpenID(openId);
+							memberService.updateMember(member);
+						}
+					}
+				} else {
+					System.out.println("userInfo_errorcode===" + errorCode);
+				}
+	        }else{
+	        		System.out.println("获取access_token出错====");
+	        }
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 }

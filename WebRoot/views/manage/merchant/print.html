@@ -32,7 +32,7 @@
 										<div id="ui_alltasks" class="ui_wtable UI_task_table">
 											<table class="buyer-info">
 												<tr>
-													<td>单位名称：$!orderInfo.merchantname</td>
+													<td>单位名称：$!member.storeName</td>
 													<td>收货地址：$!orderInfo.provincename $!orderInfo.cityname
 														$!orderInfo.region $!orderInfo.address</td>
 													<td>日期：$!date.format('yyyy-MM-dd HH:mm:ss
@@ -144,8 +144,8 @@ $(function(){
 		    });
 		}
 	});
-	$('#xiaoRow').append('<td colspan=2>小计</td><td colspan=3></td><td>' + totalRow + '</td><td></td><td>' + totalMoney + '</td><td></td><td></td>');
-	$('#totalRow').append('<td colspan=2>总计</td><td colspan=3></td><td>' + totalRow + '</td><td></td><td>' + totalMoney + '</td><td></td><td></td>');
+	$('#xiaoRow').append('<td colspan=2>小计</td><td colspan=3></td><td>' + totalRow + '</td><td></td><td>' + totalMoney.toFixed(2) + '</td><td></td><td></td>');
+	$('#totalRow').append('<td colspan=2>总计</td><td colspan=3></td><td>' + totalRow + '</td><td></td><td>' + totalMoney.toFixed(2) + '</td><td></td><td></td>');
 });
 
 

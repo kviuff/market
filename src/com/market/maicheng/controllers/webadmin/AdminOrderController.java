@@ -18,9 +18,11 @@ import com.market.maicheng.common.utils.EnumConstant;
 import com.market.maicheng.common.utils.PageVo;
 import com.market.maicheng.common.utils.RetInfo;
 import com.market.maicheng.common.utils.StrUtils;
+import com.market.maicheng.model.Member;
 import com.market.maicheng.model.Merchant;
 import com.market.maicheng.model.OrderInfo;
 import com.market.maicheng.model.StatisticsOrder;
+import com.market.maicheng.service.MemberService;
 import com.market.maicheng.service.MerchantService;
 import com.market.maicheng.service.OrderInfoService;
 
@@ -32,6 +34,8 @@ public class AdminOrderController {
 	private OrderInfoService orderInfoService;
 	@Autowired
 	private MerchantService merchantService;
+	@Autowired
+	private MemberService memberService;
 	
 	/**
 	 * 管理员用户列表
@@ -89,6 +93,8 @@ public class AdminOrderController {
 		long merchantId = orderInfo.getMerchantid();
 		Merchant merchant = merchantService.getMerchantByid(merchantId);
 		
+		Member member = memberService.getMemberForid(orderInfo.getUserid());
+		
 		List<OrderInfo> orderInfoList = orderInfoService.getOrderListBysubid(subid);
 		if(orderInfoList != null && orderInfoList.size() > 0){
 			modelMap.put("orderInfoList", orderInfoList);
@@ -96,6 +102,7 @@ public class AdminOrderController {
 		}
 		modelMap.put("orderInfo", orderInfo);
 		modelMap.put("merchant", merchant);
+		modelMap.put("member", member);
         return new ModelAndView("/views/manage/merchant/print", modelMap);
     }
 
