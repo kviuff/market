@@ -31,6 +31,7 @@ import com.market.maicheng.common.utils.StrUtils;
 import com.market.maicheng.model.Address;
 import com.market.maicheng.model.BarcodePrice;
 import com.market.maicheng.model.Member;
+import com.market.maicheng.model.Merchant;
 import com.market.maicheng.model.OrderInfo;
 import com.market.maicheng.model.Product;
 import com.market.maicheng.model.Relation;
@@ -255,11 +256,14 @@ public class OrderInfoController {
 										// 清空购物车
 										shopCarservice.delShopCar(Long.parseLong(remap.get("shopcarid").toString()));
 									}
+									
+									Merchant merchant = merchantService.getMerchantByid(merchantid);
+									
 									// 订单总价
 									order = orderInfoService.selectByPrimaryKey(orderid);
 									order.setPmoney(paymoney);
 									order.setMerchantid(merchantid);
-									order.setMerchantname(merchantService.getMerchantByid(merchantid).getShopName());
+									order.setMerchantname(merchant.getShopName());
 									// 有客户id， userid 就是字符串拼接， 没有客户id ， userid 就是登录者id
 									// userid 传mid2_saleid1, mid2_saleid2, mid2_0
 
@@ -291,15 +295,17 @@ public class OrderInfoController {
 									orderInfoService.updateByPrimaryKey(order);
 									
 									// 微信推送消息给商户
-									Member member1 = memberService.getMemberForid(order.getUserid());
+									Member member1 = memberService.getMemberForid(merchant.getUserid());
+									Member member2 = memberService.getMemberForid(order.getUserid());
 									Map<String, Object> weixinmap = new HashMap<String, Object>();
-									weixinmap.put("openId", member.getOpenID());
+									weixinmap.put("openId", member1.getOpenID()); // 商户的OPENID
+									weixinmap.put("first", merchant.getShopName() + "商家，您有一笔新订单！");
 									weixinmap.put("ordersn", orderid);
-									weixinmap.put("ordergoods", productName.substring(0, productName.length() - 1));
+									weixinmap.put("ordergoods", productName.substring(0, 30) + "...");
 									weixinmap.put("orderamount", paymoney + "元");
 									weixinmap.put("paymenttype", "");
-									weixinmap.put("memberinfo", member1.getRealName() + "," + member1.getMobile());
-									weixinmap.put("remark", "请注意查收！");
+									weixinmap.put("memberinfo", member2.getRealName() + "," + member2.getMobile());
+									weixinmap.put("remark", "详情请前往App上查看，请您及时为客户配送！");
 									WeChatPush.deliverTemplateSendToStoreForOrder(weixinmap);
 									
 									jsonObject.put("state", "1");
